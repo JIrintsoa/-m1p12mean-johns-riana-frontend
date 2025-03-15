@@ -1,7 +1,104 @@
 <div class="row">
     <div class="col-sm-12">
       <app-card cardTitle="Espace Vehicule">
-        
+        <div class="row">
+          <div class="col-4">
+            <form>
+              <div class="form-group">
+                <label for="marqueVehicule">Marque</label>
+                <input type="text" class="form-control" id="marqueVehicule" placeholder="Marque">
+              </div>
+      
+              <div class="form-group">
+                <label for="modeleVehicule">Modele</label>
+                <input type="text" class="form-control" id="modeleVehicule" placeholder="Modele">
+              </div>
+      
+              <div class="form-group">
+                <label for="anneeVehicule">Annee</label>
+                <input type="text" class="form-control" id="anneeVehicule" placeholder="Annee">
+              </div>
+              
+              <div class="form-group">
+                <label for="typeCarburant">Type Carburant</label>
+                <input type="text" class="form-control" id="typeCarburant" placeholder="Type Carburant">
+              </div>
+      
+              <button type="submit" class="btn btn-primary">Ajouter</button>
+            </form>
+          </div>
+
+          <div class="col-8">
+            <div class="row">
+              <div class="col-4">
+                <input type="text" class="form-control" id="rechercher" placeholder="Rechercher">
+              </div>
+              <div class="col-2">
+                <select id="status" class="form-control">
+                  <option selected>Status</option>
+                  <option>Aucun</option>
+                  <option>En attente</option>
+                  <option>Reparation</option>
+                </select>
+              </div>
+              <div class="col-2">
+                <input type="date" class="form-control" id="dateDebutFilter">
+              </div>
+              <div class="col-2">
+                <input type="date" class="form-control" id="dateFinFilter">
+              </div>
+              <div class="col-2">
+                <button type="button" class="btn btn-primary">Valider</button>
+              </div>
+            </div>
+            <div class="row">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">Vehicule</th>
+                    <th scope="col">Type carburant</th>
+                    <th scope="col">Dernière visite</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Action</th>
+  
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">Kia <br>Morning<br> 2007</th>
+                    <td>Essence</td>
+                    <td>12/01/2025</td>
+                    <td>Aucun</td>
+                    <td>
+                      <button type="button" class="btn btn-warning">Modifier</button>
+                      <button type="button" class="btn btn-danger" style="margin-left: 10px;">Supprimer</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Toyota<br>Rav4<br>3eme generation</th>
+                    <td>Diesel</td>
+                    <td>12/01/2025</td>
+                    <td>Reparation</td>
+                    <td>
+                      <button type="button" class="btn btn-warning">Modifier</button>
+                      <button type="button" class="btn btn-danger" style="margin-left: 10px;">Supprimer</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Hyundai<br>Santafe<br>2</th>
+                    <td>Diesel</td>
+                    <td>12/01/2025</td>
+                    <td>En attente</td>
+                    <td>
+                      <button type="button" class="btn btn-warning">Modifier</button>
+                      <button type="button" class="btn btn-danger" style="margin-left: 10px;">Supprimer</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
       </app-card>
     </div>
   </div>
