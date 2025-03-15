@@ -1,41 +1,97 @@
   <div class="row">
     <div class="col-sm-12">
       <app-card cardTitle="Faire une demande de rendez-vous">
-        <form>
-          <div class="form-row">
-            <div class="form-group col-md-12">
-              <label for="listVehicules">Vehicule</label>
-              <select id="listVehicules" class="form-control">
-                <option selected>Choose vehicule</option>
-                <option>Kia Morning</option>
-                <option>Rav 4</option>
-                <option>Santafe</option>
-              </select>
+        <div class="row">
+          <div class="col-4">
+            <form>
+              <div class="form-row">
+                <div class="form-group col-md-12">
+                  <label for="listVehicules">Vehicule</label>
+                  <select id="listVehicules" class="form-control">
+                    <option selected>Choose vehicule</option>
+                    <option>Kia Morning</option>
+                    <option>Rav 4</option>
+                    <option>Santafe</option>
+                  </select>
+                </div>
+              </div>
+      
+              <div class="form-group">
+                <label for="dateRdv">Date appointment</label>
+                <input type="date" class="form-control" id="inputAddress" placeholder="1234 Main St">
+              </div>
+      
+              <div class="form-group col-md-12">
+                <label for="listServices">Services</label>
+                <select id="listServices" class="form-control">
+                  <option selected>Choose service</option>
+                  <option>Vindange</option>
+                  <option>Pneumatique</option>
+                  <option>Carrosserie</option>
+                </select>
+              </div>
+              
+              <div class="form-group">
+                <label for="commentaire">Commentaire</label>
+                <textarea class="form-control" id="commentaire" rows="3" placeholder="Votre texte"></textarea>
+              </div>
+      
+              <button type="submit" class="btn btn-primary">Ajouter</button>
+            </form>
+          </div>
+          <div class="col-8">
+            <div class="row">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">Vehicule</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Service</th>
+                    <th scope="col">Mecanicien</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Action</th>
+  
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">Kia <br>Morning<br> 2007</th>
+                    <td>12/01/2025</td>
+                    <td>Pneumatique</td>
+                    <td>RADO</td>
+                    <td>En cours</td>
+                    <td>
+                      <button type="button" class="btn btn-info">Details</button>
+                      <button type="button" class="btn btn-secondary" style="margin-left: 10px;">Annuler</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Toyota<br>Rav4<br>3eme generation</th>
+                    <td>12/01/2025</td>
+                    <td>Vidange</td>
+                    <td>Naivo</td>
+                    <td>En reparation</td>
+                    <td>
+                      <button type="button" class="btn btn-info">Details</button>
+                      <button type="button" class="btn btn-secondary" style="margin-left: 10px;">Annuler</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Hyundai<br>Santafe<br>2</th>
+                    <td>12/01/2025</td>
+                    <td>Pneumatique</td>
+                    <td>RADO</td>
+                    <td>Termine</td>
+                    <td>
+                      <button type="button" class="btn btn-info">Details</button>
+                      <button type="button" class="btn btn-secondary" style="margin-left: 10px;">Annuler</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </div>
-  
-          <div class="form-group">
-            <label for="dateRdv">Date appointment</label>
-            <input type="date" class="form-control" id="inputAddress" placeholder="1234 Main St">
-          </div>
-  
-          <div class="form-group col-md-12">
-            <label for="listServices">Services</label>
-            <select id="listServices" class="form-control">
-              <option selected>Choose service</option>
-              <option>Vindange</option>
-              <option>Pneumatique</option>
-              <option>Carrosserie</option>
-            </select>
-          </div>
-          
-          <div class="form-group">
-            <label for="commentaire">Commentaire</label>
-            <textarea class="form-control" id="commentaire" rows="3" placeholder="Votre texte"></textarea>
-          </div>
-  
-          <button type="submit" class="btn btn-primary">Ajouter</button>
-        </form>
+        </div>
       </app-card>
     </div>
   </div>  
