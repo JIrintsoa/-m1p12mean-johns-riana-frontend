@@ -53,6 +53,62 @@ export const NavigationItems: NavigationItem[] = [
     ]
   },
   {
+    id: 'manager',
+    title: 'Manager',
+    type: 'group',
+    icon: 'icon-navigation',
+    children: [
+      {
+        id: 'Statistiques',
+        title: 'Statistiques',
+        type: 'item',
+        url: '/manager/statistics',
+        classes: 'nav-item',
+        icon: 'dashboard'
+      },
+      {
+        id: 'Appointment List',
+        title: 'Liste des rendez vous',
+        type: 'item',
+        url: '/manager/appointment-list',
+        classes: 'nav-item',
+        icon: 'dashboard'
+      },
+      {
+        id: 'Repair List',
+        title: 'Réparations',
+        type: 'item',
+        url: '/manager/repair-list',
+        classes: 'nav-item',
+        icon: 'dashboard'
+      },
+      {
+        id: 'Mécaniciens',
+        title: 'Mécaniciens',
+        type: 'item',
+        url: '/manager/mechanics',
+        classes: 'nav-item',
+        icon: 'dashboard'
+      },
+    ]
+  },
+  {
+    id: 'mechanic',
+    title: 'Mechanic',
+    type: 'group',
+    icon: 'icon-navigation',
+    children: [
+      {
+        id: 'Repair List',
+        title: 'Liste des réparations',
+        type: 'item',
+        url: '/mechanic/repair-list',
+        classes: 'nav-item',
+        icon: 'dashboard'
+      },
+    ]
+  },
+  {
     id: 'authentication',
     title: 'Authentication',
     type: 'group',

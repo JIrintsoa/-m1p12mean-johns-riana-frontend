@@ -33,6 +33,22 @@ const routes: Routes = [
         loadComponent: () => import('./components/manager/statistics/statistics.component').then((c) => c.StatisticsComponent)
       },
       {
+        path: 'manager/appointment-list',
+        loadComponent: () => import('./components/manager/appointment-list/appointment-list.component').then((c) => c.AppointmentListComponent)
+      },
+      {
+        path: 'manager/repair-list',
+        loadComponent: () => import('./components/manager/repair-list/repair-list.component').then((c) => c.RepairListComponent)
+      },
+      {
+        path: 'manager/mechanics',
+        loadComponent: () => import('./components/manager/mechanics/mechanics.component').then((c) => c.MechanicsComponent)
+      },
+      {
+        path: 'mechanic/repair-list',
+        loadComponent: () => import('./components/mechanic/repair-list/repair-list.component').then((c) => c.RepairListComponent)
+      },
+      {
         path: 'typography',
         loadComponent: () => import('./demo/component/basic-component/color/color.component').then((c) => c.ColorComponent)
       },

@@ -1,0 +1,117 @@
+<div class="row">
+  <div class="col-sm-12">
+    <app-card cardTitle="Gestion des mécaniciens">
+      <div class="row">
+
+        <!-- Filters Section -->
+        <div class="col-12 mb-4">
+          <div class="row align-items-center">
+            <div class="col-md-4 col-12 mb-3 mb-md-0">
+              <input type="text" class="form-control" id="rechercher" placeholder="Rechercher" />
+            </div>
+            <div class="col-md-3 col-12 mb-3 mb-md-0">
+              <select id="status" class="form-control">
+                <option selected>Status</option>
+                <option>Actif</option>
+                <option>Inactif</option>
+              </select>
+            </div>
+            <div class="col-md-2 col-12 mb-3 mb-md-0">
+              <button type="button" class="btn btn-primary w-100">Valider</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Table Section -->
+        <div class="col-12">
+          <table class="table table-hover table-bordered">
+            <thead>
+              <tr>
+                <th scope="col">Nom</th>
+                <th scope="col">Prénom</th>
+                <th scope="col">Email</th>
+                <th scope="col">Status</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Rakoto</td>
+                <td>Be</td>
+                <td>rakotobe&#64;gmail.com</td>
+                <td>Aucun</td>
+                <td>
+                  <button type="button" class="btn btn-warning btn-sm">Modifier</button>
+                  <button type="button" class="btn btn-danger btn-sm" style="margin-left: 10px;">Supprimer</button>
+                </td>  
+              </tr>
+              <tr>
+                <td>Rakoto</td>
+                <td>Be</td>
+                <td>rakotobe&#64;gmail.com</td>
+                <td>Aucun</td>
+                <td>
+                  <button type="button" class="btn btn-warning btn-sm">Modifier</button>
+                  <button type="button" class="btn btn-danger btn-sm" style="margin-left: 10px;">Supprimer</button>
+                </td>  
+              </tr>
+              <tr>
+                <td>Rakoto</td>
+                <td>Be</td>
+                <td>rakotobe&#64;gmail.com</td>
+                <td>Aucun</td>
+                <td>
+                  <button type="button" class="btn btn-warning btn-sm">Modifier</button>
+                  <button type="button" class="btn btn-danger btn-sm" style="margin-left: 10px;">Supprimer</button>
+                </td>                            
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </app-card>
+  </div>
+</div>
+
+  
+<div class="row">
+  <div class="col-sm-6">
+    <app-card cardTitle="Gestion des mécaniciens">
+      <div class="row">
+        <div class="col-12">
+          <form>
+            <!-- Nom Field -->
+            <div class="form-group mb-3">
+              <label for="nom" class="form-label">Nom</label>
+              <input type="text" class="form-control" id="nom" placeholder="Saisir le nom" required>
+            </div>
+
+            <!-- Prénom Field -->
+            <div class="form-group mb-3">
+              <label for="prenom" class="form-label">Prénom</label>
+              <input type="text" class="form-control" id="prenom" placeholder="Saisir le prénom" required>
+            </div>
+
+            <!-- Email Field -->
+            <div class="form-group mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input type="email" class="form-control" id="email" placeholder="Adresse e-mail" required>
+            </div>
+
+            <!-- Mot de passe Field -->
+            <div class="form-group mb-4">
+              <label for="password" class="form-label">Mot de passe</label>
+              <input type="password" class="form-control" id="password" placeholder="Mot de passe" required>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="d-flex justify-content-center">
+              <button type="submit" class="btn btn-primary w-100">Ajouter</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </app-card>
+  </div>
+</div>
