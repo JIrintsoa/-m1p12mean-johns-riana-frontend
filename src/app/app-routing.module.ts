@@ -21,11 +21,11 @@ const routes: Routes = [
         loadComponent: () => import('./demo/dashboard/default/default.component').then((c) => c.DefaultComponent)
       },
       {
-        path: 'take-appointment',
+        path: 'client/take-appointment',
         loadComponent: () => import('./components/client/appointement/forms/forms.component').then((c) => c.FormsComponent)
       },
       {
-        path: 'vehicule',
+        path: 'client/vehicule',
         loadComponent: () => import('./components/client/vehicules/vehicules.component').then((c) => c.VehiculesComponent)
       },
       {
