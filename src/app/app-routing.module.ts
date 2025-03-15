@@ -29,6 +29,15 @@ const routes: Routes = [
         loadComponent: () => import('./components/client/vehicules/vehicules.component').then((c) => c.VehiculesComponent)
       },
       {
+        path: 'client/progress',
+        loadComponent: () => import('./components/client/progress/list/list.component').then((c) => c.ListComponent),
+
+      },
+      {
+        path: 'client/progress/detail/:id', // Ajout de :id pour le paramètre dynamique
+        loadComponent: () => import('./components/client/progress/details/details.component').then((c) => c.DetailsComponent),
+      },
+      {
         path: 'manager/statistics',
         loadComponent: () => import('./components/manager/statistics/statistics.component').then((c) => c.StatisticsComponent)
       },
