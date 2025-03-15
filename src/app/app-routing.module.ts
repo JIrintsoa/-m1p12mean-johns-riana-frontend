@@ -29,6 +29,10 @@ const routes: Routes = [
         loadComponent: () => import('./components/client/vehicules/vehicules.component').then((c) => c.VehiculesComponent)
       },
       {
+        path: 'manager/statistics',
+        loadComponent: () => import('./components/manager/statistics/statistics.component').then((c) => c.StatisticsComponent)
+      },
+      {
         path: 'typography',
         loadComponent: () => import('./demo/component/basic-component/color/color.component').then((c) => c.ColorComponent)
       },
