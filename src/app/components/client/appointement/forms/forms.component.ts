@@ -5,9 +5,9 @@ import { CardComponent } from 'src/app/theme/shared/components/card/card.compone
 @Component({
   selector: 'app-forms',
   imports: [CardComponent],
-  templateUrl: './appointment-forms.component.html',
-  styleUrl: './appointment-forms.component.scss'
+  templateUrl: './forms.component.html',
+  styleUrl: './forms.component.scss'
 })
-export class AppointmentFormsComponent {
+export class FormsComponent {
 
 }

@@ -20,9 +20,13 @@ const routes: Routes = [
         path: 'dashboard/default',
         loadComponent: () => import('./demo/dashboard/default/default.component').then((c) => c.DefaultComponent)
       },
-            {
+      {
         path: 'take-appointment',
-        loadComponent: () => import('./components/appointment/forms/appointment-forms.component').then((c) => c.AppointmentFormsComponent)
+        loadComponent: () => import('./components/client/appointement/forms/forms.component').then((c) => c.FormsComponent)
+      },
+      {
+        path: 'vehicule',
+        loadComponent: () => import('./components/client/vehicules/vehicules.component').then((c) => c.VehiculesComponent)
       },
       {
         path: 'typography',

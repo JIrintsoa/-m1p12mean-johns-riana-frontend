@@ -40,7 +40,15 @@ export const NavigationItems: NavigationItem[] = [
         type: 'item',
         url: '/take-appointment',
         classes: 'nav-item',
-        icon: 'calendar'
+        icon: 'dashboard'
+      },
+      {
+        id: 'Vehicules',
+        title: 'Vehicules',
+        type: 'item',
+        url: '/vehicule',
+        classes: 'nav-item',
+        icon: 'dashboard'
       },
     ]
   },
