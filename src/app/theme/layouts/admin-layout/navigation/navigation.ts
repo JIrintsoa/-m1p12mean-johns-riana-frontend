@@ -20,8 +20,8 @@ export interface NavigationItem {
 
 export const NavigationItems: NavigationItem[] = [
   {
-    id: 'dashboard',
-    title: 'Dashboard',
+    id: 'client',
+    title: 'Client',
     type: 'group',
     icon: 'icon-navigation',
     children: [
@@ -49,6 +49,25 @@ export const NavigationItems: NavigationItem[] = [
         url: '/client/vehicule',
         classes: 'nav-item',
         icon: 'dashboard'
+      },
+      {
+        id: 'Progress',
+        title: 'Progress',
+        type: 'item',
+        url: '/client/progress',
+        classes: 'nav-item',
+        icon: 'dashboard',
+        children:[
+          {
+            id: 'detail',
+            title: 'Detail',
+            type: 'item',
+            url: '/client/progress/detail', // Sans :id ici
+            classes: 'nav-item',
+            icon: 'dashboard',
+            breadcrumbs: false // Important de le mettre à false car l'url va changer
+          },
+        ]
       },
     ]
   },
