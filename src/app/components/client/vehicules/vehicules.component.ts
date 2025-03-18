@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { VehicleModel } from 'src/app/models/vehicle.model';
-import { ClientService } from 'src/app/services/client/client.service';
+import { VehicleService } from 'src/app/services/vehicle/vehicle.service';
 import { CardComponent } from 'src/app/theme/shared/components/card/card.component';
 @Component({
   selector: 'app-vehicules',
@@ -13,15 +13,16 @@ import { CardComponent } from 'src/app/theme/shared/components/card/card.compone
 
 export class VehiculesComponent implements OnInit {
   vehicles: VehicleModel[] = [];  // Explicitly declare the type of vehicles
-  token: string = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZDkwN2Q0NmU2OWRlNWEwOWNiNjFmMCIsImVtYWlsIjoiY2xpZW50MUBnbWFpbC5jb20iLCJyb2xlIjoiY2xpZW50IiwiaWF0IjoxNzQyMjk5NzczLCJleHAiOjE3NDIzMDMzNzN9.B8Uiz4AkxJJzpHjF1pSa7Xs_sh9-LOS3QOaizWPW8Pk';
-
+  token: string = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZDkwN2Q0NmU2OWRlNWEwOWNiNjFmMCIsImVtYWlsIjoiY2xpZW50MUBnbWFpbC5jb20iLCJyb2xlIjoiY2xpZW50IiwiaWF0IjoxNzQyMzAzMTc3LCJleHAiOjE3NDIzMDY3Nzd9.jRVuW6PvFn-d4vjKbtpFk61T79LUvcIBtPROiWHwLFc'
   // form
   model: string = '';
   brand: string = '';
   year: string = '';
   fuelType: string = '';
+  successMessage: string = '';
+  errorMessage: string = '';
 
-  constructor(private clientService: ClientService) {}
+  constructor(private vehicleService: VehicleService) {}
 
   ngOnInit(): void {
     this.fetchVehicles();
@@ -29,7 +30,7 @@ export class VehiculesComponent implements OnInit {
   }
 
   fetchVehicles(): void {
-    this.clientService.getVehicles(this.token).subscribe({
+    this.vehicleService.getVehicles(this.token).subscribe({
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       next: (response: any) => {
         console.log('Raw response:', response);
@@ -51,13 +52,15 @@ export class VehiculesComponent implements OnInit {
       fuelType: this.fuelType,
     };
 
-    this.clientService.addVehicle(newVehicle, this.token).subscribe({
+    this.vehicleService.addVehicle(newVehicle, this.token).subscribe({
       next: (response) => {
         console.log('Vehicle added successfully:', response);
+        this.showMessage('Véhicule ajouté avec succès!', 'success');
         this.fetchVehicles(); // Refresh the vehicle list
         this.resetForm(); // Optionally reset the form after submission
       },
       error: (error) => {
+        this.showMessage('Erreur lors de l\'ajout du véhicule.', 'error');
         console.error('Error adding vehicle:', error);
       }
     });
@@ -68,6 +71,39 @@ export class VehiculesComponent implements OnInit {
     this.model = '';
     this.year = '';
     this.fuelType = '';
+  }
+
+  deleteVehicle(vehicleId: string): void {
+    this.vehicleService.deleteVehicle(vehicleId, this.token).subscribe({
+      next: (response) => {
+        this.showMessage('Véhicule supprimé avec succès!', 'success');
+        console.log('Vehicle deleted successfully:', response);
+        this.fetchVehicles();  // Refresh the vehicle list
+      },
+      error: (error) => {
+        this.showMessage('Erreur durant la suppression du véhicule.', 'error');
+        console.error('Error deleting vehicle:', error);
+      }
+    });
+  }
+
+  showMessage(message: string, type: 'success' | 'error'): void {
+    if (type === 'success') {
+      this.successMessage = message;
+      this.errorMessage = ''; 
+    } else {
+      this.errorMessage = message;
+      this.successMessage = '';
+    }
+
+    // Hide the message after 3 seconds
+    setTimeout(() => {
+      if (type === 'success') {
+        this.successMessage = '';
+      } else {
+        this.errorMessage = '';
+      }
+    }, 10000); 
   }
 }
 

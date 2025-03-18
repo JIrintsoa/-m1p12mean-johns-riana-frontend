@@ -23,13 +23,12 @@
                 <label for="typeCarburant">Type Carburant</label>
                 <select class="form-control" [(ngModel)]="fuelType" name="carburant" id="typeCarburant">
                   <option value="" disabled selected>Sélectionner le type de carburant</option> 
-                  <option value="essence">Essence</option>
-                  <option value="gasoil">Gasoil</option>
+                  <option value="Essence">Essence</option>
+                  <option value="Gasoil">Gasoil</option>
                 </select>
               </div>
               <button type="submit" class="btn btn-primary">Ajouter</button>
             </form>
-            
           </div>
 
           <div class="col-8">
@@ -75,7 +74,7 @@
                     <td>{{ vehicle.fuelType }}</td>
                     <td>
                       <button type="button" class="btn btn-warning">Modifier</button>
-                      <button type="button" class="btn btn-danger" style="margin-left: 10px;">Supprimer</button>
+                      <button (click)="deleteVehicle(vehicle._id)" class="btn btn-danger">Supprimer</button>
                     </td>
                   </tr>
                   <tr *ngIf="vehicles.length === 0">
@@ -84,6 +83,13 @@
                 </tbody>
               </table>
             </div>
+          </div>
+          <div *ngIf="successMessage" class="alert alert-success mt-3">
+            {{ successMessage }}
+          </div>
+          
+          <div *ngIf="errorMessage" class="alert alert-danger mt-3">
+            {{ errorMessage }}
           </div>
         </div>
       </app-card>
