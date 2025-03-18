@@ -74,17 +74,20 @@ export class VehiculesComponent implements OnInit {
   }
 
   deleteVehicle(vehicleId: string): void {
-    this.vehicleService.deleteVehicle(vehicleId, this.token).subscribe({
-      next: (response) => {
-        this.showMessage('Véhicule supprimé avec succès!', 'success');
-        console.log('Vehicle deleted successfully:', response);
-        this.fetchVehicles();  // Refresh the vehicle list
-      },
-      error: (error) => {
-        this.showMessage('Erreur durant la suppression du véhicule.', 'error');
-        console.error('Error deleting vehicle:', error);
-      }
-    });
+    const confirmation = window.confirm('Êtes-vous sûr de vouloir supprimer ce véhicule ?');
+    if(confirmation){
+      this.vehicleService.deleteVehicle(vehicleId, this.token).subscribe({
+        next: (response) => {
+          this.showMessage('Véhicule supprimé avec succès!', 'success');
+          console.log('Vehicle deleted successfully:', response);
+          this.fetchVehicles();  // Refresh the vehicle list
+        },
+        error: (error) => {
+          this.showMessage('Erreur durant la suppression du véhicule.', 'error');
+          console.error('Error deleting vehicle:', error);
+        }
+      });
+    }
   }
 
   showMessage(message: string, type: 'success' | 'error'): void {
