@@ -30,22 +30,37 @@ export class AuthLoginComponent {
       name: 'Facebook'
     }
   ];
+
   constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
     this.loginForm = this.fb.group({
-      email: ['johnsirintsoa18@gmail.com', [Validators.required, Validators.email]],
+      email: ['manager1@gmail.com', [Validators.required, Validators.email]],
       password: ['123456', Validators.required],
     });
   }
 
   onSubmit() {
     if (this.loginForm.valid) {
+      // console.log(this.loginForm)
       this.authService.login(this.loginForm.value).subscribe({
         next: (response) => {
           // Gérer la réponse de l'API (par exemple, stocker le token, rediriger)
           console.log('Connexion réussie', response);
-          // Stocker le token dans le localStorage ou sessionStorage
           localStorage.setItem('token', response.token);
-          this.router.navigate(['/dashboard']); // Rediriger vers le tableau de bord
+          
+          const role = response.user.role;
+          // console.log(role)
+          if (role == 'manager' ){
+            this.router.navigate(['/manager/appointment-list']);
+          }
+          else if (role == 'mechanic'){
+            this.router.navigate(['/mechanic/repair-list']);
+          }
+          else {
+            this.router.navigate(['/client/take-appointment']);
+          }
+          // Stocker le token dans le localStorage ou sessionStorage
+          
+          // this.router.navigate(['/dashboard']); // Rediriger vers le tableau de bord
         },
         error: (error) => {
           // Gérer les erreurs de l'API
