@@ -29,7 +29,6 @@
               </div>
               <button type="submit" class="btn btn-primary">Ajouter</button>
             </form>
-            
           </div>
 
           <div class="col-8">
@@ -84,6 +83,13 @@
                 </tbody>
               </table>
             </div>
+          </div>
+          <div *ngIf="successMessage" class="alert alert-success mt-3">
+            {{ successMessage }}
+          </div>
+          
+          <div *ngIf="errorMessage" class="alert alert-danger mt-3">
+            {{ errorMessage }}
           </div>
         </div>
       </app-card>

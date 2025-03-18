@@ -19,6 +19,8 @@ export class VehiculesComponent implements OnInit {
   brand: string = '';
   year: string = '';
   fuelType: string = '';
+  successMessage: string = '';
+  errorMessage: string = '';
 
   constructor(private vehicleService: VehicleService) {}
 
@@ -53,10 +55,12 @@ export class VehiculesComponent implements OnInit {
     this.vehicleService.addVehicle(newVehicle, this.token).subscribe({
       next: (response) => {
         console.log('Vehicle added successfully:', response);
+        this.showMessage('Véhicule ajouté avec succès!', 'success');
         this.fetchVehicles(); // Refresh the vehicle list
         this.resetForm(); // Optionally reset the form after submission
       },
       error: (error) => {
+        this.showMessage('Erreur lors de l\'ajout du véhicule.', 'error');
         console.error('Error adding vehicle:', error);
       }
     });
@@ -72,13 +76,34 @@ export class VehiculesComponent implements OnInit {
   deleteVehicle(vehicleId: string): void {
     this.vehicleService.deleteVehicle(vehicleId, this.token).subscribe({
       next: (response) => {
+        this.showMessage('Véhicule supprimé avec succès!', 'success');
         console.log('Vehicle deleted successfully:', response);
         this.fetchVehicles();  // Refresh the vehicle list
       },
       error: (error) => {
+        this.showMessage('Erreur durant la suppression du véhicule.', 'error');
         console.error('Error deleting vehicle:', error);
       }
     });
+  }
+
+  showMessage(message: string, type: 'success' | 'error'): void {
+    if (type === 'success') {
+      this.successMessage = message;
+      this.errorMessage = ''; 
+    } else {
+      this.errorMessage = message;
+      this.successMessage = '';
+    }
+
+    // Hide the message after 3 seconds
+    setTimeout(() => {
+      if (type === 'success') {
+        this.successMessage = '';
+      } else {
+        this.errorMessage = '';
+      }
+    }, 10000); 
   }
 }
 
