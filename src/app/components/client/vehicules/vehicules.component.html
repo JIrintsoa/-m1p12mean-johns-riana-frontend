@@ -3,29 +3,33 @@
       <app-card cardTitle="Espace Vehicule">
         <div class="row">
           <div class="col-4">
-            <form>
+            <form (ngSubmit)="addVehicle()">
               <div class="form-group">
                 <label for="marqueVehicule">Marque</label>
-                <input type="text" class="form-control" id="marqueVehicule" placeholder="Marque">
+                <input type="text" class="form-control" id="marqueVehicule" [(ngModel)]="brand" name="marque" placeholder="Marque">
               </div>
-      
+            
               <div class="form-group">
-                <label for="modeleVehicule">Modele</label>
-                <input type="text" class="form-control" id="modeleVehicule" placeholder="Modele">
+                <label for="modeleVehicule">Modèle</label>
+                <input type="text" class="form-control" id="modeleVehicule" [(ngModel)]="model" name="modele" placeholder="Modele">
               </div>
-      
+            
               <div class="form-group">
-                <label for="anneeVehicule">Annee</label>
-                <input type="text" class="form-control" id="anneeVehicule" placeholder="Annee">
+                <label for="anneeVehicule">Année</label>
+                <input type="text" class="form-control" id="anneeVehicule" [(ngModel)]="year" name="annee" placeholder="Annee">
               </div>
               
               <div class="form-group">
                 <label for="typeCarburant">Type Carburant</label>
-                <input type="text" class="form-control" id="typeCarburant" placeholder="Type Carburant">
+                <select class="form-control" [(ngModel)]="fuelType" name="carburant" id="typeCarburant">
+                  <option value="" disabled selected>Sélectionner le type de carburant</option> 
+                  <option value="essence">Essence</option>
+                  <option value="gasoil">Gasoil</option>
+                </select>
               </div>
-      
               <button type="submit" class="btn btn-primary">Ajouter</button>
             </form>
+            
           </div>
 
           <div class="col-8">
@@ -55,44 +59,27 @@
               <table class="table table-hover">
                 <thead>
                   <tr>
-                    <th scope="col">Vehicule</th>
+                    <th scope="col">Marque</th>
+                    <th scope="col">Modèle</th>
+                    <th scope="col">Année</th>
                     <th scope="col">Type carburant</th>
-                    <th scope="col">Dernière visite</th>
-                    <th scope="col">Status</th>
                     <th scope="col">Action</th>
   
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <th scope="row">Kia <br>Morning<br> 2007</th>
-                    <td>Essence</td>
-                    <td>12/01/2025</td>
-                    <td>Aucun</td>
+                  <tr *ngFor="let vehicle of vehicles">
+                    <td scope="row">{{ vehicle.brand }}</td>
+                    <td scope="row">{{ vehicle.model }}</td>
+                    <td scope="row">{{ vehicle.year }}</td>
+                    <td>{{ vehicle.fuelType }}</td>
                     <td>
                       <button type="button" class="btn btn-warning">Modifier</button>
                       <button type="button" class="btn btn-danger" style="margin-left: 10px;">Supprimer</button>
                     </td>
                   </tr>
-                  <tr>
-                    <th scope="row">Toyota<br>Rav4<br>3eme generation</th>
-                    <td>Diesel</td>
-                    <td>12/01/2025</td>
-                    <td>Reparation</td>
-                    <td>
-                      <button type="button" class="btn btn-warning">Modifier</button>
-                      <button type="button" class="btn btn-danger" style="margin-left: 10px;">Supprimer</button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">Hyundai<br>Santafe<br>2</th>
-                    <td>Diesel</td>
-                    <td>12/01/2025</td>
-                    <td>En attente</td>
-                    <td>
-                      <button type="button" class="btn btn-warning">Modifier</button>
-                      <button type="button" class="btn btn-danger" style="margin-left: 10px;">Supprimer</button>
-                    </td>
+                  <tr *ngIf="vehicles.length === 0">
+                    <td colspan="5" class="text-center">No vehicles available</td>
                   </tr>
                 </tbody>
               </table>
