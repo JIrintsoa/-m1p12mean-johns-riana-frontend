@@ -3,8 +3,9 @@ import { Observable } from 'rxjs';
 import { ApiService } from '../api.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root', // This ensures that the service is available globally in the app
 })
+
 export class VehicleService {
 
   constructor(private apiService: ApiService) { }
