@@ -25,6 +25,10 @@ const routes: Routes = [
         loadComponent: () => import('./components/client/appointement/forms/forms.component').then((c) => c.FormsComponent)
       },
       {
+        path: 'client/take-appointment/:id',
+        loadComponent: () => import('./components/client/appointement/details/details.component').then((c) => c.DetailsComponent)
+      },
+      {
         path: 'client/vehicule',
         loadComponent: () => import('./components/client/vehicules/vehicules.component').then((c) => c.VehiculesComponent)
       },
@@ -56,6 +60,10 @@ const routes: Routes = [
       {
         path: 'mechanic/repair-list',
         loadComponent: () => import('./components/mechanic/repair-list/repair-list.component').then((c) => c.RepairListComponent)
+      },
+      {
+        path: 'mechanic/repair-list/details/:id',
+        loadComponent: () => import('./components/mechanic/details/details.component').then((c) => c.DetailsComponent)
       },
       {
         path: 'typography',
