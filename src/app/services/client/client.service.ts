@@ -24,15 +24,4 @@ export class ClientService {
     const url = '/clients';  // API endpoint to add a new client
     return this.apiService.post(url, clientData);  // Call ApiService's post method
   }
-
-  getVehicles(token: string): Observable<unknown> {
-    const url = `/vehicles`;  // API endpoint for getting vehicles
-    const params = {};
-    return this.apiService.get<unknown>(url, params, token);  // Pass the token here
-  }
-
-  addVehicle(vehicle: unknown, token: string): Observable<unknown> {
-    const url = `/vehicles`;
-    return this.apiService.post(url, vehicle, token);
-  }
 }

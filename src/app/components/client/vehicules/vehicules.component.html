@@ -75,7 +75,7 @@
                     <td>{{ vehicle.fuelType }}</td>
                     <td>
                       <button type="button" class="btn btn-warning">Modifier</button>
-                      <button type="button" class="btn btn-danger" style="margin-left: 10px;">Supprimer</button>
+                      <button (click)="deleteVehicle(vehicle._id)" class="btn btn-danger">Supprimer</button>
                     </td>
                   </tr>
                   <tr *ngIf="vehicles.length === 0">

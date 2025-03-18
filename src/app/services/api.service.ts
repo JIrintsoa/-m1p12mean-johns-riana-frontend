@@ -35,7 +35,9 @@ export class ApiService {
     return this.http.patch<T>(`${this.baseUrl}${url}`, body);
   }
 
-  delete<T>(url: string): Observable<T> {
-    return this.http.delete<T>(`${this.baseUrl}${url}`);
+  delete(url: string, token?: string): Observable<unknown> {
+    const headers = token ? { Authorization: `Bearer ${token}` } : {};  // Include token if available
+    return this.http.delete<unknown>(`${this.baseUrl}${url}`, { headers });
   }
+  
 }
