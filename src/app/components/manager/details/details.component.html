@@ -87,35 +87,6 @@
             </form>
           </div>
         </div>
-
-        <hr>
-        <h4>NOTE</h4>
-        <div class="card">
-          <div class="card-body">
-            <p>Evaluer notre service</p>
-
-            <div class="mb-3">
-              <ngb-rating [formControl]="ctrl" [max]="maxRate" />
-            
-              <div class="form-text small">
-                @if (ctrl.valid) {
-                  <div class="text-success">Thanks!</div>
-                } @else {
-                  <div class="text-danger">Please rate us</div>
-                }
-              </div>
-            </div>
-            
-            <hr />
-            <pre>Model: <b>{{ ctrl.value }}</b></pre>
-            <button class="btn btn-sm btn-outline-{{ ctrl.disabled ? 'danger' : 'success' }} me-2" (click)="toggle()">
-              {{ ctrl.disabled ? 'control disabled' : ' control enabled' }}
-            </button>
-            <button class="btn btn-sm btn-outline-primary me-2" (click)="ctrl.setValue(null)">Clear</button>
-            
-          </div>
-        </div>
-
       </div>
     </div>
-  </div>
+</div>

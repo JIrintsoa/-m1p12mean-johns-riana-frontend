@@ -50,6 +50,10 @@ const routes: Routes = [
         loadComponent: () => import('./components/manager/appointment-list/appointment-list.component').then((c) => c.AppointmentListComponent)
       },
       {
+        path: 'manager/appointment-list/details/:id',
+        loadComponent: () => import('./components/manager/details/details.component').then((c) => c.DetailsComponent)
+      },
+      {
         path: 'manager/repair-list',
         loadComponent: () => import('./components/manager/repair-list/repair-list.component').then((c) => c.RepairListComponent)
       },
