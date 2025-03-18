@@ -12,8 +12,8 @@ export interface UserLogin {
 
 export interface User {
   _id: string;
-  firstName: string;
-  lastName: string;
+  name: string;
+  role: string;
   email: string;
   password: string;
   createdAt: string;
@@ -22,7 +22,7 @@ export interface User {
 
 export interface LoginResponse {
   message: string;
-  client: User; 
+  user: User; 
   token: string;
   role: string;
 }
