@@ -212,10 +212,17 @@
   optionalDependencies:
     lmdb "3.2.6"
 
+<<<<<<< HEAD
 "@angular/cdk@>=17.3.0", "@angular/cdk@19.0.4":
   version "19.0.4"
   resolved "https://registry.npmjs.org/@angular/cdk/-/cdk-19.0.4.tgz"
   integrity sha512-P8V1n6AFFjBUJG3YRgw8DiiNDWPZVrwQ42wbwgZxd4s2TQAuNFg3YY8h/DSMVxt2sXpavrshZsoLtP9yLKZjHA==
+=======
+"@angular/cdk@^19.2.3", "@angular/cdk@>=19.0.0":
+  version "19.2.3"
+  resolved "https://registry.npmjs.org/@angular/cdk/-/cdk-19.2.3.tgz"
+  integrity sha512-hTyYjdx9T572TblqlLDv54U7ro1/HXr3/2a++A+t8ZkcKLyI+/0Yfu6OsrWTpl2OsRYFZ0QwvbyI8ZLUIZPkqQ==
+>>>>>>> dev
   dependencies:
     tslib "^2.3.0"
   optionalDependencies:
@@ -244,7 +251,11 @@
     symbol-observable "4.0.0"
     yargs "17.7.2"
 
+<<<<<<< HEAD
 "@angular/common@^19.0.0", "@angular/common@^19.0.0 || ^20.0.0", "@angular/common@>=13.0.0", "@angular/common@>=14.0.0", "@angular/common@>=17.3.0", "@angular/common@19.2.2":
+=======
+"@angular/common@^19.0.0", "@angular/common@^19.0.0 || ^20.0.0", "@angular/common@>=13.0.0", "@angular/common@>=14.0.0", "@angular/common@>=19.0.0", "@angular/common@19.2.2":
+>>>>>>> dev
   version "19.2.2"
   resolved "https://registry.npmjs.org/@angular/common/-/common-19.2.2.tgz"
   integrity sha512-tLb4/gAjy1WFYZd68FnwLaC8w3b10RG8r+x5MUnbyhJa9K3qILzF8gWUVJ4tKLKentB3fWPWPNs9OFZH5XVf1g==
@@ -272,7 +283,11 @@
   dependencies:
     tslib "^2.3.0"
 
+<<<<<<< HEAD
 "@angular/core@^19.0.0", "@angular/core@^19.0.0 || ^20.0.0", "@angular/core@>=13.0.0", "@angular/core@>=17.3.0", "@angular/core@19.2.2":
+=======
+"@angular/core@^19.0.0", "@angular/core@^19.0.0 || ^20.0.0", "@angular/core@^19.2.2", "@angular/core@>=13.0.0", "@angular/core@>=19.0.0", "@angular/core@19.2.2":
+>>>>>>> dev
   version "19.2.2"
   resolved "https://registry.npmjs.org/@angular/core/-/core-19.2.2.tgz"
   integrity sha512-RL2wxk62BREW4sksnBSjtBDgPxHqIJQKkrlxXbbu2jZql7xohEQtdTZP3DB6iWnZLYgz8CAfTzyaHMvj6HfdLg==
@@ -5424,10 +5439,10 @@ ng-apexcharts@^1.8.0:
   dependencies:
     tslib "^2.0.0"
 
-ngx-scrollbar@16.1.1:
-  version "16.1.1"
-  resolved "https://registry.npmjs.org/ngx-scrollbar/-/ngx-scrollbar-16.1.1.tgz"
-  integrity sha512-gddeGYeWxDF56ZqVxDILxOoPNwf6cEaBBFP2StQkx52yw2TeUx7rz/Di1guZZ7yZ2hZqANFmDEHthS6TDyvV3Q==
+ngx-scrollbar@^18.0.0:
+  version "18.0.0"
+  resolved "https://registry.npmjs.org/ngx-scrollbar/-/ngx-scrollbar-18.0.0.tgz"
+  integrity sha512-+ykmY491x+nzXvnecJvZHvDz0YWuX1r7SYMxNG4RVHXm5Z68P/8kd/3ryLD6DXdNWmJawd4NGvqq2ZkUKb/g3A==
   dependencies:
     tslib "^2.3.0"
 

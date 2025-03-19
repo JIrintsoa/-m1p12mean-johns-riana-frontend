@@ -25,15 +25,15 @@ export const NavigationItems: NavigationItem[] = [
     type: 'group',
     icon: 'icon-navigation',
     children: [
-      {
-        id: 'default',
-        title: 'Default',
-        type: 'item',
-        classes: 'nav-item',
-        url: '/dashboard/default',
-        icon: 'dashboard',
-        breadcrumbs: false
-      },
+      // {
+      //   id: 'default',
+      //   title: 'Default',
+      //   type: 'item',
+      //   classes: 'nav-item',
+      //   url: '/dashboard/default',
+      //   icon: 'dashboard',
+      //   breadcrumbs: false
+      // },
       {
         id: 'take-appointment',
         title: 'Appointment',
@@ -50,25 +50,25 @@ export const NavigationItems: NavigationItem[] = [
         classes: 'nav-item',
         icon: 'dashboard'
       },
-      {
-        id: 'Progress',
-        title: 'Progress',
-        type: 'item',
-        url: '/client/progress',
-        classes: 'nav-item',
-        icon: 'dashboard',
-        children:[
-          {
-            id: 'detail',
-            title: 'Detail',
-            type: 'item',
-            url: '/client/progress/detail', // Sans :id ici
-            classes: 'nav-item',
-            icon: 'dashboard',
-            breadcrumbs: false // Important de le mettre à false car l'url va changer
-          },
-        ]
-      },
+      // {
+      //   id: 'Progress',
+      //   title: 'Progress',
+      //   type: 'item',
+      //   url: '/client/progress',
+      //   classes: 'nav-item',
+      //   icon: 'dashboard',
+      //   children:[
+      //     {
+      //       id: 'detail',
+      //       title: 'Detail',
+      //       type: 'item',
+      //       url: '/client/progress/detail', // Sans :id ici
+      //       classes: 'nav-item',
+      //       icon: 'dashboard',
+      //       breadcrumbs: false // Important de le mettre à false car l'url va changer
+      //     },
+      //   ]
+      // },
     ]
   },
   {
@@ -93,14 +93,14 @@ export const NavigationItems: NavigationItem[] = [
         classes: 'nav-item',
         icon: 'dashboard'
       },
-      {
-        id: 'Repair List',
-        title: 'Réparations',
-        type: 'item',
-        url: '/manager/repair-list',
-        classes: 'nav-item',
-        icon: 'dashboard'
-      },
+      // {
+      //   id: 'Repair List',
+      //   title: 'Réparations',
+      //   type: 'item',
+      //   url: '/manager/repair-list',
+      //   classes: 'nav-item',
+      //   icon: 'dashboard'
+      // },
       {
         id: 'Mécaniciens',
         title: 'Mécaniciens',
@@ -127,93 +127,93 @@ export const NavigationItems: NavigationItem[] = [
       },
     ]
   },
-  {
-    id: 'authentication',
-    title: 'Authentication',
-    type: 'group',
-    icon: 'icon-navigation',
-    children: [
-      {
-        id: 'login',
-        title: 'Login',
-        type: 'item',
-        classes: 'nav-item',
-        url: '/login',
-        icon: 'login',
-        target: true,
-        breadcrumbs: false
-      },
-      {
-        id: 'register',
-        title: 'Register',
-        type: 'item',
-        classes: 'nav-item',
-        url: '/register',
-        icon: 'profile',
-        target: true,
-        breadcrumbs: false
-      }
-    ]
-  },
-  {
-    id: 'utilities',
-    title: 'UI Components',
-    type: 'group',
-    icon: 'icon-navigation',
-    children: [
-      {
-        id: 'typography',
-        title: 'Typography',
-        type: 'item',
-        classes: 'nav-item',
-        url: '/typography',
-        icon: 'font-size'
-      },
-      {
-        id: 'color',
-        title: 'Colors',
-        type: 'item',
-        classes: 'nav-item',
-        url: '/color',
-        icon: 'bg-colors'
-      },
-      {
-        id: 'tabler',
-        title: 'Tabler',
-        type: 'item',
-        classes: 'nav-item',
-        url: 'https://ant.design/components/icon',
-        icon: 'ant-design',
-        target: true,
-        external: true
-      }
-    ]
-  },
+  // {
+  //   id: 'authentication',
+  //   title: 'Authentication',
+  //   type: 'group',
+  //   icon: 'icon-navigation',
+  //   children: [
+  //     {
+  //       id: 'login',
+  //       title: 'Login',
+  //       type: 'item',
+  //       classes: 'nav-item',
+  //       url: '/login',
+  //       icon: 'login',
+  //       target: true,
+  //       breadcrumbs: false
+  //     },
+  //     {
+  //       id: 'register',
+  //       title: 'Register',
+  //       type: 'item',
+  //       classes: 'nav-item',
+  //       url: '/register',
+  //       icon: 'profile',
+  //       target: true,
+  //       breadcrumbs: false
+  //     }
+  //   ]
+  // },
+  // {
+  //   id: 'utilities',
+  //   title: 'UI Components',
+  //   type: 'group',
+  //   icon: 'icon-navigation',
+  //   children: [
+  //     {
+  //       id: 'typography',
+  //       title: 'Typography',
+  //       type: 'item',
+  //       classes: 'nav-item',
+  //       url: '/typography',
+  //       icon: 'font-size'
+  //     },
+  //     {
+  //       id: 'color',
+  //       title: 'Colors',
+  //       type: 'item',
+  //       classes: 'nav-item',
+  //       url: '/color',
+  //       icon: 'bg-colors'
+  //     },
+  //     {
+  //       id: 'tabler',
+  //       title: 'Tabler',
+  //       type: 'item',
+  //       classes: 'nav-item',
+  //       url: 'https://ant.design/components/icon',
+  //       icon: 'ant-design',
+  //       target: true,
+  //       external: true
+  //     }
+  //   ]
+  // },
 
-  {
-    id: 'other',
-    title: 'Other',
-    type: 'group',
-    icon: 'icon-navigation',
-    children: [
-      {
-        id: 'sample-page',
-        title: 'Sample Page',
-        type: 'item',
-        url: '/sample-page',
-        classes: 'nav-item',
-        icon: 'chrome'
-      },
-      {
-        id: 'document',
-        title: 'Document',
-        type: 'item',
-        classes: 'nav-item',
-        url: 'https://codedthemes.gitbook.io/mantis-angular/',
-        icon: 'question',
-        target: true,
-        external: true
-      }
-    ]
-  }
+  // {
+  //   id: 'other',
+  //   title: 'Other',
+  //   type: 'group',
+  //   icon: 'icon-navigation',
+  //   children: [
+  //     {
+  //       id: 'sample-page',
+  //       title: 'Sample Page',
+  //       type: 'item',
+  //       url: '/sample-page',
+  //       classes: 'nav-item',
+  //       icon: 'chrome'
+  //     },
+  //     {
+  //       id: 'document',
+  //       title: 'Document',
+  //       type: 'item',
+  //       classes: 'nav-item',
+  //       url: 'https://codedthemes.gitbook.io/mantis-angular/',
+  //       icon: 'question',
+  //       target: true,
+  //       external: true
+  //     }
+  //   ]
+  // }
 ];

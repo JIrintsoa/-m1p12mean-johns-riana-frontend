@@ -17,10 +17,17 @@
   "private": false,
   "dependencies": {
     "@angular/animations": "19.2.2",
+<<<<<<< HEAD
     "@angular/cdk": "19.0.4",
     "@angular/common": "19.2.2",
     "@angular/compiler": "19.2.2",
     "@angular/core": "19.2.2",
+=======
+    "@angular/cdk": "^19.2.3",
+    "@angular/common": "19.2.2",
+    "@angular/compiler": "19.2.2",
+    "@angular/core": "^19.2.2",
+>>>>>>> dev
     "@angular/forms": "19.2.2",
     "@angular/localize": "^19.2.2",
     "@angular/platform-browser": "19.2.2",
@@ -33,7 +40,7 @@
     "apexcharts": "3.49.2",
     "bootstrap": "5.3.3",
     "ng-apexcharts": "^1.8.0",
-    "ngx-scrollbar": "16.1.1",
+    "ngx-scrollbar": "^18.0.0",
     "rxjs": "~7.8.1",
     "tslib": "2.8.1",
     "zone.js": "~0.15.0"
