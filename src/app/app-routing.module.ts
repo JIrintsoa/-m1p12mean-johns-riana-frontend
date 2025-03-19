@@ -119,7 +119,8 @@ const routes: Routes = [
     children: [
       {
         path: 'login',
-        loadComponent: () => import('./components/authentication/auth-login/auth-login.component').then((c) => c.AuthLoginComponent)
+        loadComponent: () => import('./components/authentication/auth-login/auth-login.component').then((c) => c.AuthLoginComponent),
+        canActivate: [AuthGuard]
       },
       {
         path: 'register',
