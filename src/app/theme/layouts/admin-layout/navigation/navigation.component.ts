@@ -1,10 +1,12 @@
 // Angular import
-import { Component, output } from '@angular/core';
+import { Component, OnInit, output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 // project import
 
 import { NavContentComponent } from './nav-content/nav-content.component';
+import { NavigationItem } from './navigation';
+import { NavigationService } from 'src/app/services/navigation.service';
 
 @Component({
   selector: 'app-navigation',
@@ -12,7 +14,10 @@ import { NavContentComponent } from './nav-content/nav-content.component';
   templateUrl: './navigation.component.html',
   styleUrls: ['./navigation.component.scss']
 })
-export class NavigationComponent {
+export class NavigationComponent implements OnInit{
+
+  navigationItems: NavigationItem[] = [];
+
   // media 1025 After Use Menu Open
   NavCollapsedMob = output();
 
@@ -20,9 +25,13 @@ export class NavigationComponent {
   windowWidth: number;
 
   // Constructor
-  constructor() {
+  constructor(private navigationService: NavigationService) {
     this.windowWidth = window.innerWidth;
     this.navCollapsedMob = false;
+  }
+
+  ngOnInit(): void {
+    this.navigationItems = this.navigationService.getNavigationItems();
   }
 
   // public method
