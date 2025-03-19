@@ -9,6 +9,7 @@ import { GuestLayoutComponent } from './theme/layouts/guest-layout/guest-layout.
 import { AuthInterceptor } from './auth/auth.interceptors';
 import { AuthGuard } from './auth/auth.guard';
 import { UnauthorizedComponent } from './shared/unauthorized/unauthorized.component';
+import { LogoutComponent } from './components/authentication/auth-logout/auth-logout.component';
 
 const routes: Routes = [
   {
@@ -126,8 +127,12 @@ const routes: Routes = [
         path: 'register',
         loadComponent: () =>
           import('./components/authentication/auth-register/auth-register.component').then((c) => c.AuthRegisterComponent)
-      }
-    ]
+      },
+      {
+        path: 'logout',
+        component: LogoutComponent, // Ajoutez la route de déconnexion
+      },
+    ],
   }
 ];
 
