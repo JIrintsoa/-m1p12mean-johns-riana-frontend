@@ -4,7 +4,7 @@ import { CommonModule, Location, LocationStrategy } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
 // project import
-import { NavigationItem, NavigationItems } from '../navigation';
+import { NavigationItem } from '../navigation';
 import { environment } from 'src/environments/environment';
 
 import { NavGroupComponent } from './nav-group/nav-group.component';
@@ -23,6 +23,7 @@ import {
   AntDesignOutline
 } from '@ant-design/icons-angular/icons';
 import { NgScrollbarModule } from 'ngx-scrollbar';
+import { NavigationService } from 'src/app/services/navigation.service';
 
 @Component({
   selector: 'app-nav-content',
@@ -40,15 +41,16 @@ export class NavContentComponent implements OnInit {
 
   navigations: NavigationItem[];
 
+
   // version
   title = 'Demo application for version numbering';
   currentApplicationVersion = environment.appVersion;
 
-  navigation = NavigationItems;
   windowWidth = window.innerWidth;
 
   // Constructor
-  constructor() {
+  constructor(navigationService: NavigationService) {
+    this.navigations = navigationService.getNavigationItems();
     this.iconService.addIcon(
       ...[
         DashboardOutline,
@@ -62,11 +64,12 @@ export class NavContentComponent implements OnInit {
         QuestionOutline
       ]
     );
-    this.navigations = NavigationItems;
+    // this.navigations = NavigationItems;
   }
 
   // Life cycle events
   ngOnInit() {
+    // console.log(this.navigations)
     if (this.windowWidth < 1025) {
       (document.querySelector('.coded-navbar') as HTMLDivElement).classList.add('menupos-static');
     }

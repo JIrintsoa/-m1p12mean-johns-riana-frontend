@@ -44,8 +44,10 @@ export class AuthLoginComponent {
       this.authService.login(this.loginForm.value).subscribe({
         next: (response) => {
           // Gérer la réponse de l'API (par exemple, stocker le token, rediriger)
-          console.log('Connexion réussie', response);
+          // console.log('Connexion réussie', response);
           localStorage.setItem('token', response.token);
+          console.log(response.user)
+          localStorage.setItem('user', JSON.stringify(response.user));
           
           const role = response.user.role;
           // console.log(role)

@@ -10,6 +10,12 @@ export interface UserLogin {
   password: string;
 }
 
+export interface UserProfile {
+  name: string;
+  email: string;
+  role: string;
+}
+
 export interface User {
   _id: string;
   name: string;
