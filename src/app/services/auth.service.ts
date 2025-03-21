@@ -12,6 +12,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 })
 export class AuthService {
   private readonly TOKEN_KEY = 'token';
+  private readonly USER_KEY = 'user';
   private jwtHelper = new JwtHelperService(); 
 
   private apiUrlRegister = `${environment.apiUrl}/clients`; // Utilise l'URL de l'API depuis l'environnement
@@ -42,6 +43,7 @@ export class AuthService {
 
   removeToken(): void {
     localStorage.removeItem(this.TOKEN_KEY);
+    localStorage.removeItem(this.USER_KEY);
   }
 
   getUserRole(): string | null {

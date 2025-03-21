@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { VehicleModel } from 'src/app/models/vehicle.model';
+import { AuthService } from 'src/app/services/auth.service';
 import { VehicleService } from 'src/app/services/vehicle/vehicle.service';
 import { CardComponent } from 'src/app/theme/shared/components/card/card.component';
 @Component({
@@ -13,8 +14,7 @@ import { CardComponent } from 'src/app/theme/shared/components/card/card.compone
 
 export class VehiculesComponent implements OnInit {
   vehicles: VehicleModel[] = [];  // Explicitly declare the type of vehicles
-  token: string = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZDkwN2Q0NmU2OWRlNWEwOWNiNjFmMCIsImVtYWlsIjoiY2xpZW50MUBnbWFpbC5jb20iLCJyb2xlIjoiY2xpZW50IiwiaWF0IjoxNzQyMzAzMTc3LCJleHAiOjE3NDIzMDY3Nzd9.jRVuW6PvFn-d4vjKbtpFk61T79LUvcIBtPROiWHwLFc'
-  // form
+  token: string =  ''; // form
   model: string = '';
   brand: string = '';
   year: string = '';
@@ -22,21 +22,23 @@ export class VehiculesComponent implements OnInit {
   successMessage: string = '';
   errorMessage: string = '';
 
-  constructor(private vehicleService: VehicleService) {}
+  constructor( private vehicleService: VehicleService, authService: AuthService) {
+    this.token = authService.getToken();
+  }
 
   ngOnInit(): void {
     this.fetchVehicles();
-    console.log('init');
+    // console.log('init');
   }
 
   fetchVehicles(): void {
     this.vehicleService.getVehicles(this.token).subscribe({
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       next: (response: any) => {
-        console.log('Raw response:', response);
+        // console.log('Raw response:', response);
         const result = response;
         this.vehicles = result.items || [];
-        console.log('Processed vehicles:', this.vehicles);
+        // console.log('Processed vehicles:', this.vehicles);
       },
       error: (error) => {
         console.error('Error fetching vehicles:', error);

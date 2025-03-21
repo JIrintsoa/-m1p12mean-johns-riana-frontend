@@ -1,6 +1,6 @@
 // angular import
 import { Component, inject, input, output } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { RouterLink, RouterModule } from '@angular/router';
 
 // project import
 
@@ -27,15 +27,17 @@ import {
 } from '@ant-design/icons-angular/icons';
 import { NgbDropdownModule, NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgScrollbarModule } from 'ngx-scrollbar';
+import { UserProfile } from 'src/app/models/user.model';
 
 @Component({
   selector: 'app-nav-right',
-  imports: [IconDirective, RouterModule, NgScrollbarModule, NgbNavModule, NgbDropdownModule],
+  imports: [IconDirective, RouterModule, NgScrollbarModule, NgbNavModule, NgbDropdownModule, RouterLink],
   templateUrl: './nav-right.component.html',
   styleUrls: ['./nav-right.component.scss']
 })
 export class NavRightComponent {
   private iconService = inject(IconService);
+  user: UserProfile;
 
   styleSelectorToggle = input<boolean>();
   Customize = output();
@@ -43,6 +45,7 @@ export class NavRightComponent {
   screenFull: boolean = true;
 
   constructor() {
+    this.user = this.getUser();
     this.windowWidth = window.innerWidth;
     this.iconService.addIcon(
       ...[
@@ -67,6 +70,12 @@ export class NavRightComponent {
     );
   }
 
+
+  getUser(): UserProfile {
+    // console.log()
+    return JSON.parse(localStorage.getItem('user'));
+  }
+
   profile = [
     {
       icon: 'edit',
@@ -75,15 +84,15 @@ export class NavRightComponent {
     {
       icon: 'user',
       title: 'View Profile'
-    },
-    {
-      icon: 'profile',
-      title: 'Social Profile'
-    },
-    {
-      icon: 'wallet',
-      title: 'Billing'
     }
+    // {
+    //   icon: 'profile',
+    //   title: 'Social Profile'
+    // },
+    // {
+    //   icon: 'wallet',
+    //   title: 'Billing'
+    // }
   ];
 
   setting = [

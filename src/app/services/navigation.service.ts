@@ -15,7 +15,7 @@ export class NavigationService {
     if (!userRole) {
       return []; // Retourner un tableau vide si l'utilisateur n'est pas authentifié
     }
-    console.log(NavigationItems)
+    // console.log(NavigationItems)
 
     return NavigationItems.filter(item => item.id === userRole);
   }
