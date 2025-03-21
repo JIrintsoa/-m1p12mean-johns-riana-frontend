@@ -13,7 +13,7 @@ import { CardComponent } from 'src/app/theme/shared/components/card/card.compone
 
 export class VehiculesComponent implements OnInit {
   vehicles: VehicleModel[] = [];  // Explicitly declare the type of vehicles
-  token: string = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZDkwN2Q0NmU2OWRlNWEwOWNiNjFmMCIsImVtYWlsIjoiY2xpZW50MUBnbWFpbC5jb20iLCJyb2xlIjoiY2xpZW50IiwiaWF0IjoxNzQyMzAzMTc3LCJleHAiOjE3NDIzMDY3Nzd9.jRVuW6PvFn-d4vjKbtpFk61T79LUvcIBtPROiWHwLFc'
+  token: string = localStorage.getItem('TOKEN_KEY');
   // form
   model: string = '';
   brand: string = '';
