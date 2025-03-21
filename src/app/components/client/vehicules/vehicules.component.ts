@@ -14,7 +14,8 @@ import { CardComponent } from 'src/app/theme/shared/components/card/card.compone
 
 export class VehiculesComponent implements OnInit {
   vehicles: VehicleModel[] = [];  // Explicitly declare the type of vehicles
-  token: string =  ''; // form
+  token: string = localStorage.getItem('TOKEN_KEY');
+  // form
   model: string = '';
   brand: string = '';
   year: string = '';

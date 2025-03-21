@@ -141,6 +141,6 @@ const routes: Routes = [
   exports: [RouterModule],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
-  ]
+  ],
 })
 export class AppRoutingModule {}
