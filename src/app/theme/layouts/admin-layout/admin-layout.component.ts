@@ -6,9 +6,9 @@ import { RouterModule } from '@angular/router';
 // Project import
 
 import { NavBarComponent } from './nav-bar/nav-bar.component';
-import { NavigationComponent } from './navigation/navigation.component';
 import { ConfigurationComponent } from './configuration/configuration.component';
 import { BreadcrumbComponent } from 'src/app/theme/shared/components/breadcrumb/breadcrumb.component';
+import { NavigationComponent } from './navigation/navigation.component';
 
 @Component({
   selector: 'app-admin',
