@@ -50,7 +50,7 @@
               <tbody>
                 <tr *ngFor="let appointment of appointments">
                   <td>{{ appointment.clientId?.name || 'No name provided' }}</td>
-                  <!-- <td>{{appointment.formattedDate}}</td> -->
+                  <td>{{appointment.formattedDate}}</td>
                   <td>{{appointment.serviceTypeId?.name}}</td>
                   <td>{{appointment.status}}</td>
                   <td>{{appointment.description}}</td>
