@@ -35,6 +35,8 @@ export class VehiculesComponent implements OnInit {
   currentPage = 1;
   itemsPerPage = 3;
   totalItems = 0;
+
+  //filter options
   searchTerm = '';
   
   vehicleToUpdate: VehicleModel | null = null;

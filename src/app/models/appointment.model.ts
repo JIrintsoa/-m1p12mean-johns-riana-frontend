@@ -5,7 +5,8 @@ export interface AppointmentModel {
   _id: string;
   clientId: {
       _id: string,
-      name: string
+      firstName: string
+      lastName: string
   };
   vehicleId: string;
   serviceTypeId: {
