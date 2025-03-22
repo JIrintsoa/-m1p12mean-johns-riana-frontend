@@ -4,9 +4,9 @@ import { CommonModule } from '@angular/common';
 
 // project import
 
-import { NavContentComponent } from './nav-content/nav-content.component';
 import { NavigationItem } from './navigation';
 import { NavigationService } from 'src/app/services/navigation.service';
+import { NavContentComponent } from './nav-content/nav-content.component';
 
 @Component({
   selector: 'app-navigation',
