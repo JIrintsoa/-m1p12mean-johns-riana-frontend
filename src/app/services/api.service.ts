@@ -39,5 +39,15 @@ export class ApiService {
     const headers = token ? { Authorization: `Bearer ${token}` } : {};  // Include token if available
     return this.http.delete<unknown>(`${this.baseUrl}${url}`, { headers });
   }
+
+  put(url: string, body: unknown, token?: string): Observable<unknown> {
+    const headers = token ? { Authorization: `Bearer ${token}` } : {};  // If a token is provided, add it to the headers
+    const httpOptions = {
+      headers: new HttpHeaders(headers)
+    };
+    
+    return this.http.put<unknown>(`${this.baseUrl}${url}`, body, httpOptions);
+  }
+
   
 }

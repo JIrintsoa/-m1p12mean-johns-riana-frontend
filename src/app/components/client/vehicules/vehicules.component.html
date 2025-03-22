@@ -34,24 +34,11 @@
           <div class="col-8">
             <div class="row">
               <div class="col-4">
-                <input type="text" class="form-control" id="rechercher" placeholder="Rechercher">
+                <input type="text" class="form-control" id="rechercher" [(ngModel)]="searchTerm" placeholder="Rechercher">
               </div>
-              <div class="col-2">
-                <select id="status" class="form-control">
-                  <option selected>Status</option>
-                  <option>Aucun</option>
-                  <option>En attente</option>
-                  <option>Reparation</option>
-                </select>
-              </div>
-              <div class="col-2">
-                <input type="date" class="form-control" id="dateDebutFilter">
-              </div>
-              <div class="col-2">
-                <input type="date" class="form-control" id="dateFinFilter">
-              </div>
-              <div class="col-2">
-                <button type="button" class="btn btn-primary">Valider</button>
+
+              <div class="col-8">
+                <button type="button" class="btn btn-primary" (click)="searchVehicles()">Valider</button>
               </div>
             </div>
             <div class="row">
@@ -73,7 +60,7 @@
                     <td scope="row">{{ vehicle.year }}</td>
                     <td>{{ vehicle.fuelType }}</td>
                     <td>
-                      <button type="button" class="btn btn-warning">Modifier</button>
+                      <button type="button" class="btn btn-outline-warning" (click)="openModalUpdate(contentModalUpdate,vehicle)">Modifier</button>
                       <button (click)="deleteVehicle(vehicle._id)" class="btn btn-danger">Supprimer</button>
                     </td>
                   </tr>
@@ -83,7 +70,39 @@
                 </tbody>
               </table>
             </div>
+
+            <div class="row">
+              <div class="col-10">
+                <nav aria-label="Page navigation">
+                  <ul class="pagination">
+                    <li class="page-item" [class.disabled]="currentPage === 1">
+                      <a class="page-link" (click)="changePage(currentPage - 1)">Previous</a>
+                    </li>
+                    <li class="page-item" *ngFor="let page of getPages()" [class.active]="page === currentPage">
+                      <a class="page-link" (click)="changePage(page)">{{ page }}</a>
+                    </li>
+                    <li class="page-item" [class.disabled]="currentPage === getPages().length">
+                      <a class="page-link" (click)="changePage(currentPage + 1)">Next</a>
+                    </li>
+                  </ul>
+                </nav>
+              </div>
+              <div class="col-2">
+                <select class="form-control" id="itemsPerPage" [(ngModel)]="itemsPerPage" (change)="changeItemsPerPage(itemsPerPage)">
+                  <option value="3">3</option>
+                  <option value="5">5</option>
+                  <option value="10">20</option>
+                </select>
+              </div>
+
+              <div class="form-group ml-3">
+
+              </div>
+            </div>
+
+
           </div>
+
           <div *ngIf="successMessage" class="alert alert-success mt-3">
             {{ successMessage }}
           </div>
@@ -94,5 +113,39 @@
         </div>
       </app-card>
     </div>
-  </div>
-  
+</div>
+
+<!-- Update Modals -->
+<ng-template #contentModalUpdate let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title">Modifier Véhicule</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+	</div>
+	<div class="modal-body">
+    <form>
+      <div class="form-group">
+        <label for="updateBrand">Marque</label>
+        <input type="text" class="form-control" id="updateBrand" [(ngModel)]="vehicleToUpdate.brand" [ngModelOptions]="{standalone: true}">
+      </div>
+      <div class="form-group">
+        <label for="updateModel">Modèle</label>
+        <input type="text" class="form-control" id="updateModel" [(ngModel)]="vehicleToUpdate.model" [ngModelOptions]="{standalone: true}">
+      </div>
+      <div class="form-group">
+        <label for="updateYear">Année</label>
+        <input type="text" class="form-control" id="updateYear" [(ngModel)]="vehicleToUpdate.year" [ngModelOptions]="{standalone: true}">
+      </div>
+      <div class="form-group">
+        <label for="updateFuelType">Type Carburant</label>
+        <select class="form-control" id="updateFuelType" [(ngModel)]="vehicleToUpdate.fuelType" [ngModelOptions]="{standalone: true}">
+          <option value="Essence">Essence</option>
+          <option value="Gasoil">Gasoil</option>
+        </select>
+      </div>
+    </form>
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-secondary" (click)="modal.close('Close click')">Close</button>
+    <button type="button" class="btn btn-success" (click)="updateVehicle()" data-dismiss="modal">Enregistrer</button>
+	</div>
+</ng-template>

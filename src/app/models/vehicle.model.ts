@@ -6,7 +6,7 @@ export interface VehicleModel {
     fuelType: string;
     userId: string;
     createdAt: string;
-    updatedAt: string;
+    updatedAt: Date;
     __v: number;
 }
 
