@@ -16,6 +16,7 @@ export interface UserProfile {
   lastName: string;
   email: string;
   role: string;
+  status: string;
 }
 
 export interface User {
@@ -27,6 +28,7 @@ export interface User {
   password: string;
   createdAt: string;
   updatedAt: string;
+  status: string;
 }
 
 export interface LoginResponse {
@@ -34,5 +36,5 @@ export interface LoginResponse {
   user: User; 
   token: string;
   role: string;
+  status: string;
 }
-
