@@ -9,6 +9,11 @@ export interface AppointmentModel {
       lastName: string
   };
   vehicleId: string;
+  mechanicId: {
+    _id: string,
+    firstName: string,
+    lastName: string,
+  };
   serviceTypeId: {
     _id: string,
     name: string

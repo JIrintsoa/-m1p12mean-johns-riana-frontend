@@ -13,7 +13,7 @@ export class ApiService {
   constructor(private http: HttpClient) { }
   
   get<T>(url: string, params?: { [key: string]: string | number | boolean }, token?: string): Observable<T> {
-    const headers = token ? { Authorization: `Bearer ${token}` } : {};  // If a token is provided, add it to the headers
+    const headers = token ? { Authorization: `Bearer ${token}` } : {}; 
   
     return this.http.get<T>(`${this.baseUrl}${url}`, {
       params,
@@ -22,7 +22,7 @@ export class ApiService {
   }
 
   post(url: string, body: unknown, token?: string): Observable<unknown> {
-    const headers = token ? { Authorization: `Bearer ${token}` } : {};  // If a token is provided, add it to the headers
+    const headers = token ? { Authorization: `Bearer ${token}` } : {}; 
     const httpOptions = {
       headers: new HttpHeaders(headers)
     };
@@ -31,8 +31,12 @@ export class ApiService {
   }
   
 
-  patch<T>(url: string, body: unknown): Observable<T> {
-    return this.http.patch<T>(`${this.baseUrl}${url}`, body);
+  patch<T>(url: string, body: unknown, token?: string): Observable<T> {
+    const headers = token ? { Authorization: `Bearer ${token}` } : {}; 
+    const httpOptions = {
+      headers: new HttpHeaders(headers)
+    };
+    return this.http.patch<T>(`${this.baseUrl}${url}`, body, httpOptions);
   }
 
   delete(url: string, token?: string): Observable<unknown> {

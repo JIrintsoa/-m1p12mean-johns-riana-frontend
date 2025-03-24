@@ -8,5 +8,4 @@ import { CardComponent } from 'src/app/theme/shared/components/card/card.compone
   styleUrl: './mechanics.component.scss'
 })
 export class MechanicsComponent {
-
 }

@@ -54,6 +54,7 @@
                   <th scope="col">Client</th>
                   <th scope="col">Date préféré</th>
                   <th scope="col">Service</th>
+                  <th scope="col">Mécanicien assigné</th>
                   <th scope="col">Status</th>
                   <th scope="col">Motif</th>
                   <th scope="col">Action</th>
@@ -65,13 +66,15 @@
                   </td>
                   <td>{{appointment.formattedDate}}</td>
                   <td>{{appointment.serviceTypeId?.name}}</td>
+                  <td>{{appointment.mechanicId?.firstName}} {{appointment.mechanicId?.lastName}}</td>
                   <td>{{appointment.status}}</td>
                   <td>{{appointment.description}}</td>
                   <td>
                     <button type="button" class="btn btn-info"
                       [routerLink]="['/manager/appointment-list/details/1']">Details</button>
-                    <button type="button" class="btn btn-secondary" style="margin-left: 10px;">Assigner
-                      mécanicien</button>
+                    <button type="button" class="btn btn-secondary" style="margin-left: 10px;" (click)="openModalUpdate(contentModalUpdate, appointment._id)">
+                      Assigner mécanicien
+                    </button>
                   </td>
                 </tr>
                 <tr>
@@ -113,3 +116,29 @@
     </app-card>
   </div>
 </div>
+
+<!-- Update Modals -->
+<ng-template #contentModalUpdate let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title">Assigner mécanicien au client</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+	</div>
+	<div class="modal-body">
+    <form>
+      <div class="form-group">
+        <label for="mecanicien">Séléctionner un mécanicien</label>
+        <select class="form-control" id="updateFuelType" [(ngModel)]="assignmentMechanicId" [ngModelOptions]="{standalone: true}">
+          <option value="" disabled>Sélectionner un mécanicien</option>
+          <option value="{{mechanic._id}}" 
+            *ngFor="let mechanic of mechanics">
+              {{mechanic.firstName}} {{mechanic.lastName}}
+          </option>
+        </select>
+      </div>
+    </form>
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-secondary" (click)="modal.close('Close click')">Close</button>
+    <button type="button" class="btn btn-success" (click)="assignMechanicToAppointment()" data-dismiss="modal">Enregistrer</button>
+	</div>
+</ng-template>

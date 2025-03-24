@@ -11,14 +11,17 @@ export interface UserLogin {
 }
 
 export interface UserProfile {
-  name: string;
+  _id: string;
+  firstName: string;
+  lastName: string;
   email: string;
   role: string;
 }
 
 export interface User {
   _id: string;
-  name: string;
+  firstName: string;
+  lastName: string;
   role: string;
   email: string;
   password: string;
