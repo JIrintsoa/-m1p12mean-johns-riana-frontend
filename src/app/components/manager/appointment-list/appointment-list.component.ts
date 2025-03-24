@@ -3,7 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { AppointmentModel } from 'src/app/models/appointment.model';
+import { ServiceType } from 'src/app/models/service.model';
 import { AppointmentService } from 'src/app/services/appointment/appointment.service';
+import { ServiceTypeService } from 'src/app/services/service-type/service-type.service';
 import { CardComponent } from 'src/app/theme/shared/components/card/card.component';
 
 @Component({
@@ -14,6 +16,7 @@ import { CardComponent } from 'src/app/theme/shared/components/card/card.compone
 })
 export class AppointmentListComponent implements OnInit {
   appointments: AppointmentModel[] = [];
+  serviceTypes: ServiceType[] = [];
   token: string = localStorage.getItem('TOKEN_KEY');
 
   // Pagination options
@@ -32,10 +35,11 @@ export class AppointmentListComponent implements OnInit {
     this.fetchAppointmentsAll()
   }
 
-  constructor(private appointmentService: AppointmentService) { }
+  constructor(private appointmentService: AppointmentService, private serviceTypeService: ServiceTypeService) { }
 
   ngOnInit(): void {
     this.fetchAppointmentsAll();
+    this.fetchServiceTypes();
   }
 
   getPages(): number[] {
@@ -59,7 +63,7 @@ export class AppointmentListComponent implements OnInit {
   fetchAppointmentsAll(): void {
     const limit = this.itemsPerPage;
     this.appointmentService.getAppointmentsAll(
-      this.token, 
+      this.token,
       this.currentPage,
       limit,
       this.searchTerm,
@@ -82,6 +86,17 @@ export class AppointmentListComponent implements OnInit {
     });
   }
 
+  fetchServiceTypes(): void {
+    this.serviceTypeService.getServiceTypes().subscribe({
+      next: (response: any) => {
+        const result = response;
+        this.serviceTypes = result.items || [];
+      },
+      error: (error) => {
+        console.error('Error fetching service types:', error);
+      }
+    });
+  }
   // Separate function for date formatting
   formatDateInFrench(value: string | Date): string {
     const frenchMonths = [

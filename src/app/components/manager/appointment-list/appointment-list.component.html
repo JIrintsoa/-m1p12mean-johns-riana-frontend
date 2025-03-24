@@ -12,7 +12,7 @@
           <div class="col-md-2 col-sm-6 mb-3 mb-md-0">
             <label for="status" class="form-label">Status</label>
             <select [(ngModel)]="status" name="status" id="status" class="form-control">
-              <option value="">Status</option>
+              <option value="">Tous</option>
               <option value="En cours">En cours</option>
               <option value="En attente">En attente</option>
               <option value="Annulé">Annulé</option>
@@ -22,9 +22,8 @@
           <div class="col-md-2 col-sm-6 mb-3 mb-md-0">
             <label for="serviceType" class="form-label">Service</label>
             <select [(ngModel)]="serviceTypeId" name="serviceTypeId" id="serviceType" class="form-control">
-              <option value="">Type de service</option>
-              <option value="Vidange">Vidange</option>
-              <option value="Réparation">Réparation</option>
+              <option value="">Tous</option>
+              <option *ngFor="let serviceType of serviceTypes" value="{{serviceType._id}}">{{serviceType.name}}</option>
             </select>
           </div>
       
