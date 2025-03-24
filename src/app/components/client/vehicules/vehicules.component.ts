@@ -29,7 +29,12 @@ export class VehiculesComponent implements OnInit {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   activeModalUpdate: any;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  activeModaleDelete: any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   @ViewChild('contentModalUpdate') contentModalUpdate: TemplateRef<any> | undefined;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  @ViewChild('contentModalDelete') contentModalDelete: TemplateRef<any> | undefined;
+
 
   // Pagination options
   currentPage = 1;
@@ -37,7 +42,7 @@ export class VehiculesComponent implements OnInit {
   totalItems = 0;
   searchTerm = '';
   
-  vehicleToUpdate: VehicleModel | null = null;
+  vehicleSelected: VehicleModel | null = null;
   
   // itemsPerPageOptions = [3, 5, 10, 20];
 
@@ -53,8 +58,13 @@ export class VehiculesComponent implements OnInit {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   openModalUpdate(contentModalUpdate: TemplateRef<any>, vehicle: VehicleModel) {
 		this.activeModalUpdate = this.modalService.open(contentModalUpdate, { centered: true });
-    this.vehicleToUpdate = vehicle;
+    this.vehicleSelected = vehicle;
 	}
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  openModalDelete(contentModalDelete: TemplateRef<any>, vehicle: VehicleModel){
+    this.activeModaleDelete = this.modalService.open(contentModalDelete, {centered: true})
+    this.vehicleSelected = vehicle
+  }
 
   ngOnInit(): void {
     this.fetchVehicles();
@@ -131,8 +141,8 @@ export class VehiculesComponent implements OnInit {
   }
 
   updateVehicle(): void {
-    if (this.vehicleToUpdate) {
-      this.vehicleService.updateVehicle(this.vehicleToUpdate, this.token).subscribe({
+    if (this.vehicleSelected) {
+      this.vehicleService.updateVehicle(this.vehicleSelected, this.token).subscribe({
         next: () => {
           this.fetchVehicles();
           this.activeModalUpdate.close()
@@ -153,24 +163,23 @@ export class VehiculesComponent implements OnInit {
   }
 
   resetFormUpdate(): void {
-    this.vehicleToUpdate = null;
+    this.vehicleSelected = null;
   }
 
-  deleteVehicle(vehicleId: string): void {
-    const confirmation = window.confirm('Êtes-vous sûr de vouloir supprimer ce véhicule ?');
-    if(confirmation){
-      this.vehicleService.deleteVehicle(vehicleId, this.token).subscribe({
-        next: (response) => {
-          this.showMessage('Véhicule supprimé avec succès!', 'success');
-          console.log('Vehicle deleted successfully:', response);
-          this.fetchVehicles();  // Refresh the vehicle list
-        },
-        error: (error) => {
-          this.showMessage('Erreur durant la suppression du véhicule.', 'error');
-          console.error('Error deleting vehicle:', error);
-        }
-      });
-    }
+  deleteVehicle(vehicle: VehicleModel): void {
+    console.log(vehicle);
+    this.activeModaleDelete.close()
+    this.vehicleService.deleteVehicle(vehicle._id, this.token).subscribe({
+      next: (response) => {
+        this.showMessage('Véhicule supprimé avec succès!', 'success');
+        console.log('Vehicle deleted successfully:', response);
+        this.fetchVehicles();  // Refresh the vehicle list
+      },
+      error: (error) => {
+        this.showMessage('Erreur durant la suppression du véhicule.', 'error');
+        console.error('Error deleting vehicle:', error);
+      }
+    });
   }
 
   showMessage(message: string, type: 'success' | 'error'): void {

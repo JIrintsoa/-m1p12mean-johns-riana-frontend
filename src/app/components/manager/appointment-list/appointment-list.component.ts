@@ -24,6 +24,7 @@ export class AppointmentListComponent implements OnInit {
 
   fetchAppointmentsAll(): void {
     this.appointmentService.getAppointmentsAll(this.token).subscribe({
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       next: (response: any) => {
         const result = response;
         

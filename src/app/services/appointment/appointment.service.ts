@@ -31,4 +31,25 @@ export class AppointmentService {
     return this.apiService.post(url, appointments, token);
   }
 
+  getAppointmentsByClient(
+    token: string, 
+    vehicleName: string = '',
+    status: string = '', 
+    startDate: string = '', 
+    endDate: string ='',
+    page: number = 1,
+    limit: number = 3
+  ): Observable<unknown> {
+    const url = `/appointments/by-client`;
+    const params = {
+      page: page.toString(),
+      limit: limit.toString(),
+      vehicleName: vehicleName,
+      status: status,
+      startDate: startDate,
+      endDate: endDate
+    };
+    return this.apiService.get<unknown>(url,params);
+  }
+
 }
