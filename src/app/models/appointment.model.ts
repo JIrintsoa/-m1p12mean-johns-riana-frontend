@@ -1,5 +1,4 @@
 import { ServiceType } from "./service.model";
-import { VehicleModel } from "./vehicle.model";
 
 export interface AppointmentModel {
   _id: string;
@@ -29,11 +28,23 @@ export interface AppointmentModel {
 
 export interface AppointmentListe {
     _id: string;
-    vehicle: VehicleModel;
-    service: ServiceType;
-    serviceType: string;
-    mecanicien: string;
+    clientId: string;
+    vehicleId: {
+      _id: string;
+      model: string;
+      brand: string;
+    };
+    serviceTypeId: ServiceType;
+    date: string;
+    description: string;
     status: string;
-    progress: number;
-    appointmentDate: string;
+    score: number;
+    mechanicId: {
+      _id: string;
+      firstName: string;
+      lastName: string
+    };
+    createdAt: string;
+    updatedAt: string;
+    
 }

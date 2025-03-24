@@ -10,3 +10,9 @@ export interface VehicleModel {
     __v: number;
 }
 
+export interface VehicleFromAppointmentClient {
+    _id: string,
+    model: string,
+    brand: string
+}
+

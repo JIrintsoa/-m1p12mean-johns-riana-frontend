@@ -46,7 +46,16 @@ export class FormsComponent implements OnInit {
     this.fetchVehicles();
     this.fetchServiceTypes();
     this.appointmentDate = this.getCurrentDate();
+    this.fetchAppointments()
     // console.log('init');
+  }
+
+  formatDate(dateString: string): string {
+    const date = new Date(dateString);
+    const day = date.getDate().toString().padStart(2, '0');
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
   }
 
   fetchVehicles(): void {
@@ -55,27 +64,33 @@ export class FormsComponent implements OnInit {
       next: (response: any) => {
         // console.log('Raw response:', response);
         const result = response;
-        console.log(result)
+        // console.log(result)
         this.vehicles = result.items || [];
         // console.log('Processed vehicles:', this.vehicles);
       },
       error: (error) => {
+        if (error.status === 401) {
+          this.authService.logout();
+        }
         console.error('Error fetching vehicles:', error);
       }
     });
   }
 
-  fetchAppointment(): void {
-    this.appointmentService.getAppointments(this.token).subscribe({
+  fetchAppointments(): void {
+    this.appointmentService.getAppointmentsByClient(this.token).subscribe({
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       next: (response: any) => {
         // console.log('Raw response:', response);
         const result = response;
-        console.log(result)
+        // console.log(result)
         this.appointments = result.items || [];
         // console.log('Processed vehicles:', this.vehicles);
       },
       error: (error) => {
+        if (error.status === 401) {
+          this.authService.logout();
+        }
         console.error('Error fetching vehicles:', error);
       }
     });
@@ -89,6 +104,9 @@ export class FormsComponent implements OnInit {
         this.serviceTypes = result.items || [];
       },
       error: (error) => {
+        if (error.status === 401) {
+          this.authService.logout();
+        }
         console.error('Error fetching service types:', error);
       }
     });
@@ -130,7 +148,7 @@ export class FormsComponent implements OnInit {
       next: (response) => {
         console.log('appointment added successfully:', response);
         this.showMessage('Rendez-vous ajouté avec succès!', 'success');
-        this.fetchAppointment(); // Refresh the vehicle list
+        this.fetchAppointments(); // Refresh the vehicle list
         this.resetForm(); // Optionally reset the form after submission
       },
       error: (error) => {

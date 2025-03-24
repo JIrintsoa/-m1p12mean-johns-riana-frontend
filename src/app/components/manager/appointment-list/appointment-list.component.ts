@@ -93,6 +93,7 @@ export class AppointmentListComponent implements OnInit {
       this.startDate,
       this.endDate
     ).subscribe({
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       next: (response: any) => {
         const result = response;
         this.appointments = result.items || [];
