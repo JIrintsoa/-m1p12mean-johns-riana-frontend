@@ -4,12 +4,10 @@ export interface UserRegister {
   email: string;
   password: string;
 }
-
 export interface UserLogin {
   email: string;
   password: string;
 }
-
 export interface UserProfile {
   _id: string;
   firstName: string;
@@ -30,7 +28,6 @@ export interface User {
   updatedAt: string;
   status: string;
 }
-
 export interface LoginResponse {
   message: string;
   user: User; 
