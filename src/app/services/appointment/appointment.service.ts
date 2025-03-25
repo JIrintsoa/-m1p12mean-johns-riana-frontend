@@ -49,23 +49,32 @@ export class AppointmentService {
 
   getAppointmentsByClient(
     token: string, 
+    limit: number = 10,
+    page: number = 1,
     vehicleName: string = '',
+    serviceTypeId: string = '' ,
     status: string = '', 
     startDate: string = '', 
-    endDate: string ='',
-    page: number = 1,
-    limit: number = 3
+    endDate: string =''
   ): Observable<unknown> {
     const url = `/appointments/by-client`;
     const params = {
       page: page.toString(),
       limit: limit.toString(),
       vehicleName: vehicleName,
+      serviceTypeId: serviceTypeId,
       status: status,
       startDate: startDate,
       endDate: endDate
     };
     return this.apiService.get<unknown>(url,params);
+  }
+
+  getAppointmentById(
+    appointmentId: string = ''
+  ): Observable<unknown> {
+    const url = `/appointments/id/${appointmentId}`;
+    return this.apiService.get<unknown>(url);
   }
 
 }
