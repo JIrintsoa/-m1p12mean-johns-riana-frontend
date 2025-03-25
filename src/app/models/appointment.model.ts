@@ -1,4 +1,5 @@
 import { ServiceType } from "./service.model";
+import { User } from "./user.model";
 import { VehicleModel } from "./vehicle.model";
 
 export interface AppointmentModel {
@@ -29,11 +30,56 @@ export interface AppointmentModel {
 
 export interface AppointmentListe {
     _id: string;
-    vehicle: VehicleModel;
-    service: ServiceType;
-    serviceType: string;
-    mecanicien: string;
+    clientId: string;
+    vehicleId: {
+      _id: string;
+      model: string;
+      brand: string;
+    };
+    serviceTypeId: ServiceType;
+    date: string;
+    description: string;
     status: string;
+    score: number;
+    mechanicId: {
+      _id: string;
+      firstName: string;
+      lastName: string
+    };
+    createdAt: string;
+    updatedAt: string;
+    
+}
+
+export interface AppointmentFilter {
+  vehicle?: string;
+  serviceTypeId: string;
+  status?: string;
+  startDate?: string;
+  endDate?: string;
+}
+
+export interface AppointmentDetail {
+  _id: string;
+  clientId: User;
+  vehicleId: VehicleModel;
+  serviceTypeId: ServiceType;
+  date: string;
+  description: string;
+  status: string;
+  score: number | null;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+}
+
+export interface AppointmentDetailResponse {
+  message: string;
+  items: {
+    appointmentDetail: AppointmentDetail;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    interventionDetail: any[]; // Définissez une interface si vous avez la structure
+    totalCost: number;
     progress: number;
-    appointmentDate: string;
+  };
 }

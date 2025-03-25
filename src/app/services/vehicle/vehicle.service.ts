@@ -11,12 +11,13 @@ export class VehicleService {
 
   constructor(private apiService: ApiService) { }
 
-  getVehicles(token: string, page: number = 1, limit: number = 3, filter: string = ''): Observable<unknown> {
+  getVehicles(token: string, page: number = 1, limit: number = 3, filter: string = '', order: string = 'desc'): Observable<unknown> {
     const url = `/vehicles`;  // API endpoint for getting vehicles
     const params = {
       page: page.toString(),
       limit: limit.toString(),
-      name: filter
+      name: filter,
+      order: order
     };
     return this.apiService.get<unknown>(url, params, token);  // Pass the token here
   }

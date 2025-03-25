@@ -36,7 +36,7 @@ const routes: Routes = [
         data: { roles: ['client'] }
       },
       {
-        path: 'client/take-appointment/:id',
+        path: 'client/take-appointment/:appointmentId',
         loadComponent: () => import('./components/client/appointement/details/details.component').then((c) => c.DetailsComponent),
         canActivate: [AuthGuard],
         data: { roles: ['client'] }

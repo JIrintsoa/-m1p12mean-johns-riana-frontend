@@ -41,6 +41,7 @@
                 <button type="button" class="btn btn-primary" (click)="searchVehicles()">Valider</button>
               </div>
             </div>
+            
             <div class="row">
               <table class="table table-hover">
                 <thead>
@@ -61,7 +62,7 @@
                     <td>{{ vehicle.fuelType }}</td>
                     <td>
                       <button type="button" class="btn btn-outline-warning" (click)="openModalUpdate(contentModalUpdate,vehicle)">Modifier</button>
-                      <button (click)="deleteVehicle(vehicle._id)" class="btn btn-danger">Supprimer</button>
+                      <button type="button" class="btn btn-outline-danger" (click)="openModalDelete(contentModalDelete,vehicle)">Supprimer</button>
                     </td>
                   </tr>
                   <tr *ngIf="vehicles.length === 0">
@@ -123,19 +124,19 @@
     <form>
       <div class="form-group">
         <label for="updateBrand">Marque</label>
-        <input type="text" class="form-control" id="updateBrand" [(ngModel)]="vehicleToUpdate.brand" [ngModelOptions]="{standalone: true}">
+        <input type="text" class="form-control" id="updateBrand" [(ngModel)]="vehicleSelected.brand" [ngModelOptions]="{standalone: true}">
       </div>
       <div class="form-group">
         <label for="updateModel">Modèle</label>
-        <input type="text" class="form-control" id="updateModel" [(ngModel)]="vehicleToUpdate.model" [ngModelOptions]="{standalone: true}">
+        <input type="text" class="form-control" id="updateModel" [(ngModel)]="vehicleSelected.model" [ngModelOptions]="{standalone: true}">
       </div>
       <div class="form-group">
         <label for="updateYear">Année</label>
-        <input type="text" class="form-control" id="updateYear" [(ngModel)]="vehicleToUpdate.year" [ngModelOptions]="{standalone: true}">
+        <input type="text" class="form-control" id="updateYear" [(ngModel)]="vehicleSelected.year" [ngModelOptions]="{standalone: true}">
       </div>
       <div class="form-group">
         <label for="updateFuelType">Type Carburant</label>
-        <select class="form-control" id="updateFuelType" [(ngModel)]="vehicleToUpdate.fuelType" [ngModelOptions]="{standalone: true}">
+        <select class="form-control" id="updateFuelType" [(ngModel)]="vehicleSelected.fuelType" [ngModelOptions]="{standalone: true}">
           <option value="Essence">Essence</option>
           <option value="Gasoil">Gasoil</option>
         </select>
@@ -146,4 +147,35 @@
 		<button type="button" class="btn btn-secondary" (click)="modal.close('Close click')">Close</button>
     <button type="button" class="btn btn-success" (click)="updateVehicle()" data-dismiss="modal">Enregistrer</button>
 	</div>
+</ng-template>
+
+<!-- Delete Modals -->
+<ng-template #contentModalDelete let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-title">Confirmation de suppression</h4>
+    <button
+      type="button"
+      class="btn-close"
+      aria-describedby="modal-title"
+      (click)="modal.dismiss('Cross click')"
+    ></button>
+  </div>
+  <div class="modal-body">
+    <p>
+      <strong>Êtes-vous sûr de vouloir supprimer le véhicule suivant ?</strong>
+    </p>
+    <p>
+      Marque: {{ vehicleSelected?.brand }}<br>
+      Modèle: {{ vehicleSelected?.model }}<br>
+      Année: {{ vehicleSelected?.year }}<br>
+      Type de carburant: {{ vehicleSelected?.fuelType }}
+    </p>
+    <p>
+      <span class="text-danger">Cette opération est irréversible.</span>
+    </p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel click')">Annuler</button>
+    <button type="button" class="btn btn-danger" (click)="deleteVehicle(vehicleSelected)">Confirmer</button>
+  </div>
 </ng-template>
