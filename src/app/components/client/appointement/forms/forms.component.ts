@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import {  RouterLink } from '@angular/router';
-import { AppointmentListe } from 'src/app/models/appointment.model';
+import { RouterLink } from '@angular/router';
+// import {  RouterLink } from '@angular/router';
+import { AppointmentFilter, AppointmentListe } from 'src/app/models/appointment.model';
 import { ServiceType } from 'src/app/models/service.model';
 import { VehicleModel } from 'src/app/models/vehicle.model';
 import { AppointmentService } from 'src/app/services/appointment/appointment.service';
@@ -14,7 +15,7 @@ import { CardComponent } from 'src/app/theme/shared/components/card/card.compone
 
 @Component({
   selector: 'app-forms',
-  imports: [RouterLink,CardComponent, FormsModule, CommonModule],
+  imports: [CardComponent, FormsModule, CommonModule, RouterLink],
   templateUrl: './forms.component.html',
   styleUrl: './forms.component.scss'
 })
@@ -32,6 +33,15 @@ export class FormsComponent implements OnInit {
   errorMessage: string = '';
   // router: any;
 
+  appointmentFilter: AppointmentFilter
+
+  // Pagination options
+  currentPage = 1;
+  itemsPerPage = 3;
+  totalItems = 0;
+  remainingServiceTypes = null;
+
+
   constructor(
     private vehicleService: VehicleService, 
     private authService: AuthService,
@@ -40,6 +50,13 @@ export class FormsComponent implements OnInit {
   ) { 
     // this.vehicles = await vehicleService.getVehicles();
     this.token = authService.getToken();
+    this.appointmentFilter = {
+      vehicle: '',
+      serviceTypeId: '',
+      status: '',
+      startDate: '', // ou null si vous voulez qu'il soit optionnel
+      endDate: '' // ou null si vous voulez qu'il soit optionnel
+    };
   }
 
   ngOnInit(): void {
@@ -47,6 +64,12 @@ export class FormsComponent implements OnInit {
     this.fetchServiceTypes();
     this.appointmentDate = this.getCurrentDate();
     this.fetchAppointments()
+
+    // Filter intialize
+    this.appointmentFilter.status = 'En attente';
+    this.appointmentFilter.endDate = this.getCurrentDate();
+    this.appointmentFilter.startDate = this.getCurrentDate();
+
     // console.log('init');
   }
 
@@ -78,13 +101,23 @@ export class FormsComponent implements OnInit {
   }
 
   fetchAppointments(): void {
-    this.appointmentService.getAppointmentsByClient(this.token).subscribe({
+    const limit = this.itemsPerPage;
+    this.appointmentService.getAppointmentsByClient(
+      this.token, 
+      limit, 
+      this.currentPage, 
+      this.appointmentFilter.vehicle,
+      this.appointmentFilter.serviceTypeId,
+      this.appointmentFilter.status,
+      this.appointmentFilter.startDate,
+      this.appointmentFilter.endDate ).subscribe({
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       next: (response: any) => {
         // console.log('Raw response:', response);
         const result = response;
         // console.log(result)
         this.appointments = result.items || [];
+        this.totalItems = result.totalItems;
         // console.log('Processed vehicles:', this.vehicles);
       },
       error: (error) => {
@@ -179,5 +212,40 @@ export class FormsComponent implements OnInit {
         this.errorMessage = '';
       }
     }, 10000); 
+  }
+
+  // Functions Pagination
+  getPages(): number[] {
+    const pageCount = Math.ceil(this.totalItems / this.itemsPerPage);
+    return Array(pageCount).fill(0).map((_, index) => index + 1);
+  }
+
+  changePage(page: number): void {
+    this.currentPage = page;
+    // console.log(page)
+    this.fetchAppointments();
+  }
+
+  changeItemsPerPage(itemsPerPage: number): void {
+    const firstItemOfCurrentPage = (this.currentPage - 1) * this.itemsPerPage;
+    this.itemsPerPage = itemsPerPage;
+    this.currentPage = Math.ceil((firstItemOfCurrentPage + 1) / this.itemsPerPage);
+    this.fetchAppointments();
+  }
+
+  // Function for the filter
+  onAppointmentFilterServiceTypeChange(serviceTypeId): void {
+    this.appointmentFilter.serviceTypeId = serviceTypeId
+    console.log(`service Type selected: `,this.appointmentFilter.serviceTypeId)
+  }
+
+  onAppointmentFilterStatusChange(status): void {
+    this.appointmentFilter.status = status
+    console.log(`Status selected: `, this.appointmentFilter.status)
+  }
+
+  searchAppointment(){
+    this.currentPage = 1; // Réinitialiser la page actuelle lors de la recherche
+    this.fetchAppointments();
   }
 }

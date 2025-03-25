@@ -7,31 +7,31 @@
         <div class="row">
           <div class="col-md-6">
             <h4>INFOS VEHICULE</h4>
-            <p><strong>Marque:</strong> Toyota</p>
-            <p><strong>Modèle:</strong> Corolla</p>
-            <p><strong>Année:</strong> 2020</p>
-            <p><strong>Immatriculation:</strong> AB-123-CD</p>
-            <p><strong>Kilométrage:</strong> 50 000 km</p>
-            <p><strong>Type carburant:</strong> Essence</p>
-            <p><strong>Date RDV:</strong> 10/12/2024 10:00</p>
+            <p><strong>Marque:</strong>  {{ appointmentDetailResponse.items.appointmentDetail.vehicleId.brand }}</p>
+            <p><strong>Modèle:</strong> {{appointmentDetailResponse.items.appointmentDetail.vehicleId.model}}</p>
+            <p><strong>Année:</strong> {{appointmentDetailResponse.items.appointmentDetail.vehicleId.year}}</p>
+            <p ><strong >Immatriculation:</strong><span [style.color]="'red'"> A faire encore</span></p>
+            <p><strong>Kilométrage:</strong><span [style.color]="'red'"> A faire encore</span></p>
+            <p><strong>Type carburant:</strong> {{appointmentDetailResponse.items.appointmentDetail.vehicleId.fuelType}}</p>
+            <p><strong>Date RDV:</strong> {{ formatDate(appointmentDetailResponse.items.appointmentDetail.date, 'dd/MM/yyyy') }}</p>
           </div>
           <div class="col-md-6">
             <h4>INFOS SERVICE</h4>
-            <p><strong>Désignation:</strong> Révision complète</p>
-            <p><strong>Description:</strong> Révision générale du véhicule avec changement des filtres et vidange.</p>
-            <p><strong>Interventions:</strong> Vidange, changement filtre à huile, filtre à air, contrôle freins.</p>
-            <p><strong>Mécanicien:</strong> Jean Dupont</p>
+            <p><strong>Désignation:</strong> {{appointmentDetailResponse.items.appointmentDetail.serviceTypeId.name}}</p>
+            <p><strong>Description:</strong> {{appointmentDetailResponse.items.appointmentDetail.serviceTypeId.description}}</p>
+            <p><strong>Interventions:</strong> <span [style.color]="'red'"> A faire encore</span></p>
+            <p><strong>Mécanicien:</strong> <span [style.color]="'red'"> A faire encore</span></p>
           </div>
         </div>
         <hr>
         <div class="row">
           <div class="col-md-6">
-            <h4>STATUT INTERVENTION</h4>
-            <p><strong>Statut:</strong> En cours </p>
-            <p><strong>Progression:</strong> 50 %</p>
+            <h4>STATUT INTERVENTION </h4>
+            <p><strong>Statut:</strong> {{appointmentDetailResponse.items.appointmentDetail.status}} </p>
+            <p><strong>Progression:</strong><span [style.color]="'red'"> A faire encore</span></p>
           </div>
           <div class="col-md-6">
-            <h4>ETAPE INTERVENTION</h4>
+            <h4>ETAPE INTERVENTION <span [style.color]="'red'"> A faire encore</span></h4>
             <table class="table table-bordered">
               <thead>
                 <tr>
@@ -94,7 +94,7 @@
         </div>
 
         <hr>
-        <h4>NOTE</h4>
+        <h4>NOTE <span [style.color]="'red'"> A faire encore</span></h4>
         <div class="card">
           <div class="card-body">
             <p>Evaluer notre service</p>
