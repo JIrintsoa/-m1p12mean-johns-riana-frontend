@@ -68,27 +68,38 @@
         <hr>
   
         <h4>COMMENTAIRES</h4>
-        <div class="card">
-          <div class="card-body">
-            <p><strong>Mécanicien:</strong> La vidange et le changement du filtre à huile sont terminés. Le filtre à air est en cours de remplacement.</p>
+        <div *ngIf="comments.length > 0; else noComments">
+          <div *ngFor="let comment of comments" class="card mt-3" 
+               [ngClass]="{
+                 'mechanic-comment': comment.userId.role === 'mechanic',
+                 'client-comment': comment.userId.role === 'client'
+               }">
+            <div class="card-body">
+              <p><strong>{{ comment.userId.firstName }} {{ comment.userId.lastName }}:</strong> {{ comment.comment }}</p>
+              <small class="text-muted">Commenté le: {{ comment.createdAt | date:'yyyy-MM-dd HH:mm' }}</small>
+            </div>
           </div>
         </div>
-
-        <div class="card mt-3">
-          <div class="card-body">
-            <p><strong>Client:</strong> Merci pour la mise à jour. Pouvez-vous me prévenir quand les freins seront contrôlés ?</p>
-          </div>
-        </div>
+        
+        <ng-template #noComments>
+          <p>Aucun commentaire à afficher.</p>
+        </ng-template>
   
         <div class="card mt-3">
           <div class="card-body">
             <h5>Laisser un commentaire au mécanicien</h5>
-            <form>
+            <form (ngSubmit)="addComment()">
               <div class="mb-3">
                 <label for="clientComment" class="form-label">Votre commentaire:</label>
-                <textarea class="form-control" id="clientComment" rows="3"></textarea>
+                <textarea [(ngModel)]="newComment" 
+                        class="form-control" 
+                        id="clientComment" 
+                        rows="3" 
+                        placeholder="Écrivez votre commentaire ici..." 
+                        [ngModelOptions]="{standalone: true}">
+              </textarea>
               </div>
-              <button type="submit" class="btn btn-primary">Envoyer</button>
+              <button type="submit" class="btn btn-primary">Publier</button>
             </form>
           </div>
         </div>
