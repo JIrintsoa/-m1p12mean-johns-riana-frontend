@@ -18,7 +18,6 @@ import { CommonModule } from '@angular/common';
 	styleUrl: './details.component.scss'
 })
 
-
 export class DetailsComponent implements OnInit {
 	token: string;
 	appointmentId: string | null = null;
@@ -30,6 +29,8 @@ export class DetailsComponent implements OnInit {
 	newComment: string
 	successMessage: string = '';
 	errorMessage: string = '';
+	existingScore: any = null; // To store the existing score
+	ratingSubmitted: boolean = false; 
 
 	formatDate = formatDate;
 
@@ -52,6 +53,7 @@ export class DetailsComponent implements OnInit {
 			}
 		});
 		this.fetchComments();
+		this.fetchAppointmentScore();
 	}
 
 	fetchAppointmentDetails(appointmentId: string) {
@@ -120,8 +122,6 @@ export class DetailsComponent implements OnInit {
 			this.errorMessage = message;
 			this.successMessage = '';
 		}
-
-		// Hide the message after 3 seconds
 		setTimeout(() => {
 			if (type === 'success') {
 				this.successMessage = '';
@@ -130,4 +130,45 @@ export class DetailsComponent implements OnInit {
 			}
 		}, 10000);
 	}
+
+	addAppointmentScore() {
+		const ratingValue = this.ctrl.value;
+	
+		// If no score exists, allow submission
+		if (this.existingScore === null) {
+		  if (ratingValue !== null && ratingValue >= 1 && ratingValue <= this.maxRate) {
+			this.appointmentService.addAppointmentScore(this.appointmentId, ratingValue, this.token).subscribe({
+			  next: (response) => {
+				console.log('Score added successfully:', response);
+				this.showMessage('Note ajouté avec succès!', 'success');
+				this.fetchAppointmentScore(); // Fetch new score after submission
+			  },
+			  error: (error) => {
+				this.showMessage('Erreur lors de l\'ajout de la note.', 'error');
+				console.error('Error adding score:', error);
+			  }
+			});
+		  } else {
+			console.error('Invalid rating value');
+		  }
+		}
+	  }
+
+	// Fetch existing appointment score
+	fetchAppointmentScore() {
+		this.appointmentService.getAppointmentScore(this.appointmentId).subscribe({
+		  next: (response: any) => {
+			const result = response;
+			this.existingScore = result.items.length > 0 ? result.items[0].score : null;  // Store existing score
+			this.ratingSubmitted = this.existingScore !== null; // Check if rating exists
+			if (this.ratingSubmitted) {
+			  this.ctrl.setValue(this.existingScore); // Set the existing score value
+			  this.ctrl.disable(); // Disable the control once submitted
+			}
+		  },
+		  error: (error) => {
+			console.error('Error fetching appointment score:', error);
+		  }
+		});
+	  }
 }

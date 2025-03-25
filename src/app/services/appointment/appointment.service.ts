@@ -76,5 +76,15 @@ export class AppointmentService {
     const url = `/appointments/id/${appointmentId}`;
     return this.apiService.get<unknown>(url);
   }
+  
+  addAppointmentScore(appointmentId: string, score: number, token: string): Observable<unknown> {
+    const url = `/appointment-scores/`;
+    const body = {appointmentId, score}
+    return this.apiService.post(url, body, token);
+  }
 
+  getAppointmentScore(appointmentId: string = ''): Observable<unknown> {
+    const url = `/appointment-scores/appointments/${appointmentId}`;
+    return this.apiService.get<unknown>(url);
+  }
 }
