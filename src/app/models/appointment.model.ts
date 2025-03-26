@@ -59,6 +59,14 @@ export interface AppointmentFilter {
   endDate?: string;
 }
 
+export interface AppointmentFilterMechanic {
+  search?: string | null;
+  serviceTypeId?: string | null;
+  status?: string | null;
+  startDate?: string | null;
+  endDate?: string | null;
+}
+
 export interface AppointmentDetail {
   _id: string;
   clientId: User;
@@ -75,11 +83,12 @@ export interface AppointmentDetail {
 
 export interface AppointmentDetailResponse {
   message: string;
-  items: {
-    appointmentDetail: AppointmentDetail;
+  items?: {
+    appointmentDetail?: AppointmentDetail;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    interventionDetail: any[]; // Définissez une interface si vous avez la structure
-    totalCost: number;
-    progress: number;
+    interventionDetail?: any[]; // Définissez une interface si vous avez la structure
+    totalCost?: number;
+    progress?: number;
   };
 }
+

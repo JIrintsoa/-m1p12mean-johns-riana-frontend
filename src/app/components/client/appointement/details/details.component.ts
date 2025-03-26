@@ -10,6 +10,8 @@ import { CommentService } from 'src/app/services/comment/comment.service';
 import { CommentModel } from 'src/app/models/comment.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { CommonModule } from '@angular/common';
+import { InterventionModel } from 'src/app/models/interventions.model';
+import { InterventionService } from 'src/app/services/intervention/intervention.service';
 
 @Component({
 	selector: 'app-details',
@@ -34,12 +36,20 @@ export class DetailsComponent implements OnInit {
 
 	formatDate = formatDate;
 
+	// Interventions
+	interventions: InterventionModel[] = null
+	interventionOtherDetail =  {
+		progress  : 0,
+		totalCost : 0
+	}
+
 	constructor(
 		private route: ActivatedRoute,
 		private http: HttpClient,
 		private appointmentService: AppointmentService,
 		private commentService: CommentService,
 		private authService: AuthService,
+		private interventionService: InterventionService
 	) {
 		this.token = authService.getToken();
 	}
@@ -50,6 +60,11 @@ export class DetailsComponent implements OnInit {
 			this.appointmentId = params.get('appointmentId');
 			if (this.appointmentId) {
 				this.fetchAppointmentDetails(this.appointmentId);
+				this.fetchInterventions();
+
+				// Other details about intervention
+				this.fetchTotalCost()
+				this.fetchProgress()
 			}
 		});
 		this.fetchComments();
@@ -60,14 +75,7 @@ export class DetailsComponent implements OnInit {
 		this.appointmentService.getAppointmentById(appointmentId).subscribe({
 			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 			next: (response: AppointmentDetailResponse) => {
-				// console.log('Raw response:', response);
-				// const result = response;
 				this.appointmentDetailResponse = response
-				// console.log(result)
-				// console.log(result)
-				// this.appointmentDetail = result.items || [];
-				// console.log(this.appointmentDetail)
-				// console.log('Processed vehicles:', this.vehicles);
 			},
 			error: (error) => {
 
@@ -83,8 +91,35 @@ export class DetailsComponent implements OnInit {
 			this.ctrl.disable();
 		}
 	}
+
+	fetchTotalCost(){
+		this.interventionService.totalCostByAppointmentId(this.appointmentId).subscribe({
+		  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+		  next: (response: any) => {
+			// console.log(response.totalCost)
+			this.interventionOtherDetail.totalCost = response.totalCost
+		  },
+		  error: (error) => {
+			console.error('Error fetching totalCost:', error);
+		  }
+		})
+	}
+
+	fetchProgress(){
+		this.interventionService.progressionByAppointmentId(this.appointmentId).subscribe({
+		  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+		  next: (response: any) => {
+			this.interventionOtherDetail.progress = response.progress
+		  },
+		  error: (error) => {
+			console.error('Error fetching progress:', error);
+		  }
+		})
+	}
+
 	fetchComments() {
 		this.commentService.getComments(this.appointmentId, this.token).subscribe({
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 			next: (response: any) => {
 				const result = response;
 				this.comments = result.items || [];
@@ -93,6 +128,18 @@ export class DetailsComponent implements OnInit {
 				console.error('Error fetching vehicles:', error);
 			}
 		});
+	}
+
+	fetchInterventions(){
+		this.interventionService.getInterventions(this.appointmentId).subscribe({
+		  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+			next: (response: any) => {
+				this.interventions = response.items
+			},
+			error: (error) => {
+				console.error('Error fetching vehicles:', error);
+			}
+		})
 	}
 
 	addComment(): void {

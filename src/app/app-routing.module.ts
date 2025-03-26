@@ -95,6 +95,12 @@ const routes: Routes = [
         data: { roles: ['mechanic'] }
       },
       {
+        path: 'mechanic/repair-list/details/:appointmentId',
+        loadComponent: () => import('./components/mechanic/details/details.component').then((c) => c.DetailsComponent),
+        canActivate: [AuthGuard],
+        data: { roles: ['mechanic'] }
+      },
+      {
         path: 'mechanic/repair-list/details/:id',
         loadComponent: () => import('./components/mechanic/details/details.component').then((c) => c.DetailsComponent),
         canActivate: [AuthGuard],
