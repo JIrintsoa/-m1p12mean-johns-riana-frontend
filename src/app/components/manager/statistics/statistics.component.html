@@ -1,17 +1,15 @@
 <div class="row">
-  @for (repair of FinishedRepairs; track repair) {
   <div class="col-md-6 col-xl-6">
     <app-card [showHeader]="false" blockClass="dashboard-card">
-      <h6 class="mb-2 f-w-400 text-muted">{{ repair.title }}</h6>
+      <h6 class="mb-2 f-w-400 text-muted">Nombre de rendez-vous en cours</h6>
       <h4 class="mb-3">
-        {{ repair.amount }}
-        <span class="badge {{ repair.background }} border {{ repair.border }} ">
-          <i antIcon type="{{ repair.icon }}" theme="outline"></i>
+        {{nbAppointmentDone}}
+        <span class="badge bg-light-primary border border-primary ">
+          <i antIcon type="rise" theme="outline"></i>
         </span>
       </h4>
     </app-card>
   </div>
-  }
   <div class="col-md-12 col-xl-12">
     <div class="col-md-12 col-xl-6">
       <h5 class="mb-3">Rapport satisfaction client par service</h5>
@@ -19,7 +17,8 @@
       <div class="form-group">
         <label for="serviceType">Sélectionner le type de service:</label>
         <select id="serviceType" [(ngModel)]="selectedService" (change)="onServiceChange()" class="form-control">
-          <option *ngFor="let service of serviceTypes" [value]="service.value">{{ service.name }}</option>
+          <option selected disabled value ="">Sélectionner un service</option>
+          <option *ngFor="let service of serviceTypes" [value]="service._id">{{ service.name }}</option>
         </select>
       </div>
 
@@ -31,7 +30,7 @@
       <app-card [showHeader]="false" blockClass="dashboard-card">
         <h6 class="mb-2 f-w-400 text-muted">Moyenne de satisfaction pour le service: <strong>{{ selectedService }}</strong></h6>
         <h4 class="mb-3">
-          4.5
+          {{generalAvg}}/5
         </h4>
       </app-card>
     </div>

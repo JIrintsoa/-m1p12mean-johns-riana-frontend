@@ -1,5 +1,5 @@
 // angular import
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 // project import
@@ -10,6 +10,9 @@ import { FallOutline, GiftOutline, MessageOutline, RiseOutline, SettingOutline }
 import { CardComponent } from 'src/app/theme/shared/components/card/card.component';
 import { ApexChart, ApexResponsive, ChartType, NgApexchartsModule } from 'ng-apexcharts';
 import { FormsModule } from '@angular/forms';
+import { ServiceType } from 'src/app/models/service.model';
+import { ServiceTypeService } from 'src/app/services/service-type/service-type.service';
+import { AppointmentService } from 'src/app/services/appointment/appointment.service';
 
 @Component({
   selector: 'app-default',
@@ -23,13 +26,48 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './statistics.component.html',
   styleUrls: ['./statistics.component.scss']
 })
-export class StatisticsComponent {
+export class StatisticsComponent implements OnInit {
   private iconService = inject(IconService);
-
+  serviceTypes: ServiceType[] = [];
+  generalAvg: number;
+  nbAppointmentDone: number;
   // constructor
-  constructor() {
+  constructor(
+    private serviceTypeService: ServiceTypeService,
+    private appointmentService: AppointmentService,
+  ) {
     this.iconService.addIcon(...[RiseOutline, FallOutline, SettingOutline, GiftOutline, MessageOutline]);
     this.updateChartData();
+  }
+
+  ngOnInit() {
+    this.fetchServiceTypes();
+    this.fetchGeneralAvg()
+  }
+
+  fetchServiceTypes(): void {
+    this.serviceTypeService.getServiceTypes().subscribe({
+      next: (response: any) => {
+        const result = response;
+        this.serviceTypes = result.items || [];
+      },
+      error: (error) => {
+        console.error('Error fetching service types:', error);
+      }
+    });
+  }
+
+  fetchGeneralAvg(): void {
+    this.appointmentService.getAppointmentScoreGeneralAvg().subscribe({
+      next: (response: any) => {
+        const result = response;
+        this.generalAvg = result.averageScore || [];
+        this.nbAppointmentDone = result.nbOfAppointmentsDone || 0;
+      },
+      error: (error) => {
+        console.error('Error fetching service types:', error);
+      }
+    });
   }
 
   recentOrder = tableData;
@@ -51,13 +89,6 @@ export class StatisticsComponent {
       icon: 'rise',
       percentage: '70.5%',
     },
-  ];
-
-  serviceTypes = [
-    { name: 'Tous', value: 'general' }, // Default general service
-    { name: 'Vidange', value: 'service1' },
-    { name: 'Réparation', value: 'service2' },
-    { name: 'Pneumatique', value: 'service3' },
   ];
 
   selectedService = 'general';  

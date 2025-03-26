@@ -87,4 +87,9 @@ export class AppointmentService {
     const url = `/appointment-scores/appointments/${appointmentId}`;
     return this.apiService.get<unknown>(url);
   }
+
+  getAppointmentScoreGeneralAvg(): Observable<unknown> {
+    const url = `/appointment-scores/average/general`;
+    return this.apiService.get<unknown>(url);
+  }
 }
