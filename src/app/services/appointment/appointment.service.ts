@@ -61,7 +61,30 @@ export class AppointmentService {
     const params = {
       page: page.toString(),
       limit: limit.toString(),
-      vehicleName: vehicleName,
+      search: vehicleName,
+      serviceTypeId: serviceTypeId,
+      status: status,
+      startDate: startDate,
+      endDate: endDate
+    };
+    return this.apiService.get<unknown>(url,params);
+  }
+
+  getAppointmentsByMechanic(
+    token: string, 
+    limit: number = 10,
+    page: number = 1,
+    search: string = '',
+    serviceTypeId: string = '' ,
+    status: string = '', 
+    startDate: string = '', 
+    endDate: string =''
+  ): Observable<unknown> {
+    const url = `/appointments/by-mechanic`;
+    const params = {
+      page: page.toString(),
+      limit: limit.toString(),
+      search: search,
       serviceTypeId: serviceTypeId,
       status: status,
       startDate: startDate,

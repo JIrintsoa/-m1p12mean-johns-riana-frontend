@@ -4,95 +4,84 @@
         <h5 class="mb-0">Détails de l'Intervention</h5>
       </div>
       <div class="card-body">
-        <div class="row">
-          <div class="col-md-6">
-            <h4>INFOS VEHICULE</h4>
-            <p><strong>Marque:</strong> Toyota</p>
-            <p><strong>Modèle:</strong> Corolla</p>
-            <p><strong>Année:</strong> 2020</p>
-            <p><strong>Immatriculation:</strong> AB-123-CD</p>
-            <p><strong>Kilométrage:</strong> 50 000 km</p>
-            <p><strong>Type carburant:</strong> Essence</p>
-            <p><strong>Date RDV:</strong> 10/12/2024 10:00</p>
-          </div>
-          <div class="col-md-6">
-            <h4>INFOS SERVICE</h4>
-            <p><strong>Désignation:</strong> Révision complète</p>
-            <p><strong>Description:</strong> Révision générale du véhicule avec changement des filtres et vidange.</p>
-            <p><strong>Interventions:</strong> Vidange, changement filtre à huile, filtre à air, contrôle freins.</p>
-            <p><strong>Mécanicien:</strong> Jean Dupont</p>
-          </div>
-        </div>
-        <hr>
-        <div class="row">
-          <div class="col-md-6">
-            <h4>STATUT INTERVENTION</h4>
-            <p><strong>Statut:</strong> En cours </p>
-            <p><strong>Progression:</strong> 50 %</p>
-          </div>
-          <div class="col-md-6">
-            <h4>ETAPE INTERVENTION</h4>
-            <div class="card-body">
-              <table class="table table-bordered">
-                  <thead>
-                      <tr>
-                          <th>Intervention à faire</th>
-                          <th>cout(Ar)</th>
-                          <th>Etat</th>
-                          <th>Action</th>
-
-                      </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                        <td>Achat Boue de secours</td>
-                        <td>10000</td>
-                        <td>Terminé</td>
-                        <td>
-                          <button type="button" class="btn btn-success" >
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
-                              <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425z"/>
-                            </svg>
-                          </button>
-                          <button type="button" class="btn btn-secondary" style="margin-left: 5px;">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-x" viewBox="0 0 16 16">
-                              <path d="M6.146 6.146a.5.5 0 0 1 .708 0L8 7.293l1.146-1.147a.5.5 0 1 1 .708.708L8.707 8l1.147 1.146a.5.5 0 0 1-.708.708L8 8.707 6.854 9.854a.5.5 0 0 1-.708-.708L7.293 8 6.146 6.854a.5.5 0 0 1 0-.708"/>
-                              <path d="M4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm0 1h8a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1"/>
-                            </svg>
-                          </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Changer les 4 pneus</td>
-                        <td>10000</td>
-                        <td>Enlevé</td>
-                        <td>
-                          <button type="button" class="btn btn-success" >
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
-                              <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425z"/>
-                            </svg>
-                          </button>
-                          <button type="button" class="btn btn-secondary" style="margin-left: 5px;">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-x" viewBox="0 0 16 16">
-                              <path d="M6.146 6.146a.5.5 0 0 1 .708 0L8 7.293l1.146-1.147a.5.5 0 1 1 .708.708L8.707 8l1.147 1.146a.5.5 0 0 1-.708.708L8 8.707 6.854 9.854a.5.5 0 0 1-.708-.708L7.293 8 6.146 6.854a.5.5 0 0 1 0-.708"/>
-                              <path d="M4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm0 1h8a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1"/>
-                            </svg>
-                          </button>
-                        </td>
-                    </tr>
-                    </tbody>
-              </table>
-              <div class="row">
-                <div class="col-6">
-                  <input type="text" class="form-control" id="nouvelleIntervention" placeholder="Saisissez une intervention">
-                </div>
-                <div class="col-6">
-                  <input type="text" class="form-control" id="coutIntervention" placeholder="Saisissez cout">
-                </div>
-              </div>
-              <button class="btn btn-primary mt-2" type="button" id="ajouterInterventionBtn">Ajouter</button>
+        <div *ngIf="appointmentDetailResponse?.items?.appointmentDetail">
+          <div class="row">
+            <div class="col-md-4">
+              <h4>INFOS VEHICULE</h4>
+              <p><strong>Marque:</strong>  {{ appointmentDetailResponse.items.appointmentDetail.vehicleId.brand }}</p>
+              <p><strong>Modèle:</strong> {{appointmentDetailResponse.items.appointmentDetail.vehicleId.model}}</p>
+              <p><strong>Année:</strong> {{appointmentDetailResponse.items.appointmentDetail.vehicleId.year}}</p>
+              <p ><strong >Immatriculation:</strong><span [style.color]="'red'"> A faire encore</span></p>
+              <p><strong>Kilométrage:</strong><span [style.color]="'red'"> A faire encore</span></p>
+              <p><strong>Type carburant:</strong> {{appointmentDetailResponse.items.appointmentDetail.vehicleId.fuelType}}</p>
+              <p><strong>Date RDV:</strong> {{ formatDate(appointmentDetailResponse.items.appointmentDetail.date, 'dd/MM/yyyy') }}</p>
+            </div>
+            <div class="col-md-8">
+              <h4>INFOS SERVICE</h4>
+              <p><strong>Désignation:</strong> {{appointmentDetailResponse.items.appointmentDetail.serviceTypeId.name}}</p>
+              <p><strong>Description:</strong> {{appointmentDetailResponse.items.appointmentDetail.serviceTypeId.description}}</p>
+              <p><strong>Interventions:</strong> <span [style.color]="'red'"> A faire encore</span></p>
+              <p><strong>Mécanicien:</strong> <span [style.color]="'red'"> A faire encore</span></p>
             </div>
           </div>
+          <hr>
+          <div class="row">
+            <div class="col-md-4">
+              <h4>STATUT INTERVENTION </h4>
+              <p><strong>Statut:</strong> {{appointmentDetailResponse.items.appointmentDetail.status}} </p>
+              <p><strong>Progression:</strong><span > {{ (interventionOtherDetail.progress * 100) | number: '1.2-2' }} %</span></p>
+              <p><strong>Total:</strong><span > {{interventionOtherDetail.totalCost}} Ar</span></p>
+            </div>
+
+            <div class="col-md-8">
+              <h4>ETAPE INTERVENTION</h4>
+              <div class="card-body">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Intervention à faire</th>
+                            <th>cout(Ar)</th>
+                            <th>Etat</th>
+                            <th>Action</th>
+  
+                        </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let intervention of interventions">
+                        <td>{{intervention.name}}</td>
+                        <td>{{intervention.cost}}</td>
+                        <td>{{intervention.status}}</td>
+                        <td>
+                          <button type="button" class="btn btn-success" (click)="openModalFinish(contentModalFinish,intervention._id)" [disabled]="intervention.status === 'Terminé' || intervention.status ==='Omis'  ">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
+                              <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425z"/>
+                            </svg>
+                          </button>
+                          <button type="button" class="btn btn-secondary" (click)="openModalSkip(contentModalSkip, intervention._id)" [disabled]="intervention.status === 'Terminé' || intervention.status ==='Omis'">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-x" viewBox="0 0 16 16">
+                              <path d="M6.146 6.146a.5.5 0 0 1 .708 0L8 7.293l1.146-1.147a.5.5 0 1 1 .708.708L8.707 8l1.147 1.146a.5.5 0 0 1-.708.708L8 8.707 6.854 9.854a.5.5 0 0 1-.708-.708L7.293 8 6.146 6.854a.5.5 0 0 1 0-.708"/>
+                              <path d="M4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm0 1h8a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1"/>
+                            </svg>
+                          </button>
+                        </td>
+                      </tr>
+                    </tbody>
+                </table>
+                <div class="row">
+                  <div class="col-6">
+                    <input type="text" class="form-control" id="nouvelleIntervention" [(ngModel)]="interventionInput.name" placeholder="Saisissez une intervention">
+                  </div>
+                  <div class="col-6">
+                    <input type="text" class="form-control" id="coutIntervention" [(ngModel)]="interventionInput.cost" placeholder="Saisissez cout">
+                  </div>
+                </div>
+                <button class="btn btn-primary mt-2" type="button" id="ajouterInterventionBtn" (click)="addIntervention()">Ajouter</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="!appointmentDetailResponse?.items?.appointmentDetail">
+          <p>Chargement des détails du rendez-vous...</p>
         </div>
         <hr>
   
@@ -134,4 +123,66 @@
         </div>
       </div>
     </div>
+</div>
+
+<!-- Finish Intervention Modals -->
+<ng-template #contentModalFinish let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-title">Terminer l'intervention</h4>
+    <button
+      type="button"
+      class="btn-close"
+      aria-describedby="modal-title"
+      (click)="modal.dismiss('Cross click')"
+    ></button>
   </div>
+  <div class="modal-body">
+    <p>
+      <strong>Êtes-vous sûr de vouloir terminer cette intervention ?</strong>
+    </p>
+    <!-- <p>
+      Marque: {{ vehicleSelected?.brand }}<br>
+      Modèle: {{ vehicleSelected?.model }}<br>
+      Année: {{ vehicleSelected?.year }}<br>
+      Type de carburant: {{ vehicleSelected?.fuelType }}
+    </p> -->
+    <p>
+      <span class="text-danger">Cette opération est irréversible.</span>
+    </p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel click')">Annuler</button>
+    <button type="button" class="btn btn-success" (click)="finishIntervention()" >Confirmer</button>
+  </div>
+</ng-template>
+
+<!-- Skip intervention Modals -->
+<ng-template #contentModalSkip let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-title">Skipper cette intervention</h4>
+    <button
+      type="button"
+      class="btn-close"
+      aria-describedby="modal-title"
+      (click)="modal.dismiss('Cross click')"
+    ></button>
+  </div>
+  <div class="modal-body">
+    <p>
+      <strong>Êtes-vous sûr de skipper cette intervention?</strong>
+    </p>
+    <!-- <p>
+      Marque: {{ vehicleSelected?.brand }}<br>
+      Modèle: {{ vehicleSelected?.model }}<br>
+      Année: {{ vehicleSelected?.year }}<br>
+      Type de carburant: {{ vehicleSelected?.fuelType }}
+    </p> -->
+    <p>
+      <span class="text-danger">Cette opération est irréversible.</span>
+    </p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel click')">Annuler</button>
+    <button type="button" class="btn btn-success" (click)="skipIntervention()">Confirmer</button>
+  </div>
+</ng-template>

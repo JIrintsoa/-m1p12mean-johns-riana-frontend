@@ -66,9 +66,9 @@ export class FormsComponent implements OnInit {
     this.fetchAppointments()
 
     // Filter intialize
-    this.appointmentFilter.status = 'En attente';
-    this.appointmentFilter.endDate = this.getCurrentDate();
-    this.appointmentFilter.startDate = this.getCurrentDate();
+    // this.appointmentFilter.status = 'En attente';
+    // this.appointmentFilter.endDate = this.getCurrentDate();
+    // this.appointmentFilter.startDate = this.getCurrentDate();
 
     // console.log('init');
   }
