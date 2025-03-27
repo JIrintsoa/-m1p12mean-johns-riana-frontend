@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 // import {  RouterLink } from '@angular/router';
 import { AppointmentFilter, AppointmentListe } from 'src/app/models/appointment.model';
 import { ServiceType } from 'src/app/models/service.model';
@@ -27,10 +28,15 @@ export class FormsComponent implements OnInit {
   selectedVehicle: VehicleModel | null = null;
   selectedServiceType: ServiceType | null = null;
   appointmentDate : string = '';
+  
   comments: string = '';
 
   successMessage: string = '';
   errorMessage: string = '';
+
+  // Add Kilometer For Vidange
+  kilometer: number = 0;
+  showKilometerInput: boolean = false
   // router: any;
 
   appointmentFilter: AppointmentFilter
@@ -41,12 +47,26 @@ export class FormsComponent implements OnInit {
   totalItems = 0;
   remainingServiceTypes = null;
 
+  // Active modal Cancel
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  activeModalCancel : any;
+
+  // Select an appointment
+  appointmentSelected = {
+    id: ''
+  }
+
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  @ViewChild('contentModalCancel') contentModalCancel: TemplateRef<any> | undefined;
+
 
   constructor(
     private vehicleService: VehicleService, 
     private authService: AuthService,
     private serviceTypeService: ServiceTypeService,
-    private appointmentService: AppointmentService
+    private appointmentService: AppointmentService,
+    private modalService: NgbModal
   ) { 
     // this.vehicles = await vehicleService.getVehicles();
     this.token = authService.getToken();
@@ -152,6 +172,10 @@ export class FormsComponent implements OnInit {
 
   onServiceTypeChange(): void {
     console.log('Service sélectionné:', this.selectedServiceType);
+    if(this.selectedServiceType.name == 'Vidange'){
+      this.showKilometerInput = true;
+      console.log(this.showKilometerInput)
+    }
   }
 
   getCurrentDate(): string {
@@ -174,7 +198,8 @@ export class FormsComponent implements OnInit {
       vehicleId: this.selectedVehicle._id,
       serviceTypeId: this.selectedServiceType._id,
       date: this.appointmentDate,
-      description: this.comments
+      description: this.comments,
+      kilometer: this.kilometer
     };
 
     this.appointmentService.addAppointment(newAppointment, this.token).subscribe({
@@ -247,5 +272,34 @@ export class FormsComponent implements OnInit {
   searchAppointment(){
     this.currentPage = 1; // Réinitialiser la page actuelle lors de la recherche
     this.fetchAppointments();
+  }
+
+  cancelAppointment(){
+    this.appointmentService.cancel(
+      this.appointmentSelected.id,
+      this.token
+    ).subscribe({
+      next: (response) => {
+        console.log('appointment added successfully:', response);
+        this.showMessage('Rendez-vous annulé avec succès!', 'success');
+        this.fetchAppointments(); // Refresh the vehicle list
+        this.activeModalCancel.close()
+        // this.resetForm(); // Optionally reset the form after submission
+      },
+      error: (error) => {
+        if (error.status === 401) {
+          this.authService.logout();
+        } else {
+          this.showMessage('Erreur lors de l\'annulation du rendez-vous.', 'error');
+          console.error('Error canceling appointment:', error);
+        }
+      }
+    });
+    // console.log(this.appointmentSelected)
+  }
+
+  clickAppointment(appointmentId){
+    this.activeModalCancel = this.modalService.open(this.contentModalCancel, { centered: true })
+    this.appointmentSelected.id = appointmentId
   }
 }

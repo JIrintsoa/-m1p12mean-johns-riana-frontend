@@ -20,7 +20,10 @@
               <h4>INFOS SERVICE</h4>
               <p><strong>Désignation:</strong> {{appointmentDetailResponse.items.appointmentDetail.serviceTypeId.name}}</p>
               <p><strong>Description:</strong> {{appointmentDetailResponse.items.appointmentDetail.serviceTypeId.description}}</p>
-              <p><strong>Interventions:</strong> <span [style.color]="'red'"> A faire encore</span></p>
+              <p><strong>Interventions:</strong>
+                <ul>
+                  <li *ngFor="let intervention of appointmentDetailResponse.items.interventionDetail">{{ intervention.name }}</li>
+                </ul>
               <p><strong>Mécanicien:</strong> <span [style.color]="'red'"> A faire encore</span></p>
             </div>
           </div>
@@ -55,7 +58,9 @@
           </div>
           <hr>
         </div>
-
+        <div *ngIf="!appointmentDetailResponse?.items?.appointmentDetail">
+          <p>Chargement des détails du rendez-vous...</p>
+        </div>
 
   
         <h4>COMMENTAIRES</h4>

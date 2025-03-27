@@ -31,6 +31,7 @@ export class DetailsComponent implements OnInit {
 	newComment: string
 	successMessage: string = '';
 	errorMessage: string = '';
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	existingScore: any = null; // To store the existing score
 	ratingSubmitted: boolean = false; 
 
@@ -204,6 +205,7 @@ export class DetailsComponent implements OnInit {
 	// Fetch existing appointment score
 	fetchAppointmentScore() {
 		this.appointmentService.getAppointmentScore(this.appointmentId).subscribe({
+		  // eslint-disable-next-line @typescript-eslint/no-explicit-any
 		  next: (response: any) => {
 			const result = response;
 			this.existingScore = result.items.length > 0 ? result.items[0].score : null;  // Store existing score

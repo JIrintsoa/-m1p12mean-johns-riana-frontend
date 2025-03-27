@@ -115,4 +115,9 @@ export class AppointmentService {
     const url = `/appointment-scores/average/general`;
     return this.apiService.get<unknown>(url);
   }
+
+  cancel(appointmentId: string, token: string): Observable<unknown>{
+    const url = `/appointments/${appointmentId}/cancel`
+    return this.apiService.patch(url,token)
+  }
 }

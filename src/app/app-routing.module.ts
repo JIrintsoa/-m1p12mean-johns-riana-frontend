@@ -10,6 +10,8 @@ import { AuthInterceptor } from './auth/auth.interceptors';
 import { AuthGuard } from './auth/auth.guard';
 import { UnauthorizedComponent } from './shared/unauthorized/unauthorized.component';
 import { LogoutComponent } from './components/authentication/auth-logout/auth-logout.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { LoaderInterceptor } from './interceptors/loader.interceptor';
 
 const routes: Routes = [
   {
@@ -143,10 +145,12 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes),HttpClientModule,UnauthorizedComponent],
+  imports: [RouterModule.forRoot(routes),HttpClientModule,UnauthorizedComponent,NgxSpinnerModule],
   exports: [RouterModule],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true }
+
   ],
 })
 export class AppRoutingModule {}

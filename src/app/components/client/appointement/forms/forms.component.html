@@ -50,7 +50,6 @@
                 </tr>
               </thead>
               <tbody>
-
                 <tr *ngFor="let appointment of appointments">
                   <th scope="row">{{appointment.vehicleId.brand}}<br/> {{appointment.vehicleId.model}}</th>
                   <td >{{ formatDate(appointment.date) }}</td>
@@ -78,7 +77,7 @@
                   </td>
                   <td>
                     <button type="button" class="btn btn-outline-info" [routerLink]="['/client/take-appointment/',appointment._id]">Détails</button>
-                    <button type="button" class="btn btn-outline-secondary" style="margin-left: 10px;" >Annuler</button>
+                    <button type="button" class="btn btn-outline-secondary" style="margin-left: 10px;" (click)="clickAppointment(appointment._id)">Annuler</button>
                   </td>
                 </tr>
                 <tr *ngIf="appointments.length === 0">
@@ -141,7 +140,7 @@
               <label for="dateRdv">Date appointment</label>
               <input type="date" class="form-control" id="dateRdv" [(ngModel)]="appointmentDate" name="appointmentDate" [ngModelOptions]="{standalone: true}">
             </div>
-    
+
             <div class="form-group col-md-12">
               <label for="listServices">Services</label>
               <select id="listServices" class="form-control" [(ngModel)]="selectedServiceType" (change)="onServiceTypeChange()" name="selectedServiceType" [ngModelOptions]="{standalone: true}">
@@ -150,6 +149,11 @@
               </select>
             </div>
             
+            <div *ngIf="showKilometerInput" class="form-group">
+              <label for="dateRdv">Kilométrage</label>
+              <input type="text" class="form-control" id="dateRdv" [(ngModel)]="kilometer" name="kilometrage" [ngModelOptions]="{standalone: true}">
+            </div>
+    
             <div class="form-group">
               <label for="commentaire">Commentaire</label>
               <textarea class="form-control" id="commentaire"  [(ngModel)]="comments" rows="3" placeholder="Votre texte" [ngModelOptions]="{standalone: true}"></textarea>
@@ -169,4 +173,29 @@
       {{ errorMessage }}
     </div>
   </div>
+
+  <!-- Cancle Modals -->
+  <ng-template #contentModalCancel let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-title">Annuler le rendez-vous</h4>
+      <button
+        type="button"
+        class="btn-close"
+        aria-describedby="modal-title"
+        (click)="modal.dismiss('Cross click')"
+      ></button>
+    </div>
+    <div class="modal-body">
+      <p>
+        <strong>Êtes-vous sûr de vouloir annuler le rendez-vous suivant ?</strong>
+      </p>
+      <p>
+        <span class="text-danger">Cette opération est irréversible.</span>
+      </p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel click')">Annuler</button>
+      <button type="button" class="btn btn-success" (click)="cancelAppointment()">Confirmer</button>
+    </div>
+  </ng-template>
 

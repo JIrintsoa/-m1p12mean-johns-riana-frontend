@@ -23,6 +23,7 @@ export class VehiculesComponent implements OnInit {
   brand: string = '';
   year: string = '';
   fuelType: string = '';
+  registration: string = '';
   successMessage: string = '';
   errorMessage: string = '';
 
@@ -121,6 +122,7 @@ export class VehiculesComponent implements OnInit {
       model: this.model,
       year: this.year,
       fuelType: this.fuelType,
+      registration:this.registration
     };
 
     this.vehicleService.addVehicle(newVehicle, this.token).subscribe({
