@@ -87,7 +87,9 @@
       <div class="text-center py-2">
         <a class="link-primary">View all</a>
       </div>
+      
     </div>
+    
   </li>
 
   <li class="dropdown pc-h-item header-user-profile" ngbDropdown>
@@ -106,10 +108,11 @@
             <h6 class="mb-0">{{user.role}}</h6>
             <span>{{user.firstName}} {{user.lastName}}</span>
           </div>
-          <a [routerLink]="['/logout']" class="bg-transparent"><i class="d-flex f-20" antIcon theme="outline" type="logout"></i></a>
+          <a [routerLink]="['/logout']" class="bg-transparent">Se déconnecter</a>
         </div>
       </div>
-      <ul ngbNav #nav="ngbNav" class="nav drp-tabs nav-fill nav-tabs">
+      
+      <!-- <ul ngbNav #nav="ngbNav" class="nav drp-tabs nav-fill nav-tabs">
         <li ngbNavItem="1">
           <a ngbNavLink>
             <i antIcon theme="outline" type="user" class="me-2"></i>
@@ -132,8 +135,9 @@
             </div>
           </ng-template>
         </li>
-      </ul>
-      <div [ngbNavOutlet]="nav"></div>
+      </ul> -->
+
+      <!-- <div [ngbNavOutlet]="nav"></div> -->
     </div>
   </li>
 </ul>
