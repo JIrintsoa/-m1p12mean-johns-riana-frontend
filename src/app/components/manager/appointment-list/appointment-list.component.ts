@@ -20,6 +20,7 @@ import { CardComponent } from 'src/app/theme/shared/components/card/card.compone
 })
 
 export class AppointmentListComponent implements OnInit {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   @ViewChild('contentModalUpdate') contentModalUpdate: TemplateRef<any> | undefined;
 
   appointments: AppointmentModel[] = [];
@@ -43,6 +44,7 @@ export class AppointmentListComponent implements OnInit {
   assigmentAppointmentId = '';
   assignmentMechanicId = '';
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   activeModalUpdate: any;
 
   applyFilters(): void {
@@ -58,6 +60,7 @@ export class AppointmentListComponent implements OnInit {
   ){ }
 
   ngOnInit(): void {
+    
     this.fetchAppointmentsAll();
     this.fetchServiceTypes();
     this.fetchMechanics();
@@ -110,6 +113,7 @@ export class AppointmentListComponent implements OnInit {
 
   fetchServiceTypes(): void {
     this.serviceTypeService.getServiceTypes().subscribe({
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       next: (response: any) => {
         const result = response;
         this.serviceTypes = result.items || [];
@@ -122,6 +126,7 @@ export class AppointmentListComponent implements OnInit {
 
   fetchMechanics(): void {
     this.mechanicService.getActiveMechanics().subscribe({
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       next: (response: any) => {
         const result = response;
         this.mechanics = result.items || [];
@@ -156,8 +161,9 @@ export class AppointmentListComponent implements OnInit {
   }
   assignMechanicToAppointment(): void {
     this.managerService.assignMechanicToAppointment(this.assignmentMechanicId,this.assigmentAppointmentId, this.token).subscribe({
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       next: (response: any) => {
-        console.log("Mechanic assigned successfully");
+        console.log("Mechanic assigned successfully", response);
         this.activeModalUpdate.close();
         this.fetchAppointmentsAll(); 
       },

@@ -118,6 +118,6 @@ export class AppointmentService {
 
   cancel(appointmentId: string, token: string): Observable<unknown>{
     const url = `/appointments/${appointmentId}/cancel`
-    return this.apiService.patch(url,token)
+    return this.apiService.delete(url,token)
   }
 }

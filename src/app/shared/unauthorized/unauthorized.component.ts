@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-unauthorized',
@@ -8,5 +9,10 @@ import { RouterLink } from '@angular/router';
   styleUrls: ['./unauthorized.component.scss']
 })
 export class UnauthorizedComponent {
-  constructor() { }
+  constructor(
+    private authService: AuthService
+  ) { }
+  removeTokenUser(){
+    this.authService.removeToken()
+  }
 }

@@ -24,7 +24,10 @@
                 <ul>
                   <li *ngFor="let intervention of appointmentDetailResponse.items.interventionDetail">{{ intervention.name }}</li>
                 </ul>
-              <p><strong>Mécanicien:</strong> <span [style.color]="'red'"> A faire encore</span></p>
+                <p><strong>Mécanicien:</strong> 
+                  {{appointmentDetailResponse.items.appointmentDetail.mechanicId.firstName || 'Aucun'}}
+                  {{appointmentDetailResponse.items.appointmentDetail.mechanicId.lastName || 'Aucun'}}
+                </p>
             </div>
           </div>
           <hr>
@@ -70,12 +73,12 @@
                  'mechanic-comment': comment.userId.role === 'mechanic',
                  'client-comment': comment.userId.role === 'client'
                }">
-          <div class="card-body">
-            <p><strong>{{ comment.userId.firstName }} {{ comment.userId.lastName }}:</strong> {{ comment.comment }}</p>
-            <small class="text-muted">Commenté le: {{ comment.createdAt | date:'yyyy-MM-dd HH:mm' }}</small>
+            <div class="card-body">
+              <p><strong>{{ comment.userId.firstName }} {{ comment.userId.lastName }}:</strong> {{ comment.comment }}</p>
+              <small class="text-muted">Commenté le: {{ comment.createdAt | date:'yyyy-MM-dd HH:mm' }}</small>
+            </div>
           </div>
         </div>
-      </div>
 
       <ng-template #noComments>
         <p>Aucun commentaire à afficher.</p>

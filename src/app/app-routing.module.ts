@@ -73,7 +73,7 @@ const routes: Routes = [
         data: { roles: ['manager'] }
       },
       {
-        path: 'manager/appointment-list/details/:id',
+        path: 'manager/appointment-list/details/:appointmentId',
         loadComponent: () => import('./components/manager/details/details.component').then((c) => c.DetailsComponent),
         canActivate: [AuthGuard],
         data: { roles: ['manager'] }

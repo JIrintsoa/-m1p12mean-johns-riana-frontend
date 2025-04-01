@@ -1,5 +1,5 @@
 import { ServiceType } from "./service.model";
-import { User } from "./user.model";
+import { User, UserProfile } from "./user.model";
 import { VehicleModel } from "./vehicle.model";
 
 export interface AppointmentModel {
@@ -72,6 +72,7 @@ export interface AppointmentDetail {
   clientId: User;
   vehicleId: VehicleModel;
   serviceTypeId: ServiceType;
+  mechanicId: UserProfile;
   date: string;
   description: string;
   status: string;

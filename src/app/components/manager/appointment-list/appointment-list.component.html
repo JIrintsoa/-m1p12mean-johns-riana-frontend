@@ -1,15 +1,15 @@
 <div class="row">
   <div class="col-sm-12">
     <app-card cardTitle="Liste des rendez vous">
-      <!-- Filters Section -->
-      <div class="row mb-4">
-        <form (ngSubmit)="applyFilters()" class="w-100">
-          <div class="col-md-2 col-sm-6 mb-3 mb-md-0">
+      <div class="col-12">
+        <!-- Filters Section -->
+        <div class="row">
+          <div class="col-2">
             <label for="rechercher" class="form-label">Rechercher</label>
             <input type="text" [(ngModel)]="searchTerm" name="searchTerm" class="form-control" id="rechercher" placeholder="Rechercher...">
           </div>
       
-          <div class="col-md-2 col-sm-6 mb-3 mb-md-0">
+          <div class="col-2">
             <label for="status" class="form-label">Status</label>
             <select [(ngModel)]="status" name="status" id="status" class="form-control">
               <option value="">Tous</option>
@@ -19,7 +19,7 @@
             </select>
           </div>
       
-          <div class="col-md-2 col-sm-6 mb-3 mb-md-0">
+          <div class="col-2">
             <label for="serviceType" class="form-label">Service</label>
             <select [(ngModel)]="serviceTypeId" name="serviceTypeId" id="serviceType" class="form-control">
               <option value="">Tous</option>
@@ -27,92 +27,91 @@
             </select>
           </div>
       
-          <div class="col-md-2 col-sm-6 mb-3 mb-md-0">
+          <div class="col-2">
             <label for="dateDebutFilter" class="form-label">Date de début</label>
             <input type="date" [(ngModel)]="startDate" name="startDate" class="form-control" id="dateDebutFilter">
           </div>
       
-          <div class="col-md-2 col-sm-6 mb-3 mb-md-0">
+          <div class="col-2">
             <label for="dateFinFilter" class="form-label">Date de fin</label>
             <input type="date" [(ngModel)]="endDate" name="endDate" class="form-control" id="dateFinFilter">
           </div>
       
-          <div class="col-md-2 col-sm-12">
+          <div class="col-2">
             <label for="applyFilter" class="form-label">&nbsp;</label>
-            <button type="submit" class="btn btn-primary w-100" id="applyFilter">Valider</button>
+            <button type="button" (click)="applyFilters()" class="btn btn-primary w-100" id="applyFilter">Valider</button>
           </div>
-        </form>
-      </div>
-      
-      <!-- Fin filtre -->
-      <div class="row">
-        <div class="col-12">
-          <div class="row">
-            <table class="table table-hover">
-              <thead>
-                <tr>
-                  <th scope="col">Client</th>
-                  <th scope="col">Date préféré</th>
-                  <th scope="col">Service</th>
-                  <th scope="col">Mécanicien assigné</th>
-                  <th scope="col">Status</th>
-                  <th scope="col">Motif</th>
-                  <th scope="col">Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let appointment of appointments">
-                  <td>{{ appointment.clientId?.firstName || 'Aucun nom' }} {{ appointment.clientId?.lastName || '' }}
-                  </td>
-                  <td>{{appointment.formattedDate}}</td>
-                  <td>{{appointment.serviceTypeId?.name}}</td>
-                  <td>{{appointment.mechanicId?.firstName}} {{appointment.mechanicId?.lastName}}</td>
-                  <td>{{appointment.status}}</td>
-                  <td>{{appointment.description}}</td>
-                  <td>
-                    <button type="button" class="btn btn-info"
-                      [routerLink]="['/manager/appointment-list/details/1']">Details</button>
-                    <button type="button" class="btn btn-secondary" style="margin-left: 10px;" (click)="openModalUpdate(contentModalUpdate, appointment._id)">
-                      Assigner mécanicien
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="row">
-            <div class="col-10">
-              <nav aria-label="Page navigation">
-                <ul class="pagination">
-                  <li class="page-item" [class.disabled]="currentPage === 1">
-                    <a class="page-link" (click)="changePage(currentPage - 1)">Previous</a>
-                  </li>
-                  <li class="page-item" *ngFor="let page of getPages()" [class.active]="page === currentPage">
-                    <a class="page-link" (click)="changePage(page)">{{ page }}</a>
-                  </li>
-                  <li class="page-item" [class.disabled]="currentPage === getPages().length">
-                    <a class="page-link" (click)="changePage(currentPage + 1)">Next</a>
-                  </li>
-                </ul>
-              </nav>
+        </div>
+        
+        <!-- Fin filtre -->
+        <div class="row">
+          <div class="col-12">
+            <div class="row">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">Client</th>
+                    <th scope="col">Date préféré</th>
+                    <th scope="col">Service</th>
+                    <th scope="col">Mécanicien assigné</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Motif</th>
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let appointment of appointments">
+                    <td>{{ appointment.clientId?.firstName || 'Aucun nom' }} {{ appointment.clientId?.lastName || '' }}
+                    </td>
+                    <td>{{appointment.formattedDate}}</td>
+                    <td>{{appointment.serviceTypeId?.name}}</td>
+                    <td>{{appointment.mechanicId?.firstName || 'Aucun' }} {{appointment.mechanicId?.lastName || ''}}</td>
+                    <td>{{appointment.status}}</td>
+                    <td>{{appointment.description}}</td>
+                    <td>
+                      <button type="button" class="btn btn-info"
+                        [routerLink]="['/manager/appointment-list/details/',appointment._id]">Details</button>
+                      <button type="button" class="btn btn-secondary" style="margin-left: 10px;" (click)="openModalUpdate(contentModalUpdate, appointment._id)">
+                        Assigner mécanicien
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                </tbody>
+              </table>
             </div>
-            <div class="col-2">
-              <select class="form-control" id="itemsPerPage" [(ngModel)]="itemsPerPage"
-                (change)="changeItemsPerPage(itemsPerPage)">
-                <option value="3">3</option>
-                <option value="5">5</option>
-                <option value="10">20</option>
-              </select>
-            </div>
+            <div class="row">
+              <div class="col-10">
+                <nav aria-label="Page navigation">
+                  <ul class="pagination">
+                    <li class="page-item" [class.disabled]="currentPage === 1">
+                      <a class="page-link" (click)="changePage(currentPage - 1)">Previous</a>
+                    </li>
+                    <li class="page-item" *ngFor="let page of getPages()" [class.active]="page === currentPage">
+                      <a class="page-link" (click)="changePage(page)">{{ page }}</a>
+                    </li>
+                    <li class="page-item" [class.disabled]="currentPage === getPages().length">
+                      <a class="page-link" (click)="changePage(currentPage + 1)">Next</a>
+                    </li>
+                  </ul>
+                </nav>
+              </div>
+              <div class="col-2">
+                <select class="form-control" id="itemsPerPage" [(ngModel)]="itemsPerPage"
+                  (change)="changeItemsPerPage(itemsPerPage)">
+                  <option value="3">3</option>
+                  <option value="5">5</option>
+                  <option value="10">20</option>
+                </select>
+              </div>
 
-            <div class="form-group ml-3">
+              <div class="form-group ml-3">
 
+              </div>
             </div>
           </div>
         </div>
       </div>
-
     </app-card>
   </div>
 </div>

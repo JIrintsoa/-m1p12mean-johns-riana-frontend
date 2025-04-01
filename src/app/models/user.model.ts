@@ -14,7 +14,7 @@ export interface UserProfile {
   lastName: string;
   email: string;
   role: string;
-  status: string;
+  status?: string;
 }
 
 export interface User {

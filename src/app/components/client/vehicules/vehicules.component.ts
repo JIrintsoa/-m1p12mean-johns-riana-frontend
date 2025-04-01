@@ -118,11 +118,11 @@ export class VehiculesComponent implements OnInit {
 
   addVehicle(): void {
     const newVehicle = {
-      brand: this.brand,
       model: this.model,
+      brand: this.brand,
+      licensePlate: this.registration,
       year: this.year,
-      fuelType: this.fuelType,
-      registration:this.registration
+      fuelType: this.fuelType
     };
 
     this.vehicleService.addVehicle(newVehicle, this.token).subscribe({
@@ -164,6 +164,7 @@ export class VehiculesComponent implements OnInit {
     this.model = '';
     this.year = '';
     this.fuelType = '';
+    this.registration = ''
   }
 
   resetFormUpdate(): void {

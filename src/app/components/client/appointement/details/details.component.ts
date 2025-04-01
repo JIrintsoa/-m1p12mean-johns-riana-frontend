@@ -146,14 +146,14 @@ export class DetailsComponent implements OnInit {
 	addComment(): void {
 		this.commentService.addComment(this.appointmentId, this.newComment, this.token).subscribe({
 			next: (response) => {
-				console.log('Vehicle added successfully:', response);
-				this.showMessage('Véhicule ajouté avec succès!', 'success');
+				console.log('comment added successfully:', response);
+				this.showMessage('Commentaire ajouté avec succès!', 'success');
 				this.fetchComments(); // Refresh the vehicle list
 				this.resetForm(); // Optionally reset the form after submission
 			},
 			error: (error) => {
-				this.showMessage('Erreur lors de l\'ajout du véhicule.', 'error');
-				console.error('Error adding vehicle:', error);
+				this.showMessage('Erreur lors de l\'ajout du commentaire.', 'error');
+				console.error('Error adding comment:', error);
 			}
 		});
 	}
@@ -200,7 +200,7 @@ export class DetailsComponent implements OnInit {
 			console.error('Invalid rating value');
 		  }
 		}
-	  }
+	}
 
 	// Fetch existing appointment score
 	fetchAppointmentScore() {
@@ -219,5 +219,5 @@ export class DetailsComponent implements OnInit {
 			console.error('Error fetching appointment score:', error);
 		  }
 		});
-	  }
+	}
 }
