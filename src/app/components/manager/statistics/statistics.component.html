@@ -1,4 +1,13 @@
 <div class="row">
+  <h5 class="mb-3">Rapport satisfaction client par service</h5>
+  <!-- Dropdown for selecting service type -->
+  <div class="form-group">
+    <label for="serviceType">Sélectionner le type de service:</label>
+    <select id="serviceType" [(ngModel)]="selectedService" (change)="onServiceChange()" class="form-control">
+      <option selected value ="">Tous</option>
+      <option *ngFor="let service of serviceTypes" [value]="service._id">{{ service.name }}</option>
+    </select>
+  </div>
   <div class="col-md-6 col-xl-6">
     <app-card [showHeader]="false" blockClass="dashboard-card">
       <h6 class="mb-2 f-w-400 text-muted">Nombre de rendez-vous en cours</h6>
@@ -10,29 +19,23 @@
       </h4>
     </app-card>
   </div>
+  <div class="col-md-6 col-xl-6">
+    <app-card [showHeader]="false" blockClass="dashboard-card">
+      <h6 class="mb-2 f-w-400 text-muted">Moyenne de satisfaction pour le service</h6>
+      <h4 class="mb-3">
+        {{averageScore}}/5
+      </h4>
+    </app-card>
+  </div>
   <div class="col-md-12 col-xl-12">
     <div class="col-md-12 col-xl-6">
-      <h5 class="mb-3">Rapport satisfaction client par service</h5>
-      <!-- Dropdown for selecting service type -->
-      <div class="form-group">
-        <label for="serviceType">Sélectionner le type de service:</label>
-        <select id="serviceType" [(ngModel)]="selectedService" (change)="onServiceChange()" class="form-control">
-          <option selected disabled value ="">Sélectionner un service</option>
-          <option *ngFor="let service of serviceTypes" [value]="service._id">{{ service.name }}</option>
-        </select>
-      </div>
-
       <!-- Pie chart displaying service data -->
-      <apx-chart [series]="chartOptions.series" [chart]="chartOptions.chart" [labels]="chartOptions.labels"
-        [responsive]="chartOptions.responsive"></apx-chart>
-    </div>
-    <div *ngIf="selectedService" class="col-md-6 col-xl-12">
-      <app-card [showHeader]="false" blockClass="dashboard-card">
-        <h6 class="mb-2 f-w-400 text-muted">Moyenne de satisfaction pour le service: <strong>{{ selectedService }}</strong></h6>
-        <h4 class="mb-3">
-          {{generalAvg}}/5
-        </h4>
-      </app-card>
+      <apx-chart
+      [series]="chartOptions.series"
+      [chart]="chartOptions.chart"
+      [labels]="chartOptions.labels"
+      [responsive]="chartOptions.responsive"
+    ></apx-chart>
     </div>
   </div>
 </div>

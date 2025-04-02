@@ -8,11 +8,12 @@ import tableData from 'src/fake-data/default-data.json';
 import { IconService, IconDirective } from '@ant-design/icons-angular';
 import { FallOutline, GiftOutline, MessageOutline, RiseOutline, SettingOutline } from '@ant-design/icons-angular/icons';
 import { CardComponent } from 'src/app/theme/shared/components/card/card.component';
-import { ApexChart, ApexResponsive, ChartType, NgApexchartsModule } from 'ng-apexcharts';
+import { ApexChart, ApexResponsive, NgApexchartsModule, } from 'ng-apexcharts';
 import { FormsModule } from '@angular/forms';
 import { ServiceType } from 'src/app/models/service.model';
 import { ServiceTypeService } from 'src/app/services/service-type/service-type.service';
 import { AppointmentService } from 'src/app/services/appointment/appointment.service';
+import { ScoreCountModel } from 'src/app/models/scorecount.model';
 
 @Component({
   selector: 'app-default',
@@ -30,7 +31,21 @@ export class StatisticsComponent implements OnInit {
   private iconService = inject(IconService);
   serviceTypes: ServiceType[] = [];
   generalAvg: number;
+  averageScore: number;
   nbAppointmentDone: number;
+  scoreCounts: ScoreCountModel[] = [];
+
+  recentOrder = tableData;
+
+  // chart stuff
+  selectedService = '';  
+
+  chartOptions: {
+    series: number[];
+    chart: ApexChart;
+    labels: string[];
+    responsive: ApexResponsive[];
+  };
   // constructor
   constructor(
     private serviceTypeService: ServiceTypeService,
@@ -42,7 +57,8 @@ export class StatisticsComponent implements OnInit {
 
   ngOnInit() {
     this.fetchServiceTypes();
-    this.fetchGeneralAvg()
+    this.fetchGeneralAvg();
+    this.fetchScoreCounts(this.selectedService)
   }
 
   fetchServiceTypes(): void {
@@ -56,13 +72,12 @@ export class StatisticsComponent implements OnInit {
       }
     });
   }
-
-  fetchGeneralAvg(): void {
-    this.appointmentService.getAppointmentScoreGeneralAvg().subscribe({
+  fetchAvgByServiceType(): void {
+    this.appointmentService.getAppointmentScoreAvgByServiceType(this.selectedService).subscribe({
       next: (response: any) => {
         const result = response;
-        this.generalAvg = result.averageScore || [];
-        this.nbAppointmentDone = result.nbOfAppointmentsDone || 0;
+        this.averageScore = result.items[0].averageScore || [];
+        console.log(response)
       },
       error: (error) => {
         console.error('Error fetching service types:', error);
@@ -70,61 +85,72 @@ export class StatisticsComponent implements OnInit {
     });
   }
 
-  recentOrder = tableData;
+  fetchGeneralAvg(): void {
+    this.appointmentService.getAppointmentScoreGeneralAvg().subscribe({
+      next: (response: any) => {
+        const result = response;
+        this.averageScore = result.averageScore || [];
+        this.nbAppointmentDone = result.nbOfAppointmentsDone || 0;
+        console.log(response)
+      },
+      error: (error) => {
+        console.error('Error fetching service types:', error);
+      }
+    });
+  }
 
-  FinishedRepairs = [
-    {
-      title: 'Nb réparations effectués',
-      amount: '400',
-      background: 'bg-light-primary ',
-      border: 'border-primary',
-      icon: 'rise',
-      percentage: '59.3%',
-    },
-    {
-      title: 'Moyenne générale avis clients',
-      amount: '4.5 / 5',
-      background: 'bg-light-primary ',
-      border: 'border-primary',
-      icon: 'rise',
-      percentage: '70.5%',
-    },
-  ];
+  fetchScoreCounts(serviceTypeId: string): void {
+    this.appointmentService.getScoreCounts(serviceTypeId).subscribe({
+      next: (response: any) => {
+        const result = response;
+        this.scoreCounts = result.items || [];
+      // Update serviceData and chartOptions once the scoreCounts are fetched
+        this.updateServiceData();
+        console.log(this.scoreCounts);
+      },
+      error: (error) => {
+        console.error('Error fetching score counts:', error);
+      }
+    });
+  }
 
-  selectedService = 'general';  
-
-  chartOptions: {
-    series: number[];
-    chart: ApexChart;
-    labels: string[];
-    responsive: ApexResponsive[];
-  };
-
+  updateServiceData() {
+    const service = this.scoreCounts[0] || { series: [0, 0, 0, 0, 0] };
+  
+    this.serviceData = {
+      data: {
+        series: [
+          service.series[0] || 0,
+          service.series[1] || 0,
+          service.series[2] || 0,
+          service.series[3] || 0,
+          service.series[4] || 0,
+        ],
+        labels: ['Note: 1', 'Note: 2', 'Note: 3', 'Note: 4', 'Note: 5'],
+      },
+    };
+  
+    this.updateChartData();
+  }
   serviceData = {
-    general: {
-      series: [44, 55, 41, 17],
-      labels: ['Note: 1', 'Note: 2', 'Note: 3', 'Note: 4']
+    data: {
+      series: [
+        this.scoreCounts[0]?.series[0] || 0,
+        this.scoreCounts[0]?.series[1] || 0,
+        this.scoreCounts[0]?.series[2] || 0,
+        this.scoreCounts[0]?.series[3] || 0,
+        this.scoreCounts[0]?.series[4] || 0,
+      ],
+      labels: ['Note: 1', 'Note: 2', 'Note: 3', 'Note: 4', 'Note: 5'],
     },
-    service1: {
-      series: [25, 30, 20, 25],
-      labels: ['Note: 1', 'Note: 2', 'Note: 3', 'Note: 4']
-    },
-    service2: {
-      series: [60, 15, 10, 15],
-      labels: ['Note: 1', 'Note: 2', 'Note: 3', 'Note: 4']
-    },
-    service3: {
-      series: [30, 40, 10, 20],
-      labels: ['Note: 1', 'Note: 2', 'Note: 3', 'Note: 4']
-    }
   };
 
   updateChartData() {
-    const service = this.serviceData[this.selectedService];
+    const service = this.serviceData.data;
     this.chartOptions = {
       series: service.series,
       chart: {
-        type: 'pie' as ChartType,
+        type: 'pie' as ApexChart['type'],
         width: '100%',
       },
       labels: service.labels,
@@ -133,18 +159,26 @@ export class StatisticsComponent implements OnInit {
           breakpoint: 480,
           options: {
             chart: {
-              width: 200
+              width: 200,
             },
             legend: {
-              position: 'bottom'
-            }
-          }
-        }
-      ]
+              position: 'bottom',
+            },
+          },
+        },
+      ],
     };
-  }
+  }  
 
   onServiceChange() {
+    if (this.selectedService === '') {
+      this.fetchGeneralAvg(); // Fetch general average when no service is selected
+    } else {
+      this.fetchAvgByServiceType(); // Fetch average score by selected service type
+    }
+  
+    this.fetchScoreCounts(this.selectedService);
     this.updateChartData();
+    this.fetchScoreCounts(this.selectedService);
   }
 }

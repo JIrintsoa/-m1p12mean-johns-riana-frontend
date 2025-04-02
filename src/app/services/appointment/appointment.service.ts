@@ -116,8 +116,21 @@ export class AppointmentService {
     return this.apiService.get<unknown>(url);
   }
 
+  getAppointmentScoreAvgByServiceType(serviceTypeId: string): Observable<unknown> {
+    const url = `/appointment-scores/average/service-types/${serviceTypeId}`;
+    return this.apiService.get<unknown>(url);
+  }
+
   cancel(appointmentId: string, token: string): Observable<unknown>{
     const url = `/appointments/${appointmentId}/cancel`
     return this.apiService.delete(url,token)
+  }
+
+  getScoreCounts(serviceTypeId: string = ''): Observable<unknown> {
+    const params = {
+      serviceTypeId
+    }
+    const url = `/appointment-scores/counts`;
+    return this.apiService.get<unknown>(url, params);
   }
 }
