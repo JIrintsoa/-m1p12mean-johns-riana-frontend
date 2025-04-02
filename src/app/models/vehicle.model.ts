@@ -2,6 +2,7 @@ export interface VehicleModel {
     _id: string;
     model: string;
     brand: string;
+    licensePlate: string;
     year: number;
     fuelType: string;
     userId: string;
