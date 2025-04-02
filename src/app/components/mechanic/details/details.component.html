@@ -26,8 +26,8 @@
                 </ul>
               
                 <p><strong>Mécanicien:</strong> 
-                  {{appointmentDetailResponse.items.appointmentDetail.mechanicId.firstName || 'Aucun'}}
-                  {{appointmentDetailResponse.items.appointmentDetail.mechanicId.lastName || 'Aucun'}}
+                  {{appointmentDetailResponse.items.appointmentDetail.mechanicId?.firstName || 'Aucun'}}
+                  {{appointmentDetailResponse.items.appointmentDetail.mechanicId?.lastName || ''}}
                 </p>
             </div>
           </div>
@@ -36,8 +36,8 @@
             <div class="col-md-4">
               <h4>STATUT INTERVENTION </h4>
               <p><strong>Statut:</strong> {{appointmentDetailResponse.items.appointmentDetail.status}} </p>
-              <p><strong>Progression:</strong><span > {{ (interventionOtherDetail.progress * 100) | number: '1.2-2' }} %</span></p>
-              <p><strong>Total:</strong><span > {{interventionOtherDetail.totalCost}} Ar</span></p>
+              <p><strong>Progression:</strong><span > {{ (appointmentDetailResponse.items.progress * 100) | number: '1.2-2' }} %</span></p>
+              <p><strong>Total:</strong><span > {{appointmentDetailResponse.items.totalCost}} Ar</span></p>
             </div>
 
             <div class="col-md-8">

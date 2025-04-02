@@ -25,8 +25,8 @@
                   <li *ngFor="let intervention of appointmentDetailResponse.items.interventionDetail">{{ intervention.name }}</li>
                 </ul>
               <p><strong>Mécanicien:</strong> 
-                {{appointmentDetailResponse.items.appointmentDetail.mechanicId.firstName || 'Aucun'}}
-                {{appointmentDetailResponse.items.appointmentDetail.mechanicId.lastName || 'Aucun'}}
+                {{appointmentDetailResponse.items.appointmentDetail.mechanicId?.firstName || 'Aucun'}}
+                {{appointmentDetailResponse.items.appointmentDetail.mechanicId?.lastName || ''}}
               </p>
             </div>
           </div>
