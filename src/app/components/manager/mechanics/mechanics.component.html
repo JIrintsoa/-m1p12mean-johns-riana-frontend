@@ -42,7 +42,7 @@
                 <td>{{mechanic.status}}</td>
                 <td>
                   <button type="button" class="btn btn-warning btn-sm" (click)="openModalUpdate(contentModalUpdate,mechanic)">Modifier</button>
-                  <button type="button" class="btn btn-danger btn-sm" style="margin-left: 10px;">Supprimer</button>
+                  <button type="button" class="btn btn-danger btn-sm" (click)="openModalDisable(contentModalDisable,mechanic)" style="margin-left: 10px;">Désactiver</button>
                 </td>                             
               </tr>
             </tbody>
@@ -153,5 +153,25 @@
 	<div class="modal-footer">
 		<button type="button" class="btn btn-secondary" (click)="modal.close('Close click')">Close</button>
     <button type="button" class="btn btn-success" (click)="updateMechanic()" data-dismiss="modal">Enregistrer</button>
+	</div>
+</ng-template>
+
+<!-- Disable Modals -->
+<ng-template #contentModalDisable let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title">Désactiver mécanicien</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+	</div>
+  <div class="modal-body">
+    <p>
+      <strong>Êtes-vous sûr de vouloir désactiver ce mécanicien?</strong>
+    </p>
+    <p>
+      <span class="text-danger">Cette opération est irréversible.</span>
+    </p>
+  </div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-secondary" (click)="modal.close('Close click')">Close</button>
+    <button type="button" class="btn btn-success" (click)="disableMechanic()" data-dismiss="modal">Désactiver</button>
 	</div>
 </ng-template>

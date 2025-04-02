@@ -1,0 +1,146 @@
+<div class="row">
+    <div class="col-sm-12">
+      <app-card cardTitle="Espace Services types">
+        <div class="row">
+          <div class="col-3">
+            <form (ngSubmit)="addServiceType()">
+              <div class="form-group">
+                <label for="marqueVehicule">Désignation</label>
+                <input type="text" class="form-control" id="marqueVehicule" [(ngModel)]="name" name="name" placeholder="Désignation">
+              </div>
+            
+              <div class="form-group">
+                <label for="modeleVehicule">Description</label>
+                <input type="text" class="form-control" id="modeleVehicule" [(ngModel)]="description" name="description" placeholder="Description">
+              </div>
+            
+              <button type="submit" class="btn btn-primary">Ajouter</button>
+            </form>
+          </div>
+
+          <div class="col-9">
+            <!-- <div class="row">
+              <div class="col-4">
+                <input type="text" class="form-control" id="rechercher" [(ngModel)]="searchTerm" placeholder="Rechercher">
+              </div>
+
+              <div class="col-8">
+                <button type="button" class="btn btn-primary" (click)="searchServiceTypes()">Valider</button>
+              </div>
+            </div> -->
+            
+            <div class="row">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">Désignation</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let serviceType of serviceTypes">
+                    <td scope="row">{{ serviceType.name }}</td>
+                    <td >{{ serviceType.description }}</td>
+                    <td>
+                      <button type="button" class="btn btn-outline-warning" (click)="openModalUpdate(contentModalUpdate,serviceType)">Modifier</button>
+                      <button type="button" class="btn btn-outline-danger" style="margin-left: 10px;" (click)="openModalDelete(contentModalDelete,serviceType)">Supprimer</button>
+                    </td>
+                  </tr>
+                  <tr *ngIf="!serviceTypes">
+                    <td colspan="5" class="text-center">Aucun services disponible</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="row">
+              <div class="col-10">
+                <nav aria-label="Page navigation">
+                  <ul class="pagination">
+                    <li class="page-item" [class.disabled]="currentPage === 1">
+                      <a class="page-link" (click)="changePage(currentPage - 1)">Previous</a>
+                    </li>
+                    <li class="page-item" *ngFor="let page of getPages()" [class.active]="page === currentPage">
+                      <a class="page-link" (click)="changePage(page)">{{ page }}</a>
+                    </li>
+                    <li class="page-item" [class.disabled]="currentPage === getPages().length">
+                      <a class="page-link" (click)="changePage(currentPage + 1)">Next</a>
+                    </li>
+                  </ul>
+                </nav>
+              </div>
+              <div class="col-2">
+                <select class="form-control" id="itemsPerPage" [(ngModel)]="itemsPerPage" (change)="changeItemsPerPage(itemsPerPage)">
+                  <option value="3">3</option>
+                  <option value="5">5</option>
+                  <option value="10">20</option>
+                </select>
+              </div>
+
+              <div class="form-group ml-3">
+
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="successMessage" class="alert alert-success mt-3">
+            {{ successMessage }}
+          </div>
+          
+          <div *ngIf="errorMessage" class="alert alert-danger mt-3">
+            {{ errorMessage }}
+          </div>
+        </div>
+      </app-card>
+    </div>
+</div>
+
+<!-- Update Modals -->
+<ng-template #contentModalUpdate let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title">Modifier Service</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+	</div>
+	<div class="modal-body">
+    <form>
+      <div class="form-group">
+        <label for="updateBrand">Désignation</label>
+        <input type="text" class="form-control" id="updateBrand" [(ngModel)]="serviceTypeSelected.name" [ngModelOptions]="{standalone: true}">
+      </div>
+      <div class="form-group">
+        <label for="updateModel">Description</label>
+        <input type="text" class="form-control" id="updateModel" [(ngModel)]="serviceTypeSelected.description" [ngModelOptions]="{standalone: true}">
+      </div>
+    </form>
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-secondary" (click)="modal.close('Close click')">Close</button>
+    <button type="button" class="btn btn-success" (click)="updateServiceType()" data-dismiss="modal">Enregistrer</button>
+	</div>
+</ng-template>
+
+<!-- Delete Modals -->
+<ng-template #contentModalDelete let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-title">Confirmation de suppression</h4>
+    <button
+      type="button"
+      class="btn-close"
+      aria-describedby="modal-title"
+      (click)="modal.dismiss('Cross click')"
+    ></button>
+  </div>
+  <div class="modal-body">
+    <p>
+      <strong>Êtes-vous sûr de vouloir supprimer ce service suivant ?</strong>
+    </p>
+    <p>
+      <span class="text-danger">Cette opération est irréversible.</span>
+    </p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel click')">Annuler</button>
+    <button type="button" class="btn btn-danger" (click)="deleteServiceType(serviceTypeSelected)">Confirmer</button>
+  </div>
+</ng-template>
