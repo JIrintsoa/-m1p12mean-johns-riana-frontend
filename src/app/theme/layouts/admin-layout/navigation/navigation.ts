@@ -109,6 +109,14 @@ export const NavigationItems: NavigationItem[] = [
         classes: 'nav-item',
         icon: 'dashboard'
       },
+      {
+        id: 'Services',
+        title: 'Services',
+        type: 'item',
+        url: '/manager/service-types',
+        classes: 'nav-item',
+        icon: 'dashboard'
+      },
     ]
   },
   {

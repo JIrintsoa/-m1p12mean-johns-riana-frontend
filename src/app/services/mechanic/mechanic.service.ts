@@ -40,4 +40,9 @@ export class MechanicService {
     const url = `/mechanics/${mechanic._id}`;
     return this.apiService.put(url, mechanic, token);
   }
+
+  disableMechanic(mechanic: User, token: string): Observable<unknown> {
+    const url = `/mechanics/${mechanic._id}/inactive`;
+    return this.apiService.patch(url, mechanic, token);
+  }
 }

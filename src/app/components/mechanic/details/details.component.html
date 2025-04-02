@@ -11,7 +11,7 @@
               <p><strong>Marque:</strong>  {{ appointmentDetailResponse.items.appointmentDetail.vehicleId.brand }}</p>
               <p><strong>Modèle:</strong> {{appointmentDetailResponse.items.appointmentDetail.vehicleId.model}}</p>
               <p><strong>Année:</strong> {{appointmentDetailResponse.items.appointmentDetail.vehicleId.year}}</p>
-              <p ><strong >Immatriculation:</strong><span [style.color]="'red'"> A faire encore</span></p>
+              <p ><strong >Immatriculation:</strong>{{appointmentDetailResponse.items.appointmentDetail.vehicleId.licensePlate}}</p>
               <p><strong>Kilométrage:</strong><span [style.color]="'red'"> A faire encore</span></p>
               <p><strong>Type carburant:</strong> {{appointmentDetailResponse.items.appointmentDetail.vehicleId.fuelType}}</p>
               <p><strong>Date RDV:</strong> {{ formatDate(appointmentDetailResponse.items.appointmentDetail.date, 'dd/MM/yyyy') }}</p>

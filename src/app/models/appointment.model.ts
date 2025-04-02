@@ -41,6 +41,7 @@ export interface AppointmentListe {
     description: string;
     status: string;
     score: number;
+    progress: number;
     mechanicId: {
       _id: string;
       firstName: string;

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -36,9 +37,13 @@ export class MechanicsComponent implements OnInit {
 
     //update
     mechanicToUpdate: User | null = null;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     activeModalUpdate: any;
     
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   @ViewChild('contentModalUpdate') contentModalUpdate: TemplateRef<any> | undefined;
+  @ViewChild('contentModalDisable') contentModalDisable: TemplateRef<any> | undefined;
+
 
     constructor(
       private modalService: NgbModal,
@@ -72,6 +77,7 @@ export class MechanicsComponent implements OnInit {
   
       this.mechanicService.addMechanic(newMechanic, this.token).subscribe({
         next: (response) => {
+          console.log(response)
           this.showMessage('Mécanicien ajouté avec succès!', 'success');
           this.fetchMechanics();
           this.resetForm(); 
@@ -104,12 +110,14 @@ export class MechanicsComponent implements OnInit {
         }
       }, 10000); 
     }  
+
     resetForm(): void {
       this.firstName = '';
       this.lastName = '';
       this.email = '';
       this.password = '';
     }
+
     resetFormUpdate(): void {
       this.mechanicToUpdate = null;
     }
@@ -152,8 +160,29 @@ export class MechanicsComponent implements OnInit {
         });
       }
     }
-      openModalUpdate(contentModalUpdate: TemplateRef<any>, mechanic: User) {
-        this.activeModalUpdate = this.modalService.open(contentModalUpdate, { centered: true });
-        this.mechanicToUpdate = mechanic;
+
+    disableMechanic(): void {
+      if (this.mechanicToUpdate) {
+        console.log(this.mechanicToUpdate)
+        this.mechanicService.disableMechanic(this.mechanicToUpdate, this.token).subscribe({
+          next: () => {
+            this.fetchMechanics();
+            this.activeModalUpdate.close()
+          },
+          error: (error) => {
+            console.error('Error updating vehicle:', error);
+          }
+        });
       }
+    }
+
+    openModalUpdate(contentModalUpdate: TemplateRef<any>, mechanic: User) {
+      this.activeModalUpdate = this.modalService.open(contentModalUpdate, { centered: true });
+      this.mechanicToUpdate = mechanic;
+    }
+
+    openModalDisable(contentModalDisable: TemplateRef<any>, mechanic: User) {
+      this.activeModalUpdate = this.modalService.open(contentModalDisable, { centered: true });
+      this.mechanicToUpdate = mechanic;
+    }
 }

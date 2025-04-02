@@ -61,7 +61,7 @@ export class AppointmentService {
     const params = {
       page: page.toString(),
       limit: limit.toString(),
-      search: vehicleName,
+      vehicleName: vehicleName,
       serviceTypeId: serviceTypeId,
       status: status,
       startDate: startDate,

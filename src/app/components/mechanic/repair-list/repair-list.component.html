@@ -61,16 +61,19 @@
                       <div
                         class="progress-bar"
                         role="progressbar"
-                        [style.width.%]="0.5 * 100"
-                        [attr.aria-valuenow]="0.5 * 100"
+                        [style.width.%]="+(appointment.progress | number: '1.2-2') * 100"
+                        [attr.aria-valuenow]="+(appointment.progress | number: '1.2-2') * 100"
                         aria-valuemin="0"
                         aria-valuemax="100"
                         style="position: relative;"
+                        [ngStyle]="{
+                          'background-color': +(appointment.progress | number: '1.2-2') < 0.33 ? 'red' : (+(appointment.progress | number: '1.2-2') < 0.66 ? 'orange' : 'green')
+                        }"
                       >
                         <span
-                          style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white;"
+                          style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: rgb(252, 248, 248);"
                         >
-                          {{ 0.5 * 100 }}%
+                          {{ +(appointment.progress | number: '1.2-2') * 100 }}%
                         </span>
                       </div>
                     </div>
