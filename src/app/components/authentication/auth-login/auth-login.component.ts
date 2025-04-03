@@ -66,8 +66,8 @@ export class AuthLoginComponent {
         },
         error: (error) => {
           // Gérer les erreurs de l'API
-          console.error('Erreur de connexion', error);
-          this.errorMessage = 'Email ou mot de passe incorrect.';
+          // console.error('Erreur de connexion', error);
+          this.errorMessage = error.error.message || 'Email ou mot de passe incorrect.';
         },
       });
     }
