@@ -87,7 +87,7 @@ export const NavigationItems: NavigationItem[] = [
       },
       {
         id: 'Appointment List',
-        title: 'Liste des rendez vous',
+        title: 'Liste des rendez-vous',
         type: 'item',
         url: '/manager/appointment-list',
         classes: 'nav-item',
