@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ApiService } from '../api.service';
 import { ServiceType } from 'src/app/models/service.model';
-import { ServiceType } from 'src/app/models/service.model';
 
 @Injectable({
   providedIn: 'root'
