@@ -51,7 +51,10 @@
               </thead>
               <tbody>
                 <tr *ngFor="let appointment of appointments">
-                  <th scope="row">{{appointment.vehicleId.brand}}<br/> {{appointment.vehicleId.model}}</th>
+                  <th scope="row">
+                    {{appointment.vehicleId.brand}} {{appointment.vehicleId.model}} <br/>
+                    {{appointment.vehicleId.licensePlate}}
+                  </th>
                   <td >{{ formatDate(appointment.date) }}</td>
                   <td >{{ appointment.serviceTypeId.name }}</td>
                   <td >{{ appointment.mechanicId?.firstName ?? 'Aucun' }}</td>
@@ -80,7 +83,7 @@
                   </td>
                   <td>
                     <button type="button" class="btn btn-outline-info" [routerLink]="['/mechanic/repair-list/details/',appointment._id]">Détails</button>
-                    <button type="button" class="btn btn-outline-secondary" style="margin-left: 10px;" >Annuler</button>
+                    <!-- <button type="button" class="btn btn-outline-secondary" style="margin-left: 10px;" >Annu   ler</button> -->
                   </td>
                 </tr>
                 <!-- <tr *ngIf="appointments.length === 0">

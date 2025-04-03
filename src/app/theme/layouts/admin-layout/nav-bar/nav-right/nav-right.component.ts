@@ -31,7 +31,7 @@ import { UserProfile } from 'src/app/models/user.model';
 
 @Component({
   selector: 'app-nav-right',
-  imports: [IconDirective, RouterModule, NgScrollbarModule, NgbNavModule, NgbDropdownModule, RouterLink],
+  imports: [ RouterModule, NgScrollbarModule, NgbNavModule, NgbDropdownModule, RouterLink],
   templateUrl: './nav-right.component.html',
   styleUrls: ['./nav-right.component.scss']
 })

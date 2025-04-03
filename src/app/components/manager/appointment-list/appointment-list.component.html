@@ -15,7 +15,7 @@
               <option value="">Tous</option>
               <option value="En cours">En cours</option>
               <option value="En attente">En attente</option>
-              <option value="Annulé">Annulé</option>
+              <!-- <option value="Annulé">Annulé</option> -->
             </select>
           </div>
       
@@ -51,11 +51,12 @@
                 <thead>
                   <tr>
                     <th scope="col">Client</th>
+                    <th scope="col">Immatriculation</th>
                     <th scope="col">Date préféré</th>
                     <th scope="col">Service</th>
                     <th scope="col">Mécanicien assigné</th>
                     <th scope="col">Status</th>
-                    <th scope="col">Motif</th>
+                    <!-- <th scope="col">Motif</th> -->
                     <th scope="col">Action</th>
                   </tr>
                 </thead>
@@ -63,11 +64,16 @@
                   <tr *ngFor="let appointment of appointments">
                     <td>{{ appointment.clientId?.firstName || 'Aucun nom' }} {{ appointment.clientId?.lastName || '' }}
                     </td>
+                    <td>
+                      {{appointment.vehicleId.brand}} {{appointment.vehicleId.model}}<br/>
+                      {{appointment.vehicleId.licensePlate}}<br/>
+
+                    </td>
                     <td>{{appointment.formattedDate}}</td>
                     <td>{{appointment.serviceTypeId?.name}}</td>
                     <td>{{appointment.mechanicId?.firstName || 'Aucun' }} {{appointment.mechanicId?.lastName || ''}}</td>
                     <td>{{appointment.status}}</td>
-                    <td>{{appointment.description}}</td>
+                    <!-- <td>{{appointment.description}}</td> -->
                     <td>
                       <button type="button" class="btn btn-info d-block mb-2"
                         [routerLink]="['/manager/appointment-list/details/', appointment._id]">Details</button>

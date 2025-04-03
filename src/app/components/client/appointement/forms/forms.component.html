@@ -9,13 +9,14 @@
 
             <div class="col-2">
               <select id="listServiceTypes" class="form-control" [(ngModel)]="appointmentFilter.serviceTypeId" (change)="onAppointmentFilterServiceTypeChange(appointmentFilter.serviceTypeId)" name="appointmentFilter.serviceType" [ariaPlaceholder]="['Type de service']">
-                <option value="Type de Service" disabled selected>Type de service</option>
+                <option value="" selected>Tous</option>
                 <option *ngFor="let serviceType of serviceTypes" [ngValue]="serviceType._id">{{ serviceType.name }}</option>
               </select>
             </div>
 
             <div class="col-2">
               <select class="form-control" id="listStatus" [(ngModel)]="appointmentFilter.status" (change)="onAppointmentFilterStatusChange(appointmentFilter.status)">
+                <option value="" selected>Tous</option>
                 <option value="En attente">En attente</option>
                 <option value="En cours ">En cours</option>
                 <option value="Terminé">terminé</option>
@@ -51,7 +52,9 @@
               </thead>
               <tbody>
                 <tr *ngFor="let appointment of appointments">
-                  <th scope="row">{{appointment.vehicleId.brand}}<br/> {{appointment.vehicleId.model}}</th>
+                  <th scope="row">{{appointment.vehicleId.brand}} {{appointment.vehicleId.model}}<br/>
+                    {{appointment.vehicleId.licensePlate}}
+                  </th>
                   <td >{{ formatDate(appointment.date) }}</td>
                   <td >{{ appointment.serviceTypeId.name }}</td>
                   <td >{{ appointment.mechanicId?.firstName ?? 'Aucun' }}</td>
@@ -169,10 +172,10 @@
               </select>
             </div>
             
-            <div class="form-group">
+            <!-- <div class="form-group">
               <label for="dateRdv">Kilométrage</label>
               <input type="text" class="form-control" id="dateRdv" [(ngModel)]="kilometer" name="kilometrage" [ngModelOptions]="{standalone: true}">
-            </div>
+            </div> -->
     
             <div class="form-group">
               <label for="commentaire">Commentaire</label>

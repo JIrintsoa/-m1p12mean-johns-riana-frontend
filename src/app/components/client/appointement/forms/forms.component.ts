@@ -102,7 +102,7 @@ export class FormsComponent implements OnInit {
   }
 
   fetchVehicles(): void {
-    this.vehicleService.getVehicles(this.token).subscribe({
+    this.vehicleService.getVehicles(this.token, 1, 30, '').subscribe({
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       next: (response: any) => {
         // console.log('Raw response:', response);

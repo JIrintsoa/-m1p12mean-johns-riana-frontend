@@ -43,8 +43,10 @@
                     <td scope="row">{{ serviceType.name }}</td>
                     <td >{{ serviceType.description }}</td>
                     <td>
-                      <button type="button" class="btn btn-outline-warning" (click)="openModalUpdate(contentModalUpdate,serviceType)">Modifier</button>
-                      <button type="button" class="btn btn-outline-danger" style="margin-left: 10px;" (click)="openModalDelete(contentModalDelete,serviceType)">Supprimer</button>
+                      <div class="d-flex flex-column">
+                        <button type="button" class="btn btn-outline-warning mb-2" (click)="openModalUpdate(contentModalUpdate, serviceType)">Modifier</button>
+                        <button type="button" class="btn btn-outline-danger" (click)="openModalDelete(contentModalDelete, serviceType)">Supprimer</button>
+                      </div>
                     </td>
                   </tr>
                   <tr *ngIf="!serviceTypes">

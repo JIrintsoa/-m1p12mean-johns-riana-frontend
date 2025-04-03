@@ -6,65 +6,140 @@
       <div class="card-body">
         <div *ngIf="appointmentDetailResponse?.items?.appointmentDetail">
           <div class="row">
-            <div class="col-md-4">
-              <h4>INFOS VEHICULE</h4>
-              <p><strong>Marque:</strong>  {{ appointmentDetailResponse.items.appointmentDetail.vehicleId.brand }}</p>
-              <p><strong>Modèle:</strong> {{appointmentDetailResponse.items.appointmentDetail.vehicleId.model}}</p>
-              <p><strong>Année:</strong> {{appointmentDetailResponse.items.appointmentDetail.vehicleId.year}}</p>
-              <p ><strong >Immatriculation:</strong>{{appointmentDetailResponse.items.appointmentDetail.vehicleId.licensePlate}}</p>
-              <p><strong>Kilométrage:</strong><span [style.color]="'red'"> A faire encore</span></p>
-              <p><strong>Type carburant:</strong> {{appointmentDetailResponse.items.appointmentDetail.vehicleId.fuelType}}</p>
-              <p><strong>Date RDV:</strong> {{ formatDate(appointmentDetailResponse.items.appointmentDetail.date, 'dd/MM/yyyy') }}</p>
+            <!-- VEHICLE INFO CARD -->
+            <div class="col-md-6">
+              <div class="card shadow-sm">
+                <div class="card-header text-white bg-light">
+                  <h4 class="mb-0">INFOS VEHICULE</h4>
+                </div>
+                <div class="card-body">
+                  <table class="table table-bordered">
+                    <tbody>
+                      <tr>
+                        <th>Marque</th>
+                        <td>{{ appointmentDetailResponse.items.appointmentDetail.vehicleId.brand }}</td>
+                      </tr>
+                      <tr>
+                        <th>Modèle</th>
+                        <td>{{ appointmentDetailResponse.items.appointmentDetail.vehicleId.model }}</td>
+                      </tr>
+                      <tr>
+                        <th>Année</th>
+                        <td>{{ appointmentDetailResponse.items.appointmentDetail.vehicleId.year }}</td>
+                      </tr>
+                      <tr>
+                        <th>Immatriculation</th>
+                        <td><span class="badge bg-secondary">{{ appointmentDetailResponse.items.appointmentDetail.vehicleId.licensePlate }}</span></td>
+                      </tr>
+                      <tr>
+                        <th>Type carburant</th>
+                        <td>{{ appointmentDetailResponse.items.appointmentDetail.vehicleId.fuelType }}</td>
+                      </tr>
+                      <tr>
+                        <th>Date RDV</th>
+                        <td><span class="text-primary fw-bold">{{ formatDate(appointmentDetailResponse.items.appointmentDetail.date, 'dd/MM/yyyy') }}</span></td>
+                      </tr>
+                      <tr>
+                        <th>Motif</th>
+                        <td>{{ appointmentDetailResponse.items.appointmentDetail.description }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
             </div>
-            <div class="col-md-8">
-              <h4>INFOS SERVICE</h4>
-              <p><strong>Désignation:</strong> {{appointmentDetailResponse.items.appointmentDetail.serviceTypeId.name}}</p>
-              <p><strong>Description:</strong> {{appointmentDetailResponse.items.appointmentDetail.serviceTypeId.description}}</p>
-              <p><strong>Interventions:</strong>
-                <ul>
-                  <li *ngFor="let intervention of appointmentDetailResponse.items.interventionDetail">{{ intervention.name }}</li>
-                </ul>
-              
-                <p><strong>Mécanicien:</strong> 
-                  {{appointmentDetailResponse.items.appointmentDetail.mechanicId?.firstName || 'Aucun'}}
-                  {{appointmentDetailResponse.items.appointmentDetail.mechanicId?.lastName || ''}}
-                </p>
+        
+            <!-- SERVICE INFO CARD -->
+            <div class="col-md-6">
+              <div class="card shadow-sm">
+                <div class="card-header text-white bg-light">
+                  <h4 class="mb-0">INFOS SERVICE</h4>
+                </div>
+                <div class="card-body">
+                  <table class="table table-bordered">
+                    <tbody>
+                      <tr>
+                        <th>Désignation</th>
+                        <td>{{ appointmentDetailResponse.items.appointmentDetail.serviceTypeId.name }}</td>
+                      </tr>
+                      <tr>
+                        <th>Description</th>
+                        <td>{{ appointmentDetailResponse.items.appointmentDetail.serviceTypeId.description }}</td>
+                      </tr>
+                      <tr>
+                        <th>Mécanicien</th>
+                        <td>
+                          {{ appointmentDetailResponse.items.appointmentDetail.mechanicId?.firstName || 'Aucun' }} 
+                          {{ appointmentDetailResponse.items.appointmentDetail.mechanicId?.lastName || '' }} 
+                          <br/>
+                          {{ appointmentDetailResponse.items.appointmentDetail.mechanicId?.email || '' }}
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
             </div>
           </div>
+        
           <hr>
+        
           <div class="row">
-            <div class="col-md-4">
-              <h4>STATUT INTERVENTION </h4>
-              <p><strong>Statut:</strong> {{appointmentDetailResponse.items.appointmentDetail.status}} </p>
-              <p><strong>Progression:</strong><span > {{ (appointmentDetailResponse.items.progress * 100) | number: '1.2-2' }} %</span></p>
-              <p><strong>Total:</strong><span > {{appointmentDetailResponse.items.totalCost}} Ar</span></p>
+            <!-- INTERVENTION STATUS CARD -->
+            <div class="col-md-6">
+              <div class="card shadow-sm">
+                <div class="card-header text-white bg-light">
+                  <h4 class="mb-0">STATUT INTERVENTION</h4>
+                </div>
+                <div class="card-body">
+                  <table class="table table-bordered">
+                    <tbody>
+                      <tr>
+                        <th>Statut</th>
+                        <td>{{ appointmentDetailResponse.items.appointmentDetail.status }}</td>
+                      </tr>
+                      <tr>
+                        <th>Progression</th>
+                        <td>{{ (interventionOtherDetail.progress * 100) | number: '1.2-2' }} %</td>
+                      </tr>
+                      <tr>
+                        <th>Total</th>
+                        <td>{{ interventionOtherDetail.totalCost | number: '1.0-0' }} Ar</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
             </div>
-
-            <div class="col-md-8">
-              <h4>ETAPE INTERVENTION</h4>
-              <div class="card-body">
-                <table class="table table-bordered">
+        
+            <!-- INTERVENTION STEPS CARD -->
+            <div class="col-md-6">
+              <div class="card shadow-sm">
+                <div class="card-header text-white bg-light">
+                  <h4 class="mb-0">ETAPE INTERVENTION</h4>
+                </div>
+                <div class="card-body">
+                  <table class="table table-bordered">
                     <thead>
-                        <tr>
-                            <th>Intervention à faire</th>
-                            <th>cout(Ar)</th>
-                            <th>Etat</th>
-                            <th>Action</th>
-  
-                        </tr>
+                      <tr>
+                        <th>Intervention à faire</th>
+                        <th>Cout (Ar)</th>
+                        <th>Statut</th>
+                        <th>Action</th>
+                      </tr>
                     </thead>
                     <tbody>
                       <tr *ngFor="let intervention of interventions">
-                        <td>{{intervention.name}}</td>
-                        <td>{{intervention.cost}}</td>
-                        <td>{{intervention.status}}</td>
+                        <td>{{ intervention.name }}</td>
+                        <td>{{ intervention.cost | number:'1.0-0' }}</td>
+                        <td>{{ intervention.status }}</td>
                         <td>
                           <button type="button" class="btn btn-success" (click)="openModalFinish(contentModalFinish,intervention._id)" [disabled]="intervention.status === 'Terminé' || intervention.status ==='Omis'  ">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
                               <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425z"/>
                             </svg>
                           </button>
-                          <button type="button" class="btn btn-secondary" (click)="openModalSkip(contentModalSkip, intervention._id)" [disabled]="intervention.status === 'Terminé' || intervention.status ==='Omis'">
+                          <button type="button" class="btn btn-secondary" style="margin-left: 5px;" (click)="openModalSkip(contentModalSkip, intervention._id)" [disabled]="intervention.status === 'Terminé' || intervention.status ==='Omis'">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-x" viewBox="0 0 16 16">
                               <path d="M6.146 6.146a.5.5 0 0 1 .708 0L8 7.293l1.146-1.147a.5.5 0 1 1 .708.708L8.707 8l1.147 1.146a.5.5 0 0 1-.708.708L8 8.707 6.854 9.854a.5.5 0 0 1-.708-.708L7.293 8 6.146 6.854a.5.5 0 0 1 0-.708"/>
                               <path d="M4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm0 1h8a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1"/>
@@ -73,20 +148,25 @@
                         </td>
                       </tr>
                     </tbody>
-                </table>
-                <div class="row">
-                  <div class="col-6">
-                    <input type="text" class="form-control" id="nouvelleIntervention" [(ngModel)]="interventionInput.name" placeholder="Saisissez une intervention">
+                  </table>
+                  <div class="row">
+                    <div class="col-6">
+                      <input type="text" class="form-control" id="nouvelleIntervention" [(ngModel)]="interventionInput.name" placeholder="Saisissez une intervention">
+                    </div>
+                    <div class="col-6">
+                      <input type="text" class="form-control" id="coutIntervention" [(ngModel)]="interventionInput.cost" placeholder="Saisissez cout">
+                    </div>
                   </div>
-                  <div class="col-6">
-                    <input type="text" class="form-control" id="coutIntervention" [(ngModel)]="interventionInput.cost" placeholder="Saisissez cout">
-                  </div>
+                  <button class="btn btn-primary mt-2" type="button" id="ajouterInterventionBtn" (click)="addIntervention()">Ajouter</button>
+  
                 </div>
-                <button class="btn btn-primary mt-2" type="button" id="ajouterInterventionBtn" (click)="addIntervention()">Ajouter</button>
               </div>
             </div>
+
           </div>
+          <hr>
         </div>
+        
         <div *ngIf="!appointmentDetailResponse?.items?.appointmentDetail">
           <p>Chargement des détails du rendez-vous...</p>
         </div>

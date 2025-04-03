@@ -169,6 +169,7 @@ export class DetailsComponent {
         console.log('Intervention added successfully:', response);
         this.showMessage('Intervention ajouté avec succès!', 'success');
         this.fetchInterventions(); // Refresh the vehicle list
+        window.location.reload(); // Refresh the page to reflect changes
         this.resetForm(); // Optionally reset the form after submission
       },
       error: (error) => {
@@ -186,6 +187,7 @@ export class DetailsComponent {
         this.showMessage('Intervention fini avec succès!', 'success');
         this.fetchInterventions(); // Refresh the vehicle list
         this.activeModalFinish.close();
+        window.location.reload(); // Refresh the page to reflect changes
         // this.resetForm(); // Optionally reset the form after submission
       },
       error: (error) => {
@@ -202,6 +204,7 @@ export class DetailsComponent {
         this.showMessage('Intervention skipper avec succès!', 'success');
         this.fetchInterventions(); // Refresh the vehicle list
         this.activeModaleSkip.close();
+        window.location.reload(); // Refresh the page to reflect changes
         // this.resetForm(); // Optionally reset the form after submission
       },
       error: (error) => {
