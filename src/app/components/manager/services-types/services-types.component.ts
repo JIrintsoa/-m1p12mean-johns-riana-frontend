@@ -130,8 +130,16 @@ export class ServicesTypesComponent implements OnInit{
     }
   }
 
-  deleteServiceType(serviceTypeSelected: ServiceType){
-    console.log(serviceTypeSelected)
+  deleteServiceType(): void {
+      this.serviceTypeService.disableServiceType(this.serviceTypeSelected, this.token).subscribe({
+        next: () => {
+          this.fetchServiceTypes();
+          this.activeModaleDelete.close()
+        },
+        error: (error) => {
+          console.error('Error updating service type:', error);
+        }
+      });
   }
 
   fetchServiceTypes(){

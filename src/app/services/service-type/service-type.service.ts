@@ -29,4 +29,9 @@ export class ServiceTypeService {
     const url = `/service-types/${serviceType._id}`;
     return this.apiService.put(url, serviceType, token);
   }
+
+  disableServiceType(serviceType: ServiceType, token: string): Observable<unknown> {
+    const url = `/service-types/disable/${serviceType._id}`;
+    return this.apiService.patch(url, serviceType, token);
+  }
 }
