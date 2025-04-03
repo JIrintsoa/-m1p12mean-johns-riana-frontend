@@ -69,12 +69,13 @@
                     <td>{{appointment.status}}</td>
                     <td>{{appointment.description}}</td>
                     <td>
-                      <button type="button" class="btn btn-info"
-                        [routerLink]="['/manager/appointment-list/details/',appointment._id]">Details</button>
-                      <button type="button" class="btn btn-secondary" style="margin-left: 10px;" (click)="openModalUpdate(contentModalUpdate, appointment._id)">
+                      <button type="button" class="btn btn-info d-block mb-2"
+                        [routerLink]="['/manager/appointment-list/details/', appointment._id]">Details</button>
+                      <button type="button" class="btn btn-secondary d-block" (click)="openModalUpdate(contentModalUpdate, appointment._id)">
                         Assigner mécanicien
                       </button>
                     </td>
+                    
                   </tr>
                   <tr>
                 </tbody>
