@@ -78,9 +78,10 @@ export class AppointmentService {
     serviceTypeId: string = '' ,
     status: string = '', 
     startDate: string = '', 
-    endDate: string =''
+    endDate: string ='',
+    mechanicId: string = ''
   ): Observable<unknown> {
-    const url = `/appointments/by-mechanic`;
+    const url = `/appointments/by-mechanic/${mechanicId}`;
     const params = {
       page: page.toString(),
       limit: limit.toString(),

@@ -9,13 +9,13 @@
             <div class="col-4">
               <input type="text" class="form-control" id="rechercher" [(ngModel)]="searchTerm" placeholder="Rechercher">
             </div>
-            <div class="col-md-3 col-12 mb-3 mb-md-0">
+            <!-- <div class="col-md-3 col-12 mb-3 mb-md-0">
               <select [(ngModel)]="status" id="status" class="form-control">
                 <option value="" selected disabled>Tous</option>
                 <option value="Actif">Actif</option>
                 <option value="Inactif">Inactif</option>
               </select>
-            </div>
+            </div> -->
             <div class="col-8">
               <button type="button" class="btn btn-primary" (click)="searchMechanics()">Valider</button>
             </div>
@@ -30,7 +30,7 @@
                 <th scope="col">Nom</th>
                 <th scope="col">Prénom</th>
                 <th scope="col">Email</th>
-                <th scope="col">Status</th>
+                <!-- <th scope="col">Status</th> -->
                 <th scope="col">Action</th>
               </tr>
             </thead>
@@ -39,7 +39,7 @@
                 <td>{{mechanic.firstName}}</td>
                 <td>{{mechanic.lastName}}</td>
                 <td>{{mechanic.email}}</td>
-                <td>{{mechanic.status}}</td>
+                <!-- <td>{{mechanic.status}}</td> -->
                 <td>
                   <button type="button" class="btn btn-warning btn-sm" (click)="openModalUpdate(contentModalUpdate,mechanic)">Modifier</button>
                   <button type="button" class="btn btn-danger btn-sm" (click)="openModalDisable(contentModalDisable,mechanic)" style="margin-left: 10px;">Désactiver</button>

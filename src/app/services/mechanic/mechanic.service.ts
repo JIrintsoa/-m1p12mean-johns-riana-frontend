@@ -21,14 +21,14 @@ export class MechanicService {
     return this.apiService.get<unknown>(url, params, token);
   }
 
-  getActiveMechanics(page: number = 1, limit: number = 10, filter: string = ''): Observable<unknown> {
+  getActiveMechanics(page: number = 1, limit: number = 10, search: string = '', token: string): Observable<unknown> {
     const url = `/mechanics/active`;
     const params = {
       page: page.toString(),
       limit: limit.toString(),
-      filter: filter
+      search,
     };
-    return this.apiService.get<unknown>(url, params);
+    return this.apiService.get<unknown>(url, params, token);
   }
 
   addMechanic(mechanicData: unknown, token: string): Observable<unknown> {

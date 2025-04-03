@@ -52,11 +52,22 @@ export class MechanicsComponent implements OnInit {
     ){ }
   
     ngOnInit(): void {
-      this.fetchMechanics();
+      this.fetchActiveMechanics();
     }
 
     fetchMechanics(){
       this.mechanicService.getMechanics(this.currentPage, this.itemsPerPage, this.searchTerm, this.status, this.token).subscribe({
+        next: (response: any) => {
+          const result = response;
+          this.mechanics = result.items || [];
+        },
+        error: (error) => {
+          console.error('Error fetching mechanics', error);
+        }
+      });
+    }
+    fetchActiveMechanics(){
+      this.mechanicService.getActiveMechanics(this.currentPage, this.itemsPerPage, this.searchTerm, this.token).subscribe({
         next: (response: any) => {
           const result = response;
           this.mechanics = result.items || [];
@@ -143,7 +154,7 @@ export class MechanicsComponent implements OnInit {
     // filters
     searchMechanics(): void {
       this.currentPage = 1; // Réinitialiser la page actuelle lors de la recherche
-      this.fetchMechanics();
+      this.fetchActiveMechanics();
     }
 
     // update mechanic

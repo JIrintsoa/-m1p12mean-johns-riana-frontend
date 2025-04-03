@@ -18,7 +18,9 @@ import { formatDate } from 'src/app/utils/utils.function';
 export class RepairListComponent implements OnInit {
   appointments : AppointmentListe[] ;
   token: string;
-  formatDate = formatDate
+  formatDate = formatDate;
+  user = JSON.parse(localStorage.getItem('user'));
+  mechanicId = this.user ? this.user._id : null;
 
   Pagination= {
     itemsPerPage: 3,
@@ -85,18 +87,15 @@ export class RepairListComponent implements OnInit {
       this.filterInput.serviceTypeId,
       this.filterInput.status,
       this.filterInput.startDate,
-      this.filterInput.endDate
+      this.filterInput.endDate,
+      this.mechanicId
     ).subscribe({
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       next: (response: any) => {
-        // console.log('Raw response:', response);
         const result = response;
-        // console.log(result)
         this.appointments = result.items || [];
         this.Pagination.totalItems = result.totalItems;
         this.Pagination.currentPage = result.currentPage;
-        // this.Pagination.totalPages = result.totalPages
-        // console.log('Processed vehicles:', this.vehicles);
       },
       error: (error) => {
         if (error.status === 401) {

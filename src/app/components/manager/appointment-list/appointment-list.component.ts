@@ -125,7 +125,7 @@ export class AppointmentListComponent implements OnInit {
   }
 
   fetchMechanics(): void {
-    this.mechanicService.getActiveMechanics().subscribe({
+    this.mechanicService.getActiveMechanics(1, 20, '', this.token).subscribe({
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       next: (response: any) => {
         const result = response;
