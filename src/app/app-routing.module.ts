@@ -91,6 +91,12 @@ const routes: Routes = [
         data: { roles: ['manager'] }
       },
       {
+        path: 'manager/managers',
+        loadComponent: () => import('./components/manager/managers/managers.component').then((c) => c.ManagersComponent),
+        canActivate: [AuthGuard],
+        data: { roles: ['manager'] }
+      },
+      {
         path: 'manager/service-types',
         loadComponent: () => import('./components/manager/services-types/services-types.component').then((c) => c.ServicesTypesComponent),
         canActivate: [AuthGuard],

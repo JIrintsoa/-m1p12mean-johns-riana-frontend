@@ -4,18 +4,18 @@ import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { User } from 'src/app/models/user.model';
-import { MechanicService } from 'src/app/services/mechanic/mechanic.service';
+import { User, UserProfile } from 'src/app/models/user.model';
+import { ManagerService } from 'src/app/services/manager/manager.service';
 import { CardComponent } from 'src/app/theme/shared/components/card/card.component';
 
 @Component({
-  selector: 'app-mechanics',
+  selector: 'app-managers',
   imports: [CardComponent, CommonModule, FormsModule],
-  templateUrl: './mechanics.component.html',
-  styleUrl: './mechanics.component.scss'
+  templateUrl: './managers.component.html',
+  styleUrl: './managers.component.scss'
 })
-export class MechanicsComponent implements OnInit {
-  mechanics: User[] = [];
+export class ManagersComponent implements OnInit {
+  managers: User[] = [];
   token: string = localStorage.getItem('TOKEN_KEY');
     // form
     firstName: string = '';
@@ -36,7 +36,7 @@ export class MechanicsComponent implements OnInit {
     status = '';
 
     //update
-    mechanicToUpdate: User | null = null;
+    managerToUpdate: User | null = null;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     activeModalUpdate: any;
     
@@ -47,50 +47,39 @@ export class MechanicsComponent implements OnInit {
 
     constructor(
       private modalService: NgbModal,
-      private mechanicService: MechanicService,
+      private managerService: ManagerService,
       private router:Router
     ){ }
   
     ngOnInit(): void {
-      this.fetchActiveMechanics();
+      this.fetchManagers();
     }
 
-    fetchMechanics(){
-      this.mechanicService.getMechanics(this.currentPage, this.itemsPerPage, this.searchTerm, this.status, this.token).subscribe({
+    fetchManagers(){
+      this.managerService.getManagers(this.currentPage, this.itemsPerPage, this.searchTerm, this.status, this.token).subscribe({
         next: (response: any) => {
           const result = response;
-          this.mechanics = result.items || [];
+          this.managers = result.items || [];
         },
         error: (error) => {
-          console.error('Error fetching mechanics', error);
-        }
-      });
-    }
-    fetchActiveMechanics(){
-      this.mechanicService.getActiveMechanics(this.currentPage, this.itemsPerPage, this.searchTerm, this.token).subscribe({
-        next: (response: any) => {
-          const result = response;
-          this.mechanics = result.items || [];
-        },
-        error: (error) => {
-          console.error('Error fetching mechanics', error);
+          console.error('Error fetching managers', error);
         }
       });
     }
 
-    addMechanic(): void {
-      const newMechanic = {
+    addManager(): void {
+      const newManager = {
         firstName: this.firstName,
         lastName: this.lastName,
         email: this.email,
         password: this.password,
       };
   
-      this.mechanicService.addMechanic(newMechanic, this.token).subscribe({
+      this.managerService.addManager(newManager, this.token).subscribe({
         next: (response) => {
           console.log(response)
-          this.showMessage('Mécanicien ajouté avec succès!', 'success');
-          this.fetchActiveMechanics();
+          this.showMessage('Manager ajouté avec succès!', 'success');
+          this.fetchManagers();
           this.resetForm(); 
         },
         error: (error) => {
@@ -98,7 +87,7 @@ export class MechanicsComponent implements OnInit {
             this.router.navigate(['/login']);
           } 
           else {
-            this.showMessage('Erreur lors de la création du mécanicien.', 'error');
+            this.showMessage('Erreur lors de la création du Manager.', 'error');
           }
         }
       });
@@ -130,7 +119,7 @@ export class MechanicsComponent implements OnInit {
     }
 
     resetFormUpdate(): void {
-      this.mechanicToUpdate = null;
+      this.managerToUpdate = null;
     }
 
     // pagination
@@ -141,28 +130,28 @@ export class MechanicsComponent implements OnInit {
   
     changePage(page: number): void {
       this.currentPage = page;
-      this.fetchActiveMechanics();
+      this.fetchManagers();
     }
   
     changeItemsPerPage(itemsPerPage: number): void {
       const firstItemOfCurrentPage = (this.currentPage - 1) * this.itemsPerPage;
       this.itemsPerPage = itemsPerPage;
       this.currentPage = Math.ceil((firstItemOfCurrentPage + 1) / this.itemsPerPage);
-      this.fetchActiveMechanics();
+      this.fetchManagers();
     }
 
     // filters
-    searchMechanics(): void {
+    searchmanagers(): void {
       this.currentPage = 1; // Réinitialiser la page actuelle lors de la recherche
-      this.fetchActiveMechanics();
+      this.fetchManagers();
     }
 
     // update mechanic
-    updateMechanic(): void {
-      if (this.mechanicToUpdate) {
-        this.mechanicService.updateMechanic(this.mechanicToUpdate, this.token).subscribe({
+    updateManager(): void {
+      if (this.managerToUpdate) {
+        this.managerService.updateManager(this.managerToUpdate, this.token).subscribe({
           next: () => {
-            this.fetchActiveMechanics();
+            this.fetchManagers();
             this.activeModalUpdate.close()
           },
           error: (error) => {
@@ -172,12 +161,12 @@ export class MechanicsComponent implements OnInit {
       }
     }
 
-    disableMechanic(): void {
-      if (this.mechanicToUpdate) {
-        console.log(this.mechanicToUpdate)
-        this.mechanicService.disableMechanic(this.mechanicToUpdate, this.token).subscribe({
+    disableManager(): void {
+      if (this.managerToUpdate) {
+        console.log(this.managerToUpdate)
+        this.managerService.disableManager(this.managerToUpdate, this.token).subscribe({
           next: () => {
-            this.fetchActiveMechanics();
+            this.fetchManagers();
             this.activeModalUpdate.close()
           },
           error: (error) => {
@@ -189,11 +178,22 @@ export class MechanicsComponent implements OnInit {
 
     openModalUpdate(contentModalUpdate: TemplateRef<any>, mechanic: User) {
       this.activeModalUpdate = this.modalService.open(contentModalUpdate, { centered: true });
-      this.mechanicToUpdate = mechanic;
+      this.managerToUpdate = mechanic;
     }
 
     openModalDisable(contentModalDisable: TemplateRef<any>, mechanic: User) {
       this.activeModalUpdate = this.modalService.open(contentModalDisable, { centered: true });
-      this.mechanicToUpdate = mechanic;
+      this.managerToUpdate = mechanic;
+    }
+
+    getManagerIdFromLocalStorage(): string | null {
+      const user = localStorage.getItem('user');
+      
+      if (user) {
+        const parsedUser: UserProfile = JSON.parse(user);
+        return parsedUser._id;
+      }
+      
+      return null;
     }
 }

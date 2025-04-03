@@ -1,0 +1,182 @@
+<div class="row">
+    <div class="col-sm-12">
+      <app-card cardTitle="Gestion des managers">
+        <div class="row">
+  
+          <!-- Filters Section -->
+          <div class="col-12 mb-4">
+            <div class="row align-items-center">
+              <div class="col-4">
+                <input type="text" class="form-control" id="rechercher" [(ngModel)]="searchTerm" placeholder="Rechercher">
+              </div>
+              <!-- <div class="col-md-3 col-12 mb-3 mb-md-0">
+                <select [(ngModel)]="status" id="status" class="form-control">
+                  <option value="" selected disabled>Tous</option>
+                  <option value="Actif">Actif</option>
+                  <option value="Inactif">Inactif</option>
+                </select>
+              </div> -->
+              <div class="col-8">
+                <button type="button" class="btn btn-primary" (click)="searchmanagers()">Valider</button>
+              </div>
+            </div>
+          </div>
+  
+          <!-- Table Section -->
+          <div class="col-12">
+            <table class="table table-hover table-bordered">
+              <thead>
+                <tr>
+                  <th scope="col">Nom</th>
+                  <th scope="col">Prénom</th>
+                  <th scope="col">Email</th>
+                  <!-- <th scope="col">Status</th> -->
+                  <th scope="col">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor=" let manager of managers">
+                  <td>{{manager.firstName}}</td>
+                  <td>{{manager.lastName}}</td>
+                  <td>{{manager.email}}</td>
+                  <!-- <td>{{manager.status}}</td> -->
+                  <td>
+                    <button type="button" class="btn btn-warning btn-sm" (click)="openModalUpdate(contentModalUpdate,manager)">Modifier</button>
+                    <button type="button" 
+                        class="btn btn-danger btn-sm" 
+                        (click)="openModalDisable(contentModalDisable,manager)" 
+                        [disabled]="manager._id === getManagerIdFromLocalStorage()"
+                        style="margin-left: 10px;">Désactiver
+                    </button>
+                  </td>                             
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="row">
+            <div class="col-10">
+              <nav aria-label="Page navigation">
+                <ul class="pagination">
+                  <li class="page-item" [class.disabled]="currentPage === 1">
+                    <a class="page-link" (click)="changePage(currentPage - 1)">Previous</a>
+                  </li>
+                  <li class="page-item" *ngFor="let page of getPages()" [class.active]="page === currentPage">
+                    <a class="page-link" (click)="changePage(page)">{{ page }}</a>
+                  </li>
+                  <li class="page-item" [class.disabled]="currentPage === getPages().length">
+                    <a class="page-link" (click)="changePage(currentPage + 1)">Next</a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+            <div class="col-2">
+              <select class="form-control" id="itemsPerPage" [(ngModel)]="itemsPerPage" (change)="changeItemsPerPage(itemsPerPage)">
+                <option value="3">3</option>
+                <option value="5">5</option>
+                <option value="10">20</option>
+              </select>
+            </div>
+          </div>
+  
+        </div>
+      </app-card>
+    </div>
+  </div>
+  
+    
+  <div class="row">
+    <div class="col-sm-6">
+      <app-card cardTitle="Créer un nouveau manager">
+        <div class="row">
+          <div class="col-12">
+            <form (ngSubmit)="addManager()">
+              <!-- Nom Field -->
+              <div class="form-group mb-3">
+                <label for="nom" class="form-label">Nom</label>
+                <input type="text" [(ngModel)]="firstName" name="firstName" class="form-control" id="nom" placeholder="Saisir le nom" required>
+              </div>
+  
+              <!-- Prénom Field -->
+              <div class="form-group mb-3">
+                <label for="prenom" class="form-label">Prénom</label>
+                <input type="text" [(ngModel)]="lastName" name="lastName" class="form-control" id="prenom" placeholder="Saisir le prénom" required>
+              </div>
+  
+              <!-- Email Field -->
+              <div class="form-group mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" [(ngModel)]="email" name="email" class="form-control" id="email" placeholder="Adresse e-mail" required>
+              </div>
+  
+              <!-- Mot de passe Field -->
+              <div class="form-group mb-4">
+                <label for="password" class="form-label">Mot de passe</label>
+                <input type="password" [(ngModel)]="password" name="password" class="form-control" id="password" placeholder="Mot de passe" required>
+              </div>
+  
+              <!-- Submit Button -->
+              <div class="d-flex justify-content-center">
+                <button type="submit" class="btn btn-primary w-100">Ajouter</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </app-card>
+      <div *ngIf="successMessage" class="alert alert-success mt-3">
+        {{ successMessage }}
+      </div>
+      
+      <div *ngIf="errorMessage" class="alert alert-danger mt-3">
+        {{ errorMessage }}
+      </div>
+    </div>
+  </div>
+  
+  
+  <!-- Update Modals -->
+  <ng-template #contentModalUpdate let-modal>
+      <div class="modal-header">
+          <h4 class="modal-title">Modifier manager</h4>
+          <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+      </div>
+      <div class="modal-body">
+      <form>
+        <div class="form-group">
+          <label for="updateBrand">Nom</label>
+          <input type="text" class="form-control" id="updateBrand" [(ngModel)]="managerToUpdate.firstName" [ngModelOptions]="{standalone: true}">
+        </div>
+        <div class="form-group">
+          <label for="updateModel">Prénom</label>
+          <input type="text" class="form-control" id="updateModel" [(ngModel)]="managerToUpdate.lastName" [ngModelOptions]="{standalone: true}">
+        </div>
+        <div class="form-group">
+          <label for="updateYear">E-mail</label>
+          <input type="text" class="form-control" id="updateYear" [(ngModel)]="managerToUpdate.email" [ngModelOptions]="{standalone: true}">
+        </div>
+      </form>
+      </div>
+      <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="modal.close('Close click')">Close</button>
+      <button type="button" class="btn btn-success" (click)="updateManager()" data-dismiss="modal">Enregistrer</button>
+      </div>
+  </ng-template>
+  
+  <!-- Disable Modals -->
+  <ng-template #contentModalDisable let-modal>
+      <div class="modal-header">
+          <h4 class="modal-title">Désactiver manager</h4>
+          <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+      </div>
+    <div class="modal-body">
+      <p>
+        <strong>Êtes-vous sûr de vouloir désactiver ce manager?</strong>
+      </p>
+      <p>
+        <span class="text-danger">Cette opération est irréversible.</span>
+      </p>
+    </div>
+      <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="modal.close('Close click')">Close</button>
+      <button type="button" class="btn btn-success" (click)="disableManager()" data-dismiss="modal">Désactiver</button>
+      </div>
+  </ng-template>

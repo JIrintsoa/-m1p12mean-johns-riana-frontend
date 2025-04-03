@@ -31,7 +31,7 @@ export class StatisticsComponent implements OnInit {
   private iconService = inject(IconService);
   serviceTypes: ServiceType[] = [];
   generalAvg: number;
-  averageScore: number;
+  averageScore: number = 0;
   nbAppointmentDone: number;
   scoreCounts: ScoreCountModel[] = [];
 
@@ -76,7 +76,7 @@ export class StatisticsComponent implements OnInit {
     this.appointmentService.getAppointmentScoreAvgByServiceType(this.selectedService).subscribe({
       next: (response: any) => {
         const result = response;
-        this.averageScore = result.items[0].averageScore || [];
+        this.averageScore = result.items[0].averageScore? result.items[0].averageScore : 0;
         console.log(response)
       },
       error: (error) => {
@@ -126,7 +126,7 @@ export class StatisticsComponent implements OnInit {
           service.series[3] || 0,
           service.series[4] || 0,
         ],
-        labels: ['Note: 1', 'Note: 2', 'Note: 3', 'Note: 4', 'Note: 5'],
+        labels: ['Note de 1', 'Note de 2', 'Note de 3', 'Note de 4', 'Note de 5'],
       },
     };
   
@@ -141,7 +141,7 @@ export class StatisticsComponent implements OnInit {
         this.scoreCounts[0]?.series[3] || 0,
         this.scoreCounts[0]?.series[4] || 0,
       ],
-      labels: ['Note: 1', 'Note: 2', 'Note: 3', 'Note: 4', 'Note: 5'],
+      labels: ['Note de 1', 'Note de 2', 'Note de 3', 'Note de 4', 'Note de 5'],
     },
   };
 

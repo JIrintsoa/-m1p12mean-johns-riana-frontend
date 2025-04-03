@@ -36,7 +36,7 @@ export const NavigationItems: NavigationItem[] = [
       // },
       {
         id: 'take-appointment',
-        title: 'Appointment',
+        title: 'Mes rendez-vous',
         type: 'item',
         url: '/client/take-appointment',
         classes: 'nav-item',
@@ -44,7 +44,7 @@ export const NavigationItems: NavigationItem[] = [
       },
       {
         id: 'Vehicules',
-        title: 'Vehicules',
+        title: 'Mes véhicules',
         type: 'item',
         url: '/client/vehicule',
         classes: 'nav-item',
@@ -110,6 +110,14 @@ export const NavigationItems: NavigationItem[] = [
         icon: 'dashboard'
       },
       {
+        id: 'Managers',
+        title: 'Managers',
+        type: 'item',
+        url: '/manager/managers',
+        classes: 'nav-item',
+        icon: 'dashboard'
+      },
+      {
         id: 'Services',
         title: 'Services',
         type: 'item',
@@ -127,7 +135,7 @@ export const NavigationItems: NavigationItem[] = [
     children: [
       {
         id: 'Repair List',
-        title: 'Liste des réparations',
+        title: 'Liste des rendez-vous',
         type: 'item',
         url: '/mechanic/repair-list',
         classes: 'nav-item',

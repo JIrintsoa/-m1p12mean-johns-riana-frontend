@@ -185,6 +185,7 @@ export class DetailsComponent {
         console.log('Intervention finished:', response);
         this.showMessage('Intervention fini avec succès!', 'success');
         this.fetchInterventions(); // Refresh the vehicle list
+        this.activeModalFinish.close();
         // this.resetForm(); // Optionally reset the form after submission
       },
       error: (error) => {
@@ -193,13 +194,14 @@ export class DetailsComponent {
       }
     })
   }
-
+ 
   skipIntervention(){
     this.interventionService.skip(this.token, this.interventIdFromModal).subscribe({
       next: (response) => {
         console.log('Intervention skipped successfully:', response);
         this.showMessage('Intervention skipper avec succès!', 'success');
         this.fetchInterventions(); // Refresh the vehicle list
+        this.activeModaleSkip.close();
         // this.resetForm(); // Optionally reset the form after submission
       },
       error: (error) => {
@@ -244,6 +246,7 @@ export class DetailsComponent {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   openModalSkip(contentModalSkip: TemplateRef<any>, interventionId: string) {
     this.activeModaleSkip = this.modalService.open(contentModalSkip, {centered: true})
+    this.interventIdFromModal = interventionId
     console.log(interventionId)
   }
 }
